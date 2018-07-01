@@ -1,0 +1,38 @@
+{
+  "name": "@datastructures-js/priority-queue",
+  "version": "1.0.0",
+  "description": "priority queue implementation in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datastructures-js/priority-queue.git"
+  },
+  "keywords": [
+    "queue",
+    "priority queue",
+    "priority queue es6",
+    "priority queue js"
+  ],
+  "author": "Eyas Ranjous <eyas.ranjous@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/datastructures-js/priority-queue/issues"
+  },
+  "homepage": "https://github.com/datastructures-js/priority-queue#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "grunt-eslint": "^20.2.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-mocha-istanbul": "^5.0.2",
+    "grunt-mocha-test": "^0.13.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.0.0"
+  }
+}
