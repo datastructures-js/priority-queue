@@ -1,6 +1,6 @@
 {
   "name": "@datastructures-js/priority-queue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "priority queue implementation in javascript",
   "main": "index.js",
   "scripts": {
