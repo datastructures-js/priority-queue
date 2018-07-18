@@ -1,4 +1,4 @@
-# # @datastrucures-js/priority-queue
+# @datastrucures-js/priority-queue
 
 [![build:?](https://travis-ci.org/datastructures-js/priority-queue.svg?branch=master)](https://travis-ci.org/datastructures-js/priority-queue) 
 [![npm](https://img.shields.io/npm/v/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
