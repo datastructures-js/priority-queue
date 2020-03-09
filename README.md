@@ -62,9 +62,9 @@ adds an element with a priority (number) to the queue. The smaller the number, t
   <tr>
     <td>O(log(n))</td>
     <td>
-       <b>element</b>: {object}
+       <b>element</b>: object
        <br><br>
-       <b>priority</b>: {number}
+       <b>priority</b>: number
     </td>
   </tr>
 </table>
@@ -87,7 +87,7 @@ returns the element with highest priority in the queue.
   </tr>
   <tr>
     <td>O(1)</td>
-    <td>{object}</td>
+    <td>object</td>
   </tr>
 </table>
 
@@ -106,7 +106,7 @@ returns an element with lowest priority in the queue. If multiple elements exist
   </tr>
   <tr>
     <td>O(1)</td>
-    <td>{object}</td>
+    <td>object</td>
   </tr>
 </table>
 
@@ -127,7 +127,7 @@ removes and returns the element with highest priority in the queue.
   </tr>
   <tr>
     <td>O(log(n))</td>
-    <td>{object}</td>
+    <td>object</td>
   </tr>
 </table>
 
@@ -159,6 +159,17 @@ console.log(priorityQueue.isEmpty()); // false
 
 returns the number of elements in the queue.
 
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>return</th>
+  </tr>
+  <tr>
+    <td>O(1)</td>
+    <td>number</td>
+  </tr>
+</table>
+
 ```js
 console.log(priorityQueue.size()); // 5
 ```
@@ -167,12 +178,32 @@ console.log(priorityQueue.size()); // 5
 
 returns an sorted array of elements from highest priority to lowest.
 
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>return</th>
+  </tr>
+  <tr>
+    <td>O(n*log(n))</td>
+    <td>array</td>
+  </tr>
+</table>
+
 ```js
 console.log(priorityQueue.toArray()); // ['patient x', 'patient z', 'patient c', 'patient w', 'patient m']
 ```
 
 ### .clear()
 clears all elements in the queue.
+
+<table>
+  <tr>
+    <th>runtime</th>
+  </tr>
+  <tr>
+    <td>O(1)</td>
+  </tr>
+</table>
 
 ```js
 priorityQueue.clear();
