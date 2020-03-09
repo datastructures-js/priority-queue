@@ -51,6 +51,7 @@ class PriorityQueue {
 
   /**
    * add an element to the queue based on its priority
+   * @public
    * @param {object} element
    * @param {number} priority
    * @throws {Error}
@@ -64,6 +65,7 @@ class PriorityQueue {
 
   /**
    * removes and returns the element with highest priority in the queue
+   * @public
    * @return {object}
    */
   dequeue() {
@@ -72,6 +74,7 @@ class PriorityQueue {
 
   /**
    * returns an sorted list of elements from highest priority to lowest
+   * @public
    * @return {array}
    */
   toArray() {
