@@ -4,75 +4,212 @@
 [![npm](https://img.shields.io/npm/v/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 [![npm](https://img.shields.io/npm/dm/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 
-elements data type: any type.
+A highly performant priority queue implementation using a Min Heap data structure.
 
-## Usage
-```js
-const pQueueFn = require('@datastructures-js/priority-queue');
-const pQueue = pQueueFn();
+# Table of Contents
+* [Install](#install)
+* [API](#api)
+  * [require](#require)
+  * [import](#import)
+  * [creating a priority queue](#create-a-priority-queue)
+  * [.enqueue(element, priority)](#enqueueelement-priority)
+  * [.front()](#front)
+  * [.back()](#back)
+  * [.dequeue()](#dequeue)
+  * [.isEmpty()](#isEmpty)
+  * [.size()](#size)
+  * [.toArray()](#toarray)
+  * [.clear()](#clear)
+ * [Build](#build)
+ * [License](#license)
+
+## Install
+
+```sh
+npm install --save @datastructures-js/priority-queue
 ```
 
 ## API
 
-**.enqueue(element, priority)** 
+### require
 
-adds an element with priority (number) to the back of the queue.
-```javascript
-pQueue.enqueue('patient 1', 2); // lower priority
-pQueue.enqueue('patient 2', 1); // higher priority
+```js
+const PriorityQueue = require('@datastructures-js/priority-queue');
 ```
 
-**.front()** 
+### import
 
-returns the front element in queue.
-```javascript
-console.log(pQueue.front()); // patient 1
+```js
+import PriorityQueue from '@datastructures-js/priority-queue';
 ```
 
-**.back()** 
+### Create a Priority Queue
 
-returns the back element in the queue.
-```javascript
-console.log(pQueue.back()); // patient 3
+```js
+const priorityQueue = new PriorityQueue();
 ```
 
-**.dequeue()** 
 
-dequeues the highest priority element from the queue.
-```javascript
-console.log(pQueue.dequeue()); // patient 2
-console.log(pQueue.front()); // patient 1
+### .enqueue(element, priority)
+
+adds an element with a priority (number) to the queue. The smaller the number, the higher the priority.
+
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>params</th>
+  </tr>
+  <tr>
+    <td>O(log(n))</td>
+    <td>
+       <b>element</b>: object
+       <br><br>
+       <b>priority</b>: number
+    </td>
+  </tr>
+</table>
+
+```js
+priorityQueue.enqueue('patient y', 1); // highest priority
+priorityQueue.enqueue('patient z', 3);
+priorityQueue.enqueue('patient w', 4); // lowest priority
+priorityQueue.enqueue('patient x', 2);
 ```
 
-**.isEmpty()** 
+### .front()
+
+returns the element with highest priority in the queue.
+
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>return</th>
+  </tr>
+  <tr>
+    <td>O(1)</td>
+    <td>object</td>
+  </tr>
+</table>
+
+```js
+console.log(priorityQueue.front()); // patient y
+```
+
+### .back()
+
+returns an element with lowest priority in the queue. If multiple elements exist at the lowest priority, the one that was inserted first will be returned.
+
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>return</th>
+  </tr>
+  <tr>
+    <td>O(1)</td>
+    <td>object</td>
+  </tr>
+</table>
+
+```js
+priorityQueue.enqueue('patient m', 4); // lowest priority
+priorityQueue.enqueue('patient c', 4); // lowest priority
+console.log(priorityQueue.back()); // patient w
+```
+
+### .dequeue()
+
+removes and returns the element with highest priority in the queue.
+
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>return</th>
+  </tr>
+  <tr>
+    <td>O(log(n))</td>
+    <td>object</td>
+  </tr>
+</table>
+
+```js
+console.log(priorityQueue.dequeue()); // patient y
+console.log(priorityQueue.front()); // patient x
+```
+
+### .isEmpty()
 
 checks if the queue is empty.
-```javascript
-console.log(pQueue.isEmpty()); // false
+
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>return</th>
+  </tr>
+  <tr>
+    <td>O(1)</td>
+    <td>{boolean}</td>
+  </tr>
+</table>
+
+```js
+console.log(priorityQueue.isEmpty()); // false
 ```
 
-**.length()** 
+### .size()
 
-returns the length of the queue.
-```javascript
-console.log(pQueue.length()); // 1
+returns the number of elements in the queue.
+
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>return</th>
+  </tr>
+  <tr>
+    <td>O(1)</td>
+    <td>number</td>
+  </tr>
+</table>
+
+```js
+console.log(priorityQueue.size()); // 5
 ```
 
-**.toArray()** 
+### .toArray()
 
-converts the queue to an array from highest prority element to lowest
-```javascript
-pQueue.enqueue('patient 3', 5);
-pQueue.enqueue('patient 4', 1);
-console.log(pQueue.toArray()); // ['patient 4', 'patient 1', 'patient 5']
+returns an sorted array of elements from highest priority to lowest.
+
+<table>
+  <tr>
+    <th>runtime</th>
+    <th>return</th>
+  </tr>
+  <tr>
+    <td>O(n*log(n))</td>
+    <td>array</td>
+  </tr>
+</table>
+
+```js
+console.log(priorityQueue.toArray()); // ['patient x', 'patient z', 'patient c', 'patient w', 'patient m']
 ```
 
-**.clear()** 
+### .clear()
+clears all elements in the queue.
 
-clears the queue
-```javascript
-pQueue.clear();
-console.log(pQueue.length()); // 0
+<table>
+  <tr>
+    <th>runtime</th>
+  </tr>
+  <tr>
+    <td>O(1)</td>
+  </tr>
+</table>
+
+```js
+priorityQueue.clear();
+console.log(priorityQueue.size()); // 0
+console.log(priorityQueue.front()); // null
+console.log(priorityQueue.dequeue()); // null
 ```
 
 ## Build

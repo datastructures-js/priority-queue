@@ -1,16 +1,16 @@
 module.exports = (grunt) => {
   grunt.initConfig({
     eslint: {
-      src: ['./*.js', './*.spec.js']
+      src: ['src/*.js', 'test/*.spec.js']
     },
     mochaTest: {
-      files: ['./*.spec.js']
+      files: ['test/*.test.js']
     },
     mocha_istanbul: {
       coverage: {
         src: './',
         options: {
-          mask: '*.spec.js'
+          mask: 'test/*.test.js'
         }
       }
     }
