@@ -8,4 +8,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2020-03-09
 ### Changed
-- use a Min Heap to store the elements of the queue.
+- use a Min Heap to store queue elements.
