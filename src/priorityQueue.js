@@ -1,5 +1,5 @@
 /**
- * datastructures-js/priority-queue
+ * @datastructures-js/priority-queue
  * @copyright 2020 Eyas Ranjous <eyas.ranjous@gmail.com>
  * @license MIT
  */
@@ -8,77 +8,77 @@ const { MinHeap } = require('@datastructures-js/heap');
 
 /**
  * @class PriorityQueue
- * uses a MinHeap to enqueue and dequeue elements based on their priorities
+ * depends on a MinHeap to manage elements based on their priorities
  */
 class PriorityQueue {
   constructor() {
-    this.heap = new MinHeap();
+    this._heap = new MinHeap();
   }
 
   /**
    * @public
-   * @returns {number}
+   * @returnss {number}
    */
   size() {
-    return this.heap.size();
+    return this._heap.size();
   }
 
   /**
    * @public
-   * @returns {boolean}
+   * @returnss {boolean}
    */
   isEmpty() {
-    return this.heap.size() === 0;
+    return this._heap.size() === 0;
   }
 
   /**
-   * returns then front element in the queue
    * @public
-   * @returns {object}
+   * returns then front element in the queue
+   * @returnss {object}
    */
   front() {
-    return this.size() > 0 ? this.heap.root().value : null;
+    return this.size() > 0 ? this._heap.root().value : null;
   }
 
   /**
    * returns then back element in the queue
    * @public
-   * @returns {object}
+   * @returnss {object}
    */
   back() {
-    return this.size() > 0 ? this.heap.leaf().value : null;
+    return this.size() > 0 ? this._heap.leaf().value : null;
   }
 
   /**
-   * add an element to the queue based on its priority
    * @public
+   * add an element to the queue based on its priority
    * @param {object} element
    * @param {number} priority
-   * @throws {Error}
+   * @throws {Error} if priority is not a valid number
    */
   enqueue(element, priority) {
     if (Number.isNaN(+priority) || priority < 1) {
       throw new Error('priority should be a positive none-zero number');
     }
-    this.heap.insert(priority, element);
+    this._heap.insert(priority, element);
   }
 
   /**
-   * removes and returns the element with highest priority in the queue
    * @public
-   * @return {object}
+   * removes and returns the element with highest priority in the queue
+   * @returns {object}
    */
   dequeue() {
-    return this.size() > 0 ? this.heap.extractRoot().value : null;
+    return this.size() > 0 ? this._heap.extractRoot().value : null;
   }
 
   /**
-   * returns an sorted list of elements from highest priority to lowest
    * @public
-   * @return {array}
+   * returns an sorted list of elements from highest priority to lowest
+   * @returns {array}
    */
   toArray() {
-    return this.heap.clone().sort().map((n) => n.getValue()).reverse();
+    return this._heap.clone().sort().map((n) => n.getValue()).reverse();
   }
 
   /**
@@ -86,7 +86,7 @@ class PriorityQueue {
    * @public
    */
   clear() {
-    this.heap.clear();
+    this._heap.clear();
   }
 }
 
