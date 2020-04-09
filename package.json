@@ -35,6 +35,6 @@
     "mocha": "^6.2.2"
   },
   "dependencies": {
-    "@datastructures-js/heap": "^1.2.0"
+    "@datastructures-js/heap": "^2.0.0"
   }
 }
