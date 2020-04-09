@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.0.0] - 2020-04-09
 ### Changed
-- `.front()`, `.bkac()`, `.dequeue()`, `.toArray()` now returns the priority with the element. 
+- `.front()`, `.back()`, `.dequeue()`, `.toArray()` now returns the priority with the element. 
 
 ### Fixed
 - README
