@@ -33,11 +33,17 @@ class PriorityQueue {
 
   /**
    * @public
-   * returns then front element in the queue
+   * returns the element with highest priority in the queue
    * @returnss {object}
    */
   front() {
-    return this.size() > 0 ? this._heap.root().value : null;
+    if (this.isEmpty()) return null;
+
+    const first = this._heap.root();
+    return {
+      priority: first.getKey(),
+      element: first.getValue()
+    };
   }
 
   /**
@@ -69,7 +75,13 @@ class PriorityQueue {
    * @returns {object}
    */
   dequeue() {
-    return this.size() > 0 ? this._heap.extractRoot().value : null;
+    if (this.isEmpty()) return null;
+
+    const first = this._heap.extractRoot();
+    return {
+      priority: first.getKey(),
+      element: first.getValue()
+    };
   }
 
   /**
