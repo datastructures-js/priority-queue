@@ -55,8 +55,8 @@ adds an element with a priority (number) to the queue. The smaller the number, t
 <table>
   <tr><th align="center" colspan="3">params</th></tr>
   <tr><td><b>name</b></td><td><b>type</b></td></tr>
-  <tr><td>element</td><td>object</td><</tr>
-  <tr><td>priority</td><td>number</td><</tr>
+  <tr><td>element</td><td>object</td></tr>
+  <tr><td>priority</td><td>number</td></tr>
 </table>
 
 <table>
@@ -226,7 +226,10 @@ returns an sorted array of elements from highest priority to lowest.
 #### Example
 
 ```js
-console.log(priorityQueue.toArray()); // ['patient x', 'patient z', 'patient c', 'patient w', 'patient m']
+console.log(priorityQueue.toArray());
+/*
+['patient x', 'patient z', 'patient c', 'patient w', 'patient m']
+*/
 ```
 
 ### .clear()
