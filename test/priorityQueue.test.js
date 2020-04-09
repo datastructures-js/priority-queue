@@ -19,8 +19,9 @@ describe('priorityQueue tests', () => {
   });
 
   describe('.size()', () => {
-    it('should have length of 4', () =>
-      expect(priorityQueue.size()).to.equal(4));
+    it('should have length of 4', () => {
+      expect(priorityQueue.size()).to.equal(4);
+    });
   });
 
   describe('.front()', () => {
@@ -33,15 +34,20 @@ describe('priorityQueue tests', () => {
 
   describe('.back()', () => {
     it('should get the back element', () => {
-      expect(priorityQueue.back()).to.equal('rose');
+      const { priority, element } = priorityQueue.back();
+      expect(priority).to.equal(7);
+      expect(element).to.equal('rose');
     });
   });
 
   describe('toArray()', () => {
     it('should convert queue to array from highest priority to lowest', () => {
       expect(priorityQueue.toArray()).to.deep.equal([
-        'samantha', 'john', 'sam', 'rose']
-      );
+        { element: 'samantha', priority: 1 },
+        { element: 'john', priority: 2 },
+        { element: 'sam', priority: 4 },
+        { element: 'rose', priority: 7 }
+      ]);
     });
   });
 

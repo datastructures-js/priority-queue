@@ -47,12 +47,18 @@ class PriorityQueue {
   }
 
   /**
-   * returns then back element in the queue
    * @public
-   * @returnss {object}
+   * returns the element with lowest priority in the queue
+   * @returns {object}
    */
   back() {
-    return this.size() > 0 ? this._heap.leaf().value : null;
+    if (this.isEmpty()) return null;
+
+    const last = this._heap.leaf();
+    return {
+      priority: last.getKey(),
+      element: last.getValue()
+    };
   }
 
   /**
@@ -90,7 +96,11 @@ class PriorityQueue {
    * @returns {array}
    */
   toArray() {
-    return this._heap.clone().sort().map((n) => n.getValue()).reverse();
+    return this._heap
+      .clone()
+      .sort()
+      .map((n) => ({ priority: n.getKey(), element: n.getValue() }))
+      .reverse();
   }
 
   /**
