@@ -81,9 +81,10 @@ priorityQueue.enqueue('patient x', 2);
 returns the element with highest priority in the queue.
 
 <table>
- <tr><th>return</th></tr>
+ <tr><th>return</th><th>description</th></tr>
  <tr>
   <td>object</td>
+  <td>object literal with "priority" and "element" props</td>
  </tr>
 </table>
 
@@ -99,18 +100,20 @@ returns the element with highest priority in the queue.
 #### Example
 
 ```js
-console.log(priorityQueue.front()); // patient y
+console.log(priorityQueue.front()); // { priority: 1, element: 'patient y' }
 ```
 
 ### .back()
 returns an element with lowest priority in the queue. If multiple elements exist at the lowest priority, the one that was inserted first will be returned.
 
 <table>
- <tr><th>return</th></tr>
+ <tr><th>return</th><th>description</th></tr>
  <tr>
   <td>object</td>
+  <td>object literal with "priority" and "element" props</td>
  </tr>
 </table>
+
 
 <table>
  <tr>
@@ -126,16 +129,17 @@ returns an element with lowest priority in the queue. If multiple elements exist
 ```js
 priorityQueue.enqueue('patient m', 4); // lowest priority
 priorityQueue.enqueue('patient c', 4); // lowest priority
-console.log(priorityQueue.back()); // patient w
+console.log(priorityQueue.back()); // { priority: 4, element: 'patient w' }
 ```
 
 ### .dequeue()
 removes and returns the element with highest priority in the queue.
 
 <table>
- <tr><th>return</th></tr>
+ <tr><th>return</th><th>description</th></tr>
  <tr>
   <td>object</td>
+  <td>object literal with "priority" and "element" props</td>
  </tr>
 </table>
 
@@ -151,8 +155,8 @@ removes and returns the element with highest priority in the queue.
 #### Example
 
 ```js
-console.log(priorityQueue.dequeue()); // patient y
-console.log(priorityQueue.front()); // patient x
+console.log(priorityQueue.dequeue()); // { priority: 1, element: 'patient y' }
+console.log(priorityQueue.front()); // { priority: 2, element: 'patient x' }
 ```
 
 ### .isEmpty()
@@ -200,12 +204,13 @@ returns the number of elements in the queue.
 </table>
 
 #### Example
+
 ```js
 console.log(priorityQueue.size()); // 5
 ```
 
 ### .toArray()
-returns an sorted array of elements from highest priority to lowest.
+returns a sorted array of elements by their priorities from highest to lowest.
 
 <table>
  <tr><th>return</th></tr>
@@ -228,7 +233,13 @@ returns an sorted array of elements from highest priority to lowest.
 ```js
 console.log(priorityQueue.toArray());
 /*
-['patient x', 'patient z', 'patient c', 'patient w', 'patient m']
+[
+  { priority: 2, element: 'patient x' },
+  { priority: 3, element: 'patient z' },
+  { priority: 4, element: 'patient c' },
+  { priority: 4, element: 'patient w' },
+  { priority: 4, element: 'patient m' }
+]
 */
 ```
 
