@@ -19,42 +19,57 @@ describe('priorityQueue tests', () => {
   });
 
   describe('.size()', () => {
-    it('should have length of 4', () =>
-      expect(priorityQueue.size()).to.equal(4));
+    it('should have length of 4', () => {
+      expect(priorityQueue.size()).to.equal(4);
+    });
   });
 
   describe('.front()', () => {
-    it('should get the front element', () =>
-      expect(priorityQueue.front()).to.equal('samantha'));
+    it('should get the front element', () => {
+      const { priority, element } = priorityQueue.front();
+      expect(priority).to.equal(1);
+      expect(element).to.equal('samantha');
+    });
   });
 
   describe('.back()', () => {
     it('should get the back element', () => {
-      expect(priorityQueue.back()).to.equal('rose');
+      const { priority, element } = priorityQueue.back();
+      expect(priority).to.equal(7);
+      expect(element).to.equal('rose');
     });
   });
 
   describe('toArray()', () => {
     it('should convert queue to array from highest priority to lowest', () => {
       expect(priorityQueue.toArray()).to.deep.equal([
-        'samantha', 'john', 'sam', 'rose']
-      );
+        { element: 'samantha', priority: 1 },
+        { element: 'john', priority: 2 },
+        { element: 'sam', priority: 4 },
+        { element: 'rose', priority: 7 }
+      ]);
     });
   });
 
   describe('.dequeue()', () => {
     it('should dequeue elements by priority', () => {
-      expect(priorityQueue.dequeue()).to.equal('samantha');
+      const { priority: p1, element: e1} = priorityQueue.dequeue();
+      expect(p1).to.equal(1);
+      expect(e1).to.equal('samantha');
       expect(priorityQueue.size()).to.equal(3);
-      expect(priorityQueue.front()).to.equal('john');
+      expect(priorityQueue.front().element).to.equal('john');
 
-      expect(priorityQueue.dequeue()).to.equal('john');
+      const { priority: p2, element: e2} = priorityQueue.dequeue();
+      expect(p2).to.equal(2);
+      expect(e2).to.equal('john');
       expect(priorityQueue.size()).to.equal(2);
-      expect(priorityQueue.front()).to.equal('sam');
+      expect(priorityQueue.front().element).to.equal('sam');
 
-      expect(priorityQueue.dequeue()).to.equal('sam');
+      const { priority: p3, element: e3} = priorityQueue.dequeue();
+      expect(p3).to.equal(4);
+      expect(e3).to.equal('sam');
       expect(priorityQueue.size()).to.equal(1);
-      expect(priorityQueue.front()).to.equal('rose');
+      expect(priorityQueue.front().element).to.equal('rose');
     });
   });
 

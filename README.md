@@ -11,7 +11,7 @@ A highly performant priority queue implementation using a Min Heap data structur
 * [API](#api)
   * [require](#require)
   * [import](#import)
-  * [creating a priority queue](#create-a-priority-queue)
+  * [Construction](#construction)
   * [.enqueue(element, priority)](#enqueueelement-priority)
   * [.front()](#front)
   * [.back()](#back)
@@ -43,31 +43,32 @@ const PriorityQueue = require('@datastructures-js/priority-queue');
 import PriorityQueue from '@datastructures-js/priority-queue';
 ```
 
-### Create a Priority Queue
+### Construction
 
 ```js
 const priorityQueue = new PriorityQueue();
 ```
 
-
 ### .enqueue(element, priority)
-
 adds an element with a priority (number) to the queue. The smaller the number, the higher the priority.
 
 <table>
-  <tr>
-    <th>runtime</th>
-    <th>params</th>
-  </tr>
-  <tr>
-    <td>O(log(n))</td>
-    <td>
-       <b>element</b>: object
-       <br><br>
-       <b>priority</b>: number
-    </td>
-  </tr>
+  <tr><th align="center" colspan="3">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr><td>element</td><td>object</td></tr>
+  <tr><td>priority</td><td>number</td></tr>
 </table>
+
+<table>
+ <tr>
+  <th>runtime</th>
+ </tr>
+ <tr>
+  <td>O(log(n))</td>
+ </tr>
+</table>
+
+#### Example
 
 ```js
 priorityQueue.enqueue('patient y', 1); // highest priority
@@ -77,133 +78,184 @@ priorityQueue.enqueue('patient x', 2);
 ```
 
 ### .front()
-
 returns the element with highest priority in the queue.
 
 <table>
-  <tr>
-    <th>runtime</th>
-    <th>return</th>
-  </tr>
-  <tr>
-    <td>O(1)</td>
-    <td>object</td>
-  </tr>
+ <tr><th>return</th><th>description</th></tr>
+ <tr>
+  <td>object</td>
+  <td>object literal with "priority" and "element" props</td>
+ </tr>
 </table>
 
+<table>
+ <tr>
+  <th>runtime</th>
+ </tr>
+ <tr>
+  <td>O(1)</td>
+ </tr>
+</table>
+
+#### Example
+
 ```js
-console.log(priorityQueue.front()); // patient y
+console.log(priorityQueue.front()); // { priority: 1, element: 'patient y' }
 ```
 
 ### .back()
-
 returns an element with lowest priority in the queue. If multiple elements exist at the lowest priority, the one that was inserted first will be returned.
 
 <table>
-  <tr>
-    <th>runtime</th>
-    <th>return</th>
-  </tr>
-  <tr>
-    <td>O(1)</td>
-    <td>object</td>
-  </tr>
+ <tr><th>return</th><th>description</th></tr>
+ <tr>
+  <td>object</td>
+  <td>object literal with "priority" and "element" props</td>
+ </tr>
 </table>
+
+
+<table>
+ <tr>
+  <th>runtime</th>
+ </tr>
+ <tr>
+  <td>O(1)</td>
+ </tr>
+</table>
+
+#### Example
 
 ```js
 priorityQueue.enqueue('patient m', 4); // lowest priority
 priorityQueue.enqueue('patient c', 4); // lowest priority
-console.log(priorityQueue.back()); // patient w
+console.log(priorityQueue.back()); // { priority: 4, element: 'patient w' }
 ```
 
 ### .dequeue()
-
 removes and returns the element with highest priority in the queue.
 
 <table>
-  <tr>
-    <th>runtime</th>
-    <th>return</th>
-  </tr>
-  <tr>
-    <td>O(log(n))</td>
-    <td>object</td>
-  </tr>
+ <tr><th>return</th><th>description</th></tr>
+ <tr>
+  <td>object</td>
+  <td>object literal with "priority" and "element" props</td>
+ </tr>
 </table>
 
+<table>
+ <tr>
+  <th>runtime</th>
+ </tr>
+ <tr>
+  <td>O(log(n))</td>
+ </tr>
+</table>
+
+#### Example
+
 ```js
-console.log(priorityQueue.dequeue()); // patient y
-console.log(priorityQueue.front()); // patient x
+console.log(priorityQueue.dequeue()); // { priority: 1, element: 'patient y' }
+console.log(priorityQueue.front()); // { priority: 2, element: 'patient x' }
 ```
 
 ### .isEmpty()
-
 checks if the queue is empty.
 
 <table>
-  <tr>
-    <th>runtime</th>
-    <th>return</th>
-  </tr>
-  <tr>
-    <td>O(1)</td>
-    <td>{boolean}</td>
-  </tr>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>boolean</td>
+ </tr>
 </table>
+
+<table>
+ <tr>
+  <th>runtime</th>
+ </tr>
+ <tr>
+  <td>O(1)</td>
+ </tr>
+</table>
+
+#### Example
 
 ```js
 console.log(priorityQueue.isEmpty()); // false
 ```
 
 ### .size()
-
 returns the number of elements in the queue.
 
 <table>
-  <tr>
-    <th>runtime</th>
-    <th>return</th>
-  </tr>
-  <tr>
-    <td>O(1)</td>
-    <td>number</td>
-  </tr>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>number</td>
+ </tr>
 </table>
+
+<table>
+ <tr>
+  <th>runtime</th>
+ </tr>
+ <tr>
+  <td>O(1)</td>
+ </tr>
+</table>
+
+#### Example
 
 ```js
 console.log(priorityQueue.size()); // 5
 ```
 
 ### .toArray()
-
-returns an sorted array of elements from highest priority to lowest.
+returns a sorted array of elements by their priorities from highest to lowest.
 
 <table>
-  <tr>
-    <th>runtime</th>
-    <th>return</th>
-  </tr>
-  <tr>
-    <td>O(n*log(n))</td>
-    <td>array</td>
-  </tr>
+ <tr><th>return</th><th>description</th></tr>
+ <tr>
+  <td>array</td><td>an array of object literals with "priority" & "element" props</td>
+ </tr>
 </table>
 
+<table>
+ <tr>
+  <th>runtime</th>
+ </tr>
+ <tr>
+  <td>O(n*log(n))</td>
+ </tr>
+</table>
+
+#### Example
+
 ```js
-console.log(priorityQueue.toArray()); // ['patient x', 'patient z', 'patient c', 'patient w', 'patient m']
+console.log(priorityQueue.toArray());
+/*
+[
+  { priority: 2, element: 'patient x' },
+  { priority: 3, element: 'patient z' },
+  { priority: 4, element: 'patient c' },
+  { priority: 4, element: 'patient w' },
+  { priority: 4, element: 'patient m' }
+]
+*/
 ```
 
 ### .clear()
 clears all elements in the queue.
 
 <table>
-  <tr>
-    <th>runtime</th>
-  </tr>
-  <tr>
-    <td>O(1)</td>
-  </tr>
+ <tr>
+  <th>runtime</th>
+ </tr>
+ <tr>
+  <td>O(1)</td>
+ </tr>
 </table>
+
+#### Example
 
 ```js
 priorityQueue.clear();
