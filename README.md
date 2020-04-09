@@ -213,9 +213,9 @@ console.log(priorityQueue.size()); // 5
 returns a sorted array of elements by their priorities from highest to lowest.
 
 <table>
- <tr><th>return</th></tr>
+ <tr><th>return</th><th>description</th></tr>
  <tr>
-  <td>array</td>
+  <td>array</td><td>an array of object literals with "priority" & "element" props</td>
  </tr>
 </table>
 
