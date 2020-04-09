@@ -28,7 +28,7 @@ class PriorityQueue {
    * @returnss {boolean}
    */
   isEmpty() {
-    return this._heap.size() === 0;
+    return this._heap.isEmpty();
   }
 
   /**
