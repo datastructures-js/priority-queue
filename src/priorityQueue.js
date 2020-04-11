@@ -25,7 +25,7 @@ class PriorityQueue {
 
   /**
    * @public
-   * @returnss {boolean}
+   * @returns {boolean}
    */
   isEmpty() {
     return this._heap.isEmpty();
