@@ -17,7 +17,7 @@ class PriorityQueue {
 
   /**
    * @public
-   * @returnss {number}
+   * @returns {number}
    */
   size() {
     return this._heap.size();
@@ -25,7 +25,7 @@ class PriorityQueue {
 
   /**
    * @public
-   * @returnss {boolean}
+   * @returns {boolean}
    */
   isEmpty() {
     return this._heap.isEmpty();
@@ -34,7 +34,7 @@ class PriorityQueue {
   /**
    * @public
    * returns the element with highest priority in the queue
-   * @returnss {object}
+   * @returns {object}
    */
   front() {
     if (this.isEmpty()) return null;
@@ -104,8 +104,8 @@ class PriorityQueue {
   }
 
   /**
-   * clears the queue
    * @public
+   * clears the queue
    */
   clear() {
     this._heap.clear();
