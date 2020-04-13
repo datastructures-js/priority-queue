@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 [![npm](https://img.shields.io/npm/dm/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 
-A highly performant priority queue implementation using a Min Heap data structure.
+A highly performant priority queue implementation using a Heap data structure.
 
 # Table of Contents
 * [Install](#install)
@@ -30,27 +30,31 @@ npm install --save @datastructures-js/priority-queue
 ```
 
 ## API
+There are two types of PriorityQueue in this repo: MinPriorityQueue which uses a MinHeap and considers an element with smaller priority number as higher in priority. And MaxPriorityQueue which uses a MaxHeap and cosiders an element with bigger priority number as higher in priority.
 
 ### require
 
 ```js
-const PriorityQueue = require('@datastructures-js/priority-queue');
+const { MinPriorityQueue, MaxPriorityQueue } = require('@datastructures-js/priority-queue');
 ```
 
 ### import
 
 ```js
-import PriorityQueue from '@datastructures-js/priority-queue';
+import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-queue';
 ```
 
 ### Construction
 
+#### Example
 ```js
-const priorityQueue = new PriorityQueue();
+const patientsQueue = new MinPriorityQueue();
+
+const biddersQueue = new MaxPriorityQueue();
 ```
 
 ### .enqueue(element, priority)
-adds an element with a priority (number) to the queue. The smaller the number, the higher the priority.
+adds an element with a priority (number) to the queue.
 
 <table>
   <tr><th align="center" colspan="3">params</th></tr>
@@ -71,10 +75,17 @@ adds an element with a priority (number) to the queue. The smaller the number, t
 #### Example
 
 ```js
-priorityQueue.enqueue('patient y', 1); // highest priority
-priorityQueue.enqueue('patient z', 3);
-priorityQueue.enqueue('patient w', 4); // lowest priority
-priorityQueue.enqueue('patient x', 2);
+// MinPriorityQueue Example, where priority is the turn for example
+patientsQueue.enqueue('patient y', 1); // highest priority
+patientsQueue.enqueue('patient z', 3);
+patientsQueue.enqueue('patient w', 4); // lowest priority
+patientsQueue.enqueue('patient x', 2);
+
+// MaxPriorityQueue Example, where priority is the bid for example
+biddersQueue.enqueue('bidder y', 1000); // lowest priority
+biddersQueue.enqueue('bidder w', 2500);
+biddersQueue.enqueue('bidder z', 3500); // highest priority
+biddersQueue.enqueue('bidder x', 3000);
 ```
 
 ### .front()
@@ -100,7 +111,9 @@ returns the element with highest priority in the queue.
 #### Example
 
 ```js
-console.log(priorityQueue.front()); // { priority: 1, element: 'patient y' }
+console.log(patientsQueue.front()); // { priority: 1, element: 'patient y' }
+
+console.log(biddersQueue.front()); // { priority: 3500, element: 'bidder z' }
 ```
 
 ### .back()
@@ -127,9 +140,13 @@ returns an element with lowest priority in the queue. If multiple elements exist
 #### Example
 
 ```js
-priorityQueue.enqueue('patient m', 4); // lowest priority
-priorityQueue.enqueue('patient c', 4); // lowest priority
-console.log(priorityQueue.back()); // { priority: 4, element: 'patient w' }
+patientsQueue.enqueue('patient m', 4); // lowest priority
+patientsQueue.enqueue('patient c', 4); // lowest priority
+console.log(patientsQueue.back()); // { priority: 4, element: 'patient w' }
+
+biddersQueue.enqueue('bidder m', 1000); // lowest priority
+biddersQueue.enqueue('bidder c', 1000); // lowest priority
+console.log(biddersQueue.back()); // { priority: 1000, element: 'bidder y' }
 ```
 
 ### .dequeue()
@@ -155,8 +172,11 @@ removes and returns the element with highest priority in the queue.
 #### Example
 
 ```js
-console.log(priorityQueue.dequeue()); // { priority: 1, element: 'patient y' }
-console.log(priorityQueue.front()); // { priority: 2, element: 'patient x' }
+console.log(patientsQueue.dequeue()); // { priority: 1, element: 'patient y' }
+console.log(patientsQueue.front()); // { priority: 2, element: 'patient x' }
+
+console.log(biddersQueue.dequeue()); // { priority: 3500, element: 'bidder z' }
+console.log(biddersQueue.front()); // { priority: 3000, element: 'bidder x' }
 ```
 
 ### .isEmpty()
@@ -181,7 +201,9 @@ checks if the queue is empty.
 #### Example
 
 ```js
-console.log(priorityQueue.isEmpty()); // false
+console.log(patientsQueue.isEmpty()); // false
+
+console.log(biddersQueue.isEmpty()); // false
 ```
 
 ### .size()
@@ -206,7 +228,9 @@ returns the number of elements in the queue.
 #### Example
 
 ```js
-console.log(priorityQueue.size()); // 5
+console.log(patientsQueue.size()); // 5
+
+console.log(biddersQueue.size()); // 5
 ```
 
 ### .toArray()
@@ -231,7 +255,7 @@ returns a sorted array of elements by their priorities from highest to lowest.
 #### Example
 
 ```js
-console.log(priorityQueue.toArray());
+console.log(patientsQueue.toArray());
 /*
 [
   { priority: 2, element: 'patient x' },
@@ -239,6 +263,17 @@ console.log(priorityQueue.toArray());
   { priority: 4, element: 'patient c' },
   { priority: 4, element: 'patient w' },
   { priority: 4, element: 'patient m' }
+]
+*/
+
+console.log(biddersQueue.toArray());
+/*
+[
+  { priority: 3000, element: 'bidder x' },
+  { priority: 2500, element: 'bidder w' },
+  { priority: 1000, element: 'bidder y' },
+  { priority: 1000, element: 'bidder m' },
+  { priority: 1000, element: 'bidder c' }
 ]
 */
 ```
@@ -258,10 +293,15 @@ clears all elements in the queue.
 #### Example
 
 ```js
-priorityQueue.clear();
-console.log(priorityQueue.size()); // 0
-console.log(priorityQueue.front()); // null
-console.log(priorityQueue.dequeue()); // null
+patientsQueue.clear();
+console.log(patientsQueue.size()); // 0
+console.log(patientsQueue.front()); // null
+console.log(patientsQueue.dequeue()); // null
+
+biddersQueue.clear();
+console.log(biddersQueue.size()); // 0
+console.log(biddersQueue.front()); // null
+console.log(biddersQueue.dequeue()); // null
 ```
 
 ## Build

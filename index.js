@@ -1,3 +1,4 @@
-const PriorityQueue = require('./src/priorityQueue');
+const MinPriorityQueue = require('./src/minPriorityQueue');
+const MaxPriorityQueue = require('./src/maxPriorityQueue');
 
-module.exports = PriorityQueue;
+module.exports = { MinPriorityQueue, MaxPriorityQueue };
