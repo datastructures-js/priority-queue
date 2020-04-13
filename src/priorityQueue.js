@@ -4,17 +4,11 @@
  * @license MIT
  */
 
-const { MinHeap } = require('@datastructures-js/heap');
-
 /**
+ * @abstract
  * @class PriorityQueue
- * depends on a MinHeap to manage elements based on their priorities
  */
 class PriorityQueue {
-  constructor() {
-    this._heap = new MinHeap();
-  }
-
   /**
    * @public
    * @returns {number}
