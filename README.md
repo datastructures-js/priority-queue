@@ -75,13 +75,13 @@ adds an element with a priority (number) to the queue.
 #### Example
 
 ```js
-// MinPriorityQueue Example
+// MinPriorityQueue Example, where priority is the turn for example
 patientsQueue.enqueue('patient y', 1); // highest priority
 patientsQueue.enqueue('patient z', 3);
 patientsQueue.enqueue('patient w', 4); // lowest priority
 patientsQueue.enqueue('patient x', 2);
 
-// MaxPriorityQueue Example
+// MaxPriorityQueue Example, where priority is the bid for example
 biddersQueue.enqueue('bidder y', 1000); // lowest priority
 biddersQueue.enqueue('bidder w', 2500);
 biddersQueue.enqueue('bidder z', 3500); // highest priority
