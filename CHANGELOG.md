@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.0.0] - 2020-04-13
 ### Changed
-- split PriorityQueue into `MinPriorityQueue` & `MaxPriorityQueue` to working with different type of priorities.
+- split PriorityQueue into `MinPriorityQueue` & `MaxPriorityQueue` to enable working with different type of priorities.
 
 ## [3.0.1] - 2020-04-11
 ### Fixed
