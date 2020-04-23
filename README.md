@@ -57,7 +57,7 @@ const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
 ```
 
 ### .enqueue(element, priority)
-adds an element with a priority (number) to the queue. Priority is optional if a priority callback has been defined in the constructor.
+adds an element with a priority (number) to the queue. Priority is not required here if a priority callback has been defined in the constructor. If passed here in addition to an existing constructor callback, it will override the callback one.
 
 <table>
   <tr><th align="center" colspan="3">params</th></tr>
