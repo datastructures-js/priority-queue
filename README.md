@@ -45,7 +45,7 @@ import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-
 ```
 
 ### Construction
-The constructor can accept a callback to get the priority from the queued element. If not passed, the priortiy can be passed with `.enqueue`.
+The constructor can accept a callback to get the priority from the queued element. If not passed, the priortiy should be passed with `.enqueue`.
 
 #### Example
 ```js
