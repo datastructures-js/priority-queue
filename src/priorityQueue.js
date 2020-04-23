@@ -9,6 +9,14 @@
  * @class PriorityQueue
  */
 class PriorityQueue {
+  constructor(options = {}) {
+    const { priority } = options;
+    if (priority !== undefined && typeof priority !== 'function') {
+      throw new Error('invalid priority callback');
+    }
+    this._getPriority = typeof priority === 'function' ? priority : null;
+  }
+
   /**
    * @public
    * @returns {number}
@@ -63,10 +71,15 @@ class PriorityQueue {
    * @throws {Error} if priority is not a valid number
    */
   enqueue(element, priority) {
-    if (Number.isNaN(+priority) || priority < 1) {
-      throw new Error('priority should be a positive none-zero number');
+    if (priority && (Number.isNaN(+priority) || priority < 1)) {
+      throw new Error('invalid priority number');
     }
-    this._heap.insert(priority, element);
+
+    if (!priority && this._getPriority === null) {
+      throw new Error('missing priority number or constructor callback');
+    }
+
+    this._heap.insert(priority || this._getPriority(element), element);
   }
 
   /**

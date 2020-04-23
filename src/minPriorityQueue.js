@@ -12,8 +12,8 @@ const PriorityQueue = require('./priorityQueue');
  * @extends PriorityQueue
  */
 class MinPriorityQueue extends PriorityQueue {
-  constructor() {
-    super();
+  constructor(options) {
+    super(options);
     this._heap = new MinHeap();
   }
 }
