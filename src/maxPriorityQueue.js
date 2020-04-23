@@ -12,8 +12,8 @@ const PriorityQueue = require('./priorityQueue');
  * @extends PriorityQueue
  */
 class MaxPriorityQueue extends PriorityQueue {
-  constructor() {
-    super();
+  constructor(options) {
+    super(options);
     this._heap = new MaxHeap();
   }
 }

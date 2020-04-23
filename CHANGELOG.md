@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2020-04-22
+### Added
+- allow passing a priority callback in constructor.
+
 ## [4.0.0] - 2020-04-13
 ### Changed
 - split PriorityQueue into `MinPriorityQueue` & `MaxPriorityQueue` to enable working with different type of priorities.

@@ -1,6 +1,6 @@
 {
   "name": "@datastructures-js/priority-queue",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "priority queue implementation in javascript using a Min Heap",
   "main": "index.js",
   "scripts": {
