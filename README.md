@@ -49,10 +49,10 @@ The constructor can accept a callback to get the priority from the queued elemen
 
 #### Example
 ```js
-// for a priority not in the enqueued element
+// the priority not part of the enqueued element
 const patientsQueue = new MinPriorityQueue();
 
-// for a priority as that is a prop of the queued element
+// the priority is a prop of the queued element
 const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
 ```
 
