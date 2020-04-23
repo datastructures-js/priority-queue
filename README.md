@@ -271,11 +271,11 @@ console.log(patientsQueue.toArray());
 console.log(biddersQueue.toArray());
 /*
 [
-  { priority: 3000, element: 'bidder x' },
-  { priority: 2500, element: 'bidder w' },
-  { priority: 1000, element: 'bidder y' },
-  { priority: 1000, element: 'bidder m' },
-  { priority: 1000, element: 'bidder c' }
+  { priority: 3000, element: { name: 'bidder x', value: 3000 } },
+  { priority: 2500, element: { name: 'bidder w', value: 2500 } },
+  { priority: 1000, element: { name: 'bidder y', value: 1000 } },
+  { priority: 1000, element: { name: 'bidder m', value: 1000 } },
+  { priority: 1000, element: { name: 'bidder c', value: 1000 } }
 ]
 */
 ```
