@@ -45,16 +45,19 @@ import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-
 ```
 
 ### Construction
+The constructor can accept a callback to get the priority from the queued element. If not passed, the priortiy can be passed with `.enqueue`.
 
 #### Example
 ```js
+// for a priority not in the enqueued element
 const patientsQueue = new MinPriorityQueue();
 
-const biddersQueue = new MaxPriorityQueue();
+// for a priority as that is a prop of the queued element
+const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
 ```
 
 ### .enqueue(element, priority)
-adds an element with a priority (number) to the queue.
+adds an element with a priority (number) to the queue. Priority is optional if a priority callback has been defined in the constructor.
 
 <table>
   <tr><th align="center" colspan="3">params</th></tr>
@@ -81,11 +84,11 @@ patientsQueue.enqueue('patient z', 3);
 patientsQueue.enqueue('patient w', 4); // lowest priority
 patientsQueue.enqueue('patient x', 2);
 
-// MaxPriorityQueue Example, where priority is the bid for example
-biddersQueue.enqueue('bidder y', 1000); // lowest priority
-biddersQueue.enqueue('bidder w', 2500);
-biddersQueue.enqueue('bidder z', 3500); // highest priority
-biddersQueue.enqueue('bidder x', 3000);
+// MaxPriorityQueue Example, where priority is the bid for example. Priority is obtained from the callback.
+biddersQueue.enqueue({ name: 'bidder y', value: 1000 }); // lowest priority
+biddersQueue.enqueue({ name: 'bidder w', value: 2500 });
+biddersQueue.enqueue({ name: 'bidder z', value: 3500 }); // highest priority
+biddersQueue.enqueue({ name: 'bidder x', value: 3000 });
 ```
 
 ### .front()
@@ -113,7 +116,7 @@ returns the element with highest priority in the queue.
 ```js
 console.log(patientsQueue.front()); // { priority: 1, element: 'patient y' }
 
-console.log(biddersQueue.front()); // { priority: 3500, element: 'bidder z' }
+console.log(biddersQueue.front()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
 ```
 
 ### .back()
@@ -126,7 +129,6 @@ returns an element with lowest priority in the queue. If multiple elements exist
   <td>object literal with "priority" and "element" props</td>
  </tr>
 </table>
-
 
 <table>
  <tr>
@@ -144,9 +146,9 @@ patientsQueue.enqueue('patient m', 4); // lowest priority
 patientsQueue.enqueue('patient c', 4); // lowest priority
 console.log(patientsQueue.back()); // { priority: 4, element: 'patient w' }
 
-biddersQueue.enqueue('bidder m', 1000); // lowest priority
-biddersQueue.enqueue('bidder c', 1000); // lowest priority
-console.log(biddersQueue.back()); // { priority: 1000, element: 'bidder y' }
+biddersQueue.enqueue({ name: 'bidder m', value: 1000 }); // lowest priority
+biddersQueue.enqueue({ name: 'bidder c', value: 1000 }); // lowest priority
+console.log(biddersQueue.back()); // { priority: 1000, element: { name: 'bidder y', value: 1000 } }
 ```
 
 ### .dequeue()
@@ -175,8 +177,8 @@ removes and returns the element with highest priority in the queue.
 console.log(patientsQueue.dequeue()); // { priority: 1, element: 'patient y' }
 console.log(patientsQueue.front()); // { priority: 2, element: 'patient x' }
 
-console.log(biddersQueue.dequeue()); // { priority: 3500, element: 'bidder z' }
-console.log(biddersQueue.front()); // { priority: 3000, element: 'bidder x' }
+console.log(biddersQueue.dequeue()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
+console.log(biddersQueue.front()); // { priority: 3000, element: { name: 'bidder x', value: 3000 } }
 ```
 
 ### .isEmpty()
