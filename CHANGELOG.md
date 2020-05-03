@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.1] - 2020-05-03
+### Fixed
+- README
+- package.json
+
 ## [4.1.0] - 2020-04-22
 ### Added
 - allow passing a priority callback in constructor.

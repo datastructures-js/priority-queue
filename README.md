@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 [![npm](https://img.shields.io/npm/dm/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 
-A highly performant priority queue implementation using a Heap data structure.
+A performant priority queue implementation using a Heap data structure.
 
 # Table of Contents
 * [Install](#install)
@@ -12,7 +12,7 @@ A highly performant priority queue implementation using a Heap data structure.
   * [require](#require)
   * [import](#import)
   * [Construction](#construction)
-  * [.enqueue(element, priority)](#enqueueelement-priority)
+  * [.enqueue(element[, priority])](#enqueueelement-priority)
   * [.front()](#front)
   * [.back()](#back)
   * [.dequeue()](#dequeue)
@@ -48,6 +48,7 @@ import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-
 The constructor can accept a callback to get the priority from the queued element. If not passed, the priortiy should be passed with `.enqueue`.
 
 #### Example
+
 ```js
 // the priority not part of the enqueued element
 const patientsQueue = new MinPriorityQueue();
@@ -56,7 +57,7 @@ const patientsQueue = new MinPriorityQueue();
 const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
 ```
 
-### .enqueue(element, priority)
+### .enqueue(element[, priority])
 adds an element with a priority (number) to the queue. Priority is not required here if a priority callback has been defined in the constructor. If passed here in addition to an existing constructor callback, it will override the callback one.
 
 <table>
