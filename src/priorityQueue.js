@@ -67,19 +67,20 @@ class PriorityQueue {
    * @public
    * add an element to the queue based on its priority
    * @param {object} element
-   * @param {number} priority
+   * @param {number} p - priority
    * @throws {Error} if priority is not a valid number
    */
-  enqueue(element, priority) {
-    if (priority && (Number.isNaN(+priority) || priority < 1)) {
+  enqueue(element, p) {
+    if (p && Number.isNaN(+p)) {
       throw new Error('invalid priority number');
     }
 
-    if (!priority && this._getPriority === null) {
+    if (Number.isNaN(+p) && this._getPriority === null) {
       throw new Error('missing priority number or constructor callback');
     }
 
-    this._heap.insert(priority || this._getPriority(element), element);
+    const priority = !Number.isNaN(+p) ? p : this._getPriority(element);
+    this._heap.insert(priority, element);
   }
 
   /**
