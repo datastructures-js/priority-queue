@@ -27,12 +27,14 @@ describe('MinPriorityQueue tests', () => {
     });
 
     it('should queue elements with priorities', () => {
-      patientsQueue.enqueue('patient y', 1); // highest priority
+      patientsQueue.enqueue('patient a', 0); // highest priority
+      patientsQueue.enqueue('patient y', 1);
       patientsQueue.enqueue('patient z', 3);
       patientsQueue.enqueue('patient w', 4); // lowest priority
       patientsQueue.enqueue('patient x', 2);
 
-      turnsQueue.enqueue({ name: 'patient y', value: 1 }); // highest priority
+      turnsQueue.enqueue({ name: 'patient a', value: 0 }); // highest priority
+      turnsQueue.enqueue({ name: 'patient y', value: 1 });
       turnsQueue.enqueue({ name: 'patient z', value: 3 });
       turnsQueue.enqueue({ name: 'patient w', value: 4 }); // lowest priority
       turnsQueue.enqueue({ name: 'patient x', value: 2 });
@@ -41,16 +43,16 @@ describe('MinPriorityQueue tests', () => {
 
   describe('.size()', () => {
     it('should have length of 4', () => {
-      expect(patientsQueue.size()).to.equal(4);
-      expect(turnsQueue.size()).to.equal(4);
+      expect(patientsQueue.size()).to.equal(5);
+      expect(turnsQueue.size()).to.equal(5);
     });
   });
 
   describe('.front()', () => {
     it('should get the front element', () => {
       const { priority, element } = patientsQueue.front();
-      expect(priority).to.equal(1);
-      expect(element).to.equal('patient y');
+      expect(priority).to.equal(0);
+      expect(element).to.equal('patient a');
     });
   });
 
@@ -65,6 +67,7 @@ describe('MinPriorityQueue tests', () => {
   describe('toArray()', () => {
     it('should convert queue to array from highest priority to lowest', () => {
       expect(patientsQueue.toArray()).to.deep.equal([
+        { priority: 0, element: 'patient a' },
         { priority: 1, element: 'patient y' },
         { priority: 2, element: 'patient x' },
         { priority: 3, element: 'patient z' },
@@ -72,6 +75,7 @@ describe('MinPriorityQueue tests', () => {
       ]);
 
       expect(turnsQueue.toArray()).to.deep.equal([
+        { priority: 0, element: { name: 'patient a', value: 0 }},
         { priority: 1, element: { name: 'patient y', value: 1 }},
         { priority: 2, element: { name: 'patient x', value: 2 }},
         { priority: 3, element: { name: 'patient z', value: 3 }},
@@ -82,6 +86,19 @@ describe('MinPriorityQueue tests', () => {
 
   describe('.dequeue()', () => {
     it('should dequeue elements by priority', () => {
+      const { priority: p0, element: e0} = patientsQueue.dequeue();
+      expect(p0).to.equal(0);
+      expect(e0).to.equal('patient a');
+      expect(patientsQueue.size()).to.equal(4);
+      expect(patientsQueue.front().element).to.equal('patient y');
+
+      const { priority: p00, element: e00} = turnsQueue.dequeue();
+      expect(p00).to.equal(0);
+      expect(e00).to.deep.equal({ name: 'patient a', value: 0 });
+      expect(turnsQueue.size()).to.equal(4);
+      expect(turnsQueue.front().element)
+        .to.deep.equal({ name: 'patient y', value: 1 });
+
       const { priority: p1, element: e1} = patientsQueue.dequeue();
       expect(p1).to.equal(1);
       expect(e1).to.equal('patient y');

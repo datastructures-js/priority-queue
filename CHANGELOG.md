@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.2] - 2020-09-22
+### Fixed
+- Allow any number value for priority.
+
 ## [4.1.1] - 2020-05-03
 ### Fixed
 - README
