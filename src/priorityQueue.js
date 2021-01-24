@@ -83,8 +83,7 @@ class PriorityQueue {
     }
 
     const priority = !Number.isNaN(+p) ? p : this._priorityCb(element);
-
-    this._heap.insert(priority, element);
+    this._heap.insert(+priority, element);
   }
 
   /**
