@@ -75,11 +75,14 @@ class PriorityQueue {
    */
   enqueue(element, p) {
     if (p && Number.isNaN(+p)) {
-      throw new Error('.enqueue expects a valid priority number');
+      throw new Error('.enqueue expects a numeric priority');
     }
 
     if (Number.isNaN(+p) && Number.isNaN(this._priorityCb(element))) {
-      throw new Error('missing priority number or constructor callback');
+      throw new Error(
+        '.enqueue expects a numeric priority '
+        + 'or a constructor callback that returns a number'
+      );
     }
 
     const priority = !Number.isNaN(+p) ? p : this._priorityCb(element);
