@@ -86,9 +86,9 @@ patientsQueue
 // MaxPriorityQueue Example, where priority is the bid for example. Priority is obtained from the callback.
 biddersQueue
   .enqueue({ name: 'bidder y', value: 1000 }); // lowest priority
-  enqueue({ name: 'bidder w', value: 2500 });
-  enqueue({ name: 'bidder z', value: 3500 }); // highest priority
-  enqueue({ name: 'bidder x', value: 3000 });
+  .enqueue({ name: 'bidder w', value: 2500 });
+  .enqueue({ name: 'bidder z', value: 3500 }); // highest priority
+  .enqueue({ name: 'bidder x', value: 3000 });
 ```
 
 ### .front()
