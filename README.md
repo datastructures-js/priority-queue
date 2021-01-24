@@ -8,9 +8,9 @@ A performant priority queue implementation using a Heap data structure.
 
 # Table of Contents
 * [Install](#install)
+* [require](#require)
+* [import](#import)
 * [API](#api)
-  * [require](#require)
-  * [import](#import)
   * [Construction](#construction)
   * [.enqueue(element[, priority])](#enqueueelement-priority)
   * [.front()](#front)
@@ -47,8 +47,6 @@ import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-
 ### Construction
 The constructor can accept a callback to get the priority from the queued element. If not passed, the priortiy should be passed with `.enqueue`.
 
-#### Example
-
 ```js
 // the priority not part of the enqueued element
 const patientsQueue = new MinPriorityQueue();
@@ -61,58 +59,51 @@ const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
 adds an element with a priority (number) to the queue. Priority is not required here if a priority callback has been defined in the constructor. If passed here in addition to an existing constructor callback, it will override the callback one.
 
 <table>
-  <tr><th align="center" colspan="3">params</th></tr>
-  <tr><td><b>name</b></td><td><b>type</b></td></tr>
-  <tr><td>element</td><td>object</td></tr>
-  <tr><td>priority</td><td>number</td></tr>
+  <tr>
+    <th align="center">params</th>
+    <th align="center">return</th>
+    <th align="center">runtime</th>
+  </tr>
+  <tr>
+    <td>
+      element: any
+      <br />
+      priority: number
+    </td>
+    <td align="center">MinPriorityQueue | MaxPriorityHeap</td>
+    <td align="center">O(log(n))</td>
+  </tr>
 </table>
-
-<table>
- <tr>
-  <th>runtime</th>
- </tr>
- <tr>
-  <td>O(log(n))</td>
- </tr>
-</table>
-
-#### Example
 
 ```js
 // MinPriorityQueue Example, where priority is the turn for example
-patientsQueue.enqueue('patient y', 1); // highest priority
-patientsQueue.enqueue('patient z', 3);
-patientsQueue.enqueue('patient w', 4); // lowest priority
-patientsQueue.enqueue('patient x', 2);
+patientsQueue
+  .enqueue('patient y', 1); // highest priority
+  .enqueue('patient z', 3);
+  .enqueue('patient w', 4); // lowest priority
+  .enqueue('patient x', 2);
 
 // MaxPriorityQueue Example, where priority is the bid for example. Priority is obtained from the callback.
-biddersQueue.enqueue({ name: 'bidder y', value: 1000 }); // lowest priority
-biddersQueue.enqueue({ name: 'bidder w', value: 2500 });
-biddersQueue.enqueue({ name: 'bidder z', value: 3500 }); // highest priority
-biddersQueue.enqueue({ name: 'bidder x', value: 3000 });
+biddersQueue
+  .enqueue({ name: 'bidder y', value: 1000 }); // lowest priority
+  enqueue({ name: 'bidder w', value: 2500 });
+  enqueue({ name: 'bidder z', value: 3500 }); // highest priority
+  enqueue({ name: 'bidder x', value: 3000 });
 ```
 
 ### .front()
 returns the element with highest priority in the queue.
 
 <table>
- <tr><th>return</th><th>description</th></tr>
- <tr>
-  <td>object</td>
-  <td>object literal with "priority" and "element" props</td>
- </tr>
+  <tr>
+    <th align="center">return</th>
+    <th align="center">runtime</th>
+  </tr>
+  <tr>
+    <td align="center">any</td>
+    <td align="center">O(1)</td>
+  </tr>
 </table>
-
-<table>
- <tr>
-  <th>runtime</th>
- </tr>
- <tr>
-  <td>O(1)</td>
- </tr>
-</table>
-
-#### Example
 
 ```js
 console.log(patientsQueue.front()); // { priority: 1, element: 'patient y' }

@@ -16,14 +16,14 @@ describe('MaxPriorityQueue tests', () => {
 
     it('throws an error if a priority callback is invalid', () => {
       expect(() => new MaxPriorityQueue({ priority: 'test' }))
-        .to.throw('invalid priority callback');
+        .to.throw('.constructor expects a valid priority function');
     });
   });
 
-  describe('enqueue(element, priority)', () => {
+  describe('enqueue(element[, priority])', () => {
     it('should throw an error when priority is invalid number', () => {
       expect(() => biddersQueue.enqueue('test', 'p'))
-        .to.throw('invalid priority number');
+        .to.throw('.enqueue expects a valid priority number');
     });
 
     it('should throw an error when no priority is provided', () => {
