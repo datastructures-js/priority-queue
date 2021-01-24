@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - 2021-01-24
+### Changed
+- upgrade heap to latest major version.
+- `.enqueue` can now be chanined.
+
+### Added
+- a default priority callback that returns the element itself if no callback is provided.
+
+### Fixed
+- cleaner error messages.
+- README
+- jsdoc
+
 ## [4.1.2] - 2020-09-22
 ### Fixed
 - Allow any number value for priority.
