@@ -69,7 +69,7 @@ class PriorityQueue {
   /**
    * Adds an element to the queue
    * @public
-   * @param {object} element
+   * @param {any} element
    * @param {number} p - priority
    * @throws {Error} if priority is not a valid number
    */
