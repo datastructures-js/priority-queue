@@ -7,7 +7,8 @@
     no-underscore-dangle: [
       "error",
       { "allowAfterThis": true }
-    ]
+    ],
+    "class-methods-use-this": 0
   },
   "env": {
     "mocha": true,

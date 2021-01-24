@@ -16,14 +16,24 @@ describe('MinPriorityQueue tests', () => {
 
     it('throws an error if a priority callback is invalid', () => {
       expect(() => new MinPriorityQueue({ priority: 'test' }))
-        .to.throw('invalid priority callback');
+        .to.throw('.constructor expects a valid priority function');
     });
   });
 
-  describe('enqueue(element, priority)', () => {
-    it('should throw an error when priort is invalid number', () => {
+  describe('enqueue(element[, priority])', () => {
+    it('should throw an error when priority is invalid number', () => {
       expect(() => patientsQueue.enqueue('test', 'p'))
-        .to.throw('invalid priority number');
+        .to.throw('.enqueue expects a numeric priority');
+    });
+
+    it('should throw an error when priority not provided anywhere', () => {
+      const invalidQueue = new MinPriorityQueue();
+      expect(() => invalidQueue.enqueue('test'))
+        .to.throw(Error).and.to.have.property(
+          'message',
+          '.enqueue expects a numeric priority '
+          + 'or a constructor callback that returns a number'
+        );
     });
 
     it('should queue elements with priorities', () => {
