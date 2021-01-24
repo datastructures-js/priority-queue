@@ -12,11 +12,12 @@ class PriorityQueue {
    * @params {object} [options]
    */
   constructor(options = {}) {
-    const { priority } = options;
+    const { priority, elements } = options;
     if (priority !== undefined && typeof priority !== 'function') {
       throw new Error('.constructor expects a valid priority function');
     }
     this._priorityCb = priority || ((el) => +el);
+    this._elements = elements;
   }
 
   /**
@@ -25,9 +26,17 @@ class PriorityQueue {
    */
   _getElementWithPriority(node) {
     return {
-      priority: node.key,
-      element: node.value
+      priority: typeof node === 'object' ? node.key : node,
+      element: typeof node === 'object' ? node.value : node
     };
+  }
+
+  /**
+   * @private
+   */
+  _initHeap(Heap) {
+    this._heap = new Heap(this._elements);
+    this._heap.fix();
   }
 
   /**

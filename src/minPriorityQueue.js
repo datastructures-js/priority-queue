@@ -13,7 +13,7 @@ const PriorityQueue = require('./priorityQueue');
 class MinPriorityQueue extends PriorityQueue {
   constructor(options) {
     super(options);
-    this._heap = new MinHeap();
+    this._initHeap(MinHeap);
   }
 }
 
