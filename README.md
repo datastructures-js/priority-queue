@@ -112,7 +112,7 @@ console.log(biddersQueue.front()); // { priority: 3500, element: { name: 'bidder
 ```
 
 ### .back()
-returns an element with lowest priority in the queue. If multiple elements exist at the lowest priority, the one that was inserted first will be returned.
+returns an element with a lowest priority in the queue.
 
 <table>
   <tr>
@@ -128,7 +128,7 @@ returns an element with lowest priority in the queue. If multiple elements exist
 ```js
 patientsQueue.enqueue('patient m', 4); // lowest priority
 patientsQueue.enqueue('patient c', 4); // lowest priority
-console.log(patientsQueue.back()); // { priority: 4, element: 'patient w' }
+console.log(patientsQueue.back()); // { priority: 4, element: 'patient c' }
 
 biddersQueue.enqueue({ name: 'bidder m', value: 1000 }); // lowest priority
 biddersQueue.enqueue({ name: 'bidder c', value: 1000 }); // lowest priority
