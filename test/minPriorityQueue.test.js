@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const MinPriorityQueue = require('../src/minPriorityQueue');
 
 describe('MinPriorityQueue tests', () => {
-  let patientsQueue, turnsQueue, numbersQueue;
+  let patientsQueue, turnsQueue;
 
   describe('constructor(options)', () => {
     it('creates an instance', () => {
@@ -12,10 +12,6 @@ describe('MinPriorityQueue tests', () => {
 
     it('creates an instance with a priority callback', () => {
       turnsQueue = new MinPriorityQueue({ priority: (turn) => turn.value });
-    });
-
-    it('creates an queue from a list of numbers', () => {
-      numbersQueue = new MinPriorityQueue({ elements: [5, 1, 2, 3, 4] });
     });
 
     it('throws an error if a priority callback is invalid', () => {
@@ -95,14 +91,6 @@ describe('MinPriorityQueue tests', () => {
         { priority: 3, element: { name: 'patient z', value: 3 }},
         { priority: 4, element: { name: 'patient w', value: 4 }}
       ]);
-
-      expect(numbersQueue.toArray()).to.deep.equal([
-        { priority: 1, element: 1 },
-        { priority: 2, element: 2 },
-        { priority: 3, element: 3 },
-        { priority: 4, element: 4 },
-        { priority: 5, element: 5 },
-      ]);
     });
   });
 
@@ -159,12 +147,6 @@ describe('MinPriorityQueue tests', () => {
       expect(turnsQueue.size()).to.equal(1);
       expect(turnsQueue.front().element)
         .to.deep.equal({ name: 'patient w', value: 4 });
-
-      expect(numbersQueue.dequeue()).to.deep.equal({ priority: 1, element: 1 });
-      expect(numbersQueue.dequeue()).to.deep.equal({ priority: 2, element: 2 });
-      expect(numbersQueue.dequeue()).to.deep.equal({ priority: 3, element: 3 });
-      expect(numbersQueue.dequeue()).to.deep.equal({ priority: 4, element: 4 });
-      expect(numbersQueue.dequeue()).to.deep.equal({ priority: 5, element: 5 });
     });
   });
 
