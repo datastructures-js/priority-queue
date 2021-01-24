@@ -70,7 +70,7 @@ adds an element with a priority (number) to the queue. Priority is not required 
       <br />
       priority: number
     </td>
-    <td align="center">MinPriorityQueue | MaxPriorityHeap</td>
+    <td align="center">MinPriorityQueue | MaxPriorityQueue</td>
     <td align="center">O(log(n))</td>
   </tr>
 </table>
