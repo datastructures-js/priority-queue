@@ -45,13 +45,13 @@ import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-
 ```
 
 ### Construction
-The constructor accepts a callback to get the priority from the queued element. If not passed, the priortiy must be provided with `.enqueue`.
+The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the value of the element itself.
 
 ```js
-// the priority not part of the enqueued element
-const patientsQueue = new MinPriorityQueue();
+// empty queue with priority not being part of the queued element
+const patientsQueue = new MinPriorityQueue(); // priority should be provided in .enqueue
 
-// the priority is a prop of the queued element
+// empty queue with priority returned from the queued element
 const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
 ```
 
