@@ -56,7 +56,7 @@ const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
 ```
 
 ### .enqueue(element[, priority])
-adds an element with a priority (number) to the queue. Priority is not required here if a priority callback has been provided in the constructor. If passed here with a constructor callback, it will override the callback.
+adds an element with a numeric priority to the queue. Priority is not required here if a priority callback has been provided in the constructor. If passed here with a constructor callback, it will override the callback.
 
 <table>
   <tr>
@@ -76,14 +76,14 @@ adds an element with a priority (number) to the queue. Priority is not required 
 </table>
 
 ```js
-// MinPriorityQueue Example, where priority is the turn for example
+// MinPriorityQueue Example, where priority is the patient's turn
 patientsQueue
   .enqueue('patient y', 1); // highest priority
   .enqueue('patient z', 3);
   .enqueue('patient w', 4); // lowest priority
   .enqueue('patient x', 2);
 
-// MaxPriorityQueue Example, where priority is the bid for example. Priority is obtained from the callback.
+// MaxPriorityQueue Example, where priority is the bid's value.
 biddersQueue
   .enqueue({ name: 'bidder y', value: 1000 }); // lowest priority
   .enqueue({ name: 'bidder w', value: 2500 });
