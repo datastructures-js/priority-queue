@@ -48,10 +48,13 @@ import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-
 The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the value of the element itself.
 
 ```js
-// empty queue with priority not being part of the queued element
-const patientsQueue = new MinPriorityQueue(); // priority should be provided in .enqueue
+// empty queue with default priority the element value itself.
+const numbersQueue = new MinPriorityQueue();
 
-// empty queue with priority returned from the queued element
+// empty queue, will provide priority in .enqueue
+const patientsQueue = new MinPriorityQueue();
+
+// empty queue with priority returned from a prop of the queued object
 const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
 ```
 
@@ -76,6 +79,15 @@ adds an element with a numeric priority to the queue. Priority is not required h
 </table>
 
 ```js
+// MinPriorityQueue Example, where priority is the number element itself
+const numbersQueue
+  .enqueue(10)
+  .enqueue(-7)
+  .enqueue(2)
+  .enqueue(-1)
+  .enqueue(-17)
+  .enqueue(33);
+
 // MinPriorityQueue Example, where priority is the patient's turn
 patientsQueue
   .enqueue('patient y', 1); // highest priority
@@ -106,6 +118,8 @@ returns the element with highest priority in the queue.
 </table>
 
 ```js
+console.log(numbersQueue.front()); // { priority: -17, element: -17 }
+
 console.log(patientsQueue.front()); // { priority: 1, element: 'patient y' }
 
 console.log(biddersQueue.front()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
@@ -126,6 +140,8 @@ returns an element with a lowest priority in the queue.
 </table>
 
 ```js
+console.log(numbersQueue.back()); // { priority: 33, element: 33 }
+
 patientsQueue.enqueue('patient m', 4); // lowest priority
 patientsQueue.enqueue('patient c', 4); // lowest priority
 console.log(patientsQueue.back()); // { priority: 4, element: 'patient c' }
@@ -150,6 +166,9 @@ removes and returns the element with highest priority in the queue.
 </table>
 
 ```js
+console.log(numbersQueue.dequeue()); // { priority: -17, element: -17 }
+console.log(numbersQueue.front()); // { priority: -7, element: -7 }
+
 console.log(patientsQueue.dequeue()); // { priority: 1, element: 'patient y' }
 console.log(patientsQueue.front()); // { priority: 2, element: 'patient x' }
 
@@ -172,6 +191,8 @@ checks if the queue is empty.
 </table>
 
 ```js
+console.log(numbersQueue.isEmpty()); // false
+
 console.log(patientsQueue.isEmpty()); // false
 
 console.log(biddersQueue.isEmpty()); // false
@@ -192,6 +213,8 @@ returns the number of elements in the queue.
 </table>
 
 ```js
+console.log(numbersQueue.size()); // 5
+
 console.log(patientsQueue.size()); // 5
 
 console.log(biddersQueue.size()); // 5
@@ -212,6 +235,17 @@ returns a sorted array of elements by their priorities from highest to lowest.
 </table>
 
 ```js
+console.log(numbersQueue.toArray());
+/*
+[
+  { priority: -7, element: -7 },
+  { priority: -1, element: -1 },
+  { priority: 2, element: 2 },
+  { priority: 10, element: 10 },
+  { priority: 33, element: 33 }
+]
+*/
+
 console.log(patientsQueue.toArray());
 /*
 [
@@ -249,6 +283,11 @@ clears all elements in the queue.
 
 
 ```js
+numbersQueue.clear();
+console.log(numbersQueue.size()); // 0
+console.log(numbersQueue.front()); // null
+console.log(numbersQueue.dequeue()); // null
+
 patientsQueue.clear();
 console.log(patientsQueue.size()); // 0
 console.log(patientsQueue.front()); // null
