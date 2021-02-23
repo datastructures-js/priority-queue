@@ -79,7 +79,7 @@ adds an element with a numeric priority to the queue. Priority is not required h
 </table>
 
 ```js
-// MinPriorityQueue Example, where priority is the element itself
+// MinPriorityQueue Example, where priority is the number element itself
 const numbersQueue
   .enqueue(10)
   .enqueue(-7)
