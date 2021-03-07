@@ -80,7 +80,7 @@ adds an element with a numeric priority to the queue. Priority is not required h
 
 ```js
 // MinPriorityQueue Example, where priority is the number element itself
-const numbersQueue
+numbersQueue
   .enqueue(10)
   .enqueue(-7)
   .enqueue(2)
