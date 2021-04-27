@@ -90,16 +90,16 @@ numbersQueue
 
 // MinPriorityQueue Example, where priority is the patient's turn
 patientsQueue
-  .enqueue('patient y', 1); // highest priority
-  .enqueue('patient z', 3);
-  .enqueue('patient w', 4); // lowest priority
+  .enqueue('patient y', 1) // highest priority
+  .enqueue('patient z', 3)
+  .enqueue('patient w', 4) // lowest priority
   .enqueue('patient x', 2);
 
 // MaxPriorityQueue Example, where priority is the bid's value.
 biddersQueue
-  .enqueue({ name: 'bidder y', value: 1000 }); // lowest priority
-  .enqueue({ name: 'bidder w', value: 2500 });
-  .enqueue({ name: 'bidder z', value: 3500 }); // highest priority
+  .enqueue({ name: 'bidder y', value: 1000 }) // lowest priority
+  .enqueue({ name: 'bidder w', value: 2500 })
+  .enqueue({ name: 'bidder z', value: 3500 }) // highest priority
   .enqueue({ name: 'bidder x', value: 3000 });
 ```
 
