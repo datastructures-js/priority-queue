@@ -30,7 +30,7 @@ npm install --save @datastructures-js/priority-queue
 ```
 
 ## API
-PriorityQueue in this repo is implemented as types: MinPriorityQueue which uses a MinHeap and considers an element with smaller priority number as higher in priority. And MaxPriorityQueue which uses a MaxHeap and cosiders an element with bigger priority number as higher in priority.
+PriorityQueue in this repo is implemented as two types: MinPriorityQueue which uses a MinHeap and considers an element with smaller priority number as higher in priority. And MaxPriorityQueue which uses a MaxHeap and cosiders an element with bigger priority number as higher in priority.
 
 ### require
 
