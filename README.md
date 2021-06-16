@@ -30,7 +30,7 @@ npm install --save @datastructures-js/priority-queue
 ```
 
 ## API
-There are two types of PriorityQueue in this repo: MinPriorityQueue which uses a MinHeap and considers an element with smaller priority number as higher in priority. And MaxPriorityQueue which uses a MaxHeap and cosiders an element with bigger priority number as higher in priority.
+PriorityQueue in this repo is implemented as types: MinPriorityQueue which uses a MinHeap and considers an element with smaller priority number as higher in priority. And MaxPriorityQueue which uses a MaxHeap and cosiders an element with bigger priority number as higher in priority.
 
 ### require
 
@@ -41,12 +41,18 @@ const { MinPriorityQueue, MaxPriorityQueue } = require('@datastructures-js/prior
 ### import
 
 ```js
-import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-queue';
+import {
+  MinPriorityQueue,
+  MaxPriorityQueue,
+  PriorityQueueOptions, // queue options interface
+  PriorityQueueItem // queue item interface
+} from '@datastructures-js/priority-queue';
 ```
 
 ### Construction
 The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the value of the element itself.
 
+##### JS
 ```js
 // empty queue with default priority the element value itself.
 const numbersQueue = new MinPriorityQueue();
@@ -56,6 +62,21 @@ const patientsQueue = new MinPriorityQueue();
 
 // empty queue with priority returned from a prop of the queued object
 const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
+```
+
+##### TS
+```js
+const numbersQueue = new MinPriorityQueue<number>();
+
+const patientsQueue = new MinPriorityQueue<string>();
+
+interface Bid {
+  name: string;
+  value: number;
+}
+const biddersQueue = new MaxPriorityQueue<Bid>({
+  priority: (bid: Bid) => bid.value
+});
 ```
 
 ### .enqueue(element[, priority])
