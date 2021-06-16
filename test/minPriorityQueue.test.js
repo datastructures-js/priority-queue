@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const MinPriorityQueue = require('../src/minPriorityQueue');
+const { MinPriorityQueue } = require('../src/minPriorityQueue');
 
 describe('MinPriorityQueue tests', () => {
   let patientsQueue, turnsQueue;

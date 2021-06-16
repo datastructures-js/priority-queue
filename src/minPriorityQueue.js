@@ -4,7 +4,7 @@
  */
 
 const { MinHeap } = require('@datastructures-js/heap');
-const PriorityQueue = require('./priorityQueue');
+const { PriorityQueue } = require('./priorityQueue');
 
 /**
  * @class MinPriorityQueue
@@ -17,4 +17,4 @@ class MinPriorityQueue extends PriorityQueue {
   }
 }
 
-module.exports = MinPriorityQueue;
+exports.MinPriorityQueue = MinPriorityQueue;

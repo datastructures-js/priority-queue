@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const MaxPriorityQueue = require('../src/maxPriorityQueue');
+const { MaxPriorityQueue } = require('../src/maxPriorityQueue');
 
 describe('MaxPriorityQueue tests', () => {
   let biddersQueue, bidsQueue;

@@ -122,4 +122,4 @@ class PriorityQueue {
   }
 }
 
-module.exports = PriorityQueue;
+exports.PriorityQueue = PriorityQueue;
