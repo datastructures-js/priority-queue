@@ -92,7 +92,7 @@ adds an element with a numeric priority to the queue. Priority is not required h
   </tr>
   <tr>
     <td>
-      element: any
+      element: T
       <br />
       priority: number
     </td>
@@ -135,7 +135,7 @@ returns the element with highest priority in the queue.
     <th align="center">runtime</th>
   </tr>
   <tr>
-    <td align="center">object</td>
+    <td align="center">PriorityQueueItem&lt;T&gt;</td>
     <td align="center">O(1)</td>
   </tr>
 </table>
@@ -157,7 +157,7 @@ returns an element with a lowest priority in the queue.
     <th align="center">runtime</th>
   </tr>
   <tr>
-    <td align="center">object</td>
+    <td align="center">PriorityQueueItem&lt;T&gt;</td>
     <td align="center">O(1)</td>
   </tr>
 </table>
@@ -183,7 +183,7 @@ removes and returns the element with highest priority in the queue.
     <th align="center">runtime</th>
   </tr>
   <tr>
-    <td align="center">object</td>
+    <td align="center">PriorityQueueItem&lt;T&gt;</td>
     <td align="center">O(log(n))</td>
   </tr>
 </table>
@@ -252,7 +252,7 @@ returns a sorted array of elements by their priorities from highest to lowest.
     <th align="center">runtime</th>
   </tr>
   <tr>
-    <td align="center">array&lt;object&gt;</td>
+    <td align="center">PriorityQueueItem&lt;T&gt;[]</td>
     <td align="center">O(n*log(n))</td>
   </tr>
 </table>
