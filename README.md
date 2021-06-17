@@ -13,7 +13,7 @@ A performant priority queue implementation using a Heap data structure.
 * [require](#require)
 * [import](#import)
 * [API](#api)
-  * [Construction](#construction)
+  * [constructor](#constructor)
   * [.enqueue(element[, priority])](#enqueueelement-priority)
   * [.front()](#front)
   * [.back()](#back)
@@ -51,7 +51,7 @@ import {
 } from '@datastructures-js/priority-queue';
 ```
 
-### Construction
+### constructor
 The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the value of the element itself.
 
 ##### JS
