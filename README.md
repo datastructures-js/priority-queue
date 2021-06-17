@@ -6,7 +6,7 @@
 
 A performant priority queue implementation using a Heap data structure.
 
-# Table of Contents
+# Contents
 * [Install](#install)
 * [require](#require)
 * [import](#import)
