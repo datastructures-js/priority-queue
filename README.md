@@ -96,7 +96,7 @@ adds an element with a numeric priority to the queue. Priority is not required h
       <br />
       priority: number
     </td>
-    <td align="center">MinPriorityQueue | MaxPriorityQueue</td>
+    <td align="center">MinPriorityQueue&lt;T&gt; | MaxPriorityQueue&lt;T&gt;</td>
     <td align="center">O(log(n))</td>
   </tr>
 </table>
