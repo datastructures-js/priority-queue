@@ -52,7 +52,7 @@ import {
 ```
 
 ### constructor
-The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the value of the element itself.
+The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself.
 
 ##### JS
 ```js
