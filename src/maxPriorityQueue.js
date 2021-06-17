@@ -4,7 +4,7 @@
  */
 
 const { MaxHeap } = require('@datastructures-js/heap');
-const PriorityQueue = require('./priorityQueue');
+const { PriorityQueue } = require('./priorityQueue');
 
 /**
  * @class MaxPriorityQueue
@@ -17,4 +17,4 @@ class MaxPriorityQueue extends PriorityQueue {
   }
 }
 
-module.exports = MaxPriorityQueue;
+exports.MaxPriorityQueue = MaxPriorityQueue;

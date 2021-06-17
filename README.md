@@ -6,12 +6,14 @@
 
 A performant priority queue implementation using a Heap data structure.
 
-# Table of Contents
+<img src="https://user-images.githubusercontent.com/6517308/121813242-859a9700-cc6b-11eb-99c0-49e5bb63005b.jpg">
+
+# Contents
 * [Install](#install)
 * [require](#require)
 * [import](#import)
 * [API](#api)
-  * [Construction](#construction)
+  * [constructor](#constructor)
   * [.enqueue(element[, priority])](#enqueueelement-priority)
   * [.front()](#front)
   * [.back()](#back)
@@ -30,7 +32,7 @@ npm install --save @datastructures-js/priority-queue
 ```
 
 ## API
-There are two types of PriorityQueue in this repo: MinPriorityQueue which uses a MinHeap and considers an element with smaller priority number as higher in priority. And MaxPriorityQueue which uses a MaxHeap and cosiders an element with bigger priority number as higher in priority.
+PriorityQueue in this repo is implemented as two types: MinPriorityQueue which uses a MinHeap and considers an element with smaller priority number as higher in priority. And MaxPriorityQueue which uses a MaxHeap and cosiders an element with bigger priority number as higher in priority.
 
 ### require
 
@@ -41,12 +43,18 @@ const { MinPriorityQueue, MaxPriorityQueue } = require('@datastructures-js/prior
 ### import
 
 ```js
-import { MinPriorityQueue, MaxPriorityQueue } from '@datastructures-js/priority-queue';
+import {
+  MinPriorityQueue,
+  MaxPriorityQueue,
+  PriorityQueueOptions, // queue options interface
+  PriorityQueueItem // queue item interface
+} from '@datastructures-js/priority-queue';
 ```
 
-### Construction
-The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the value of the element itself.
+### constructor
+The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself.
 
+##### JS
 ```js
 // empty queue with default priority the element value itself.
 const numbersQueue = new MinPriorityQueue();
@@ -56,6 +64,21 @@ const patientsQueue = new MinPriorityQueue();
 
 // empty queue with priority returned from a prop of the queued object
 const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
+```
+
+##### TS
+```js
+const numbersQueue = new MinPriorityQueue<number>();
+
+const patientsQueue = new MinPriorityQueue<string>();
+
+interface Bid {
+  name: string;
+  value: number;
+}
+const biddersQueue = new MaxPriorityQueue<Bid>({
+  priority: (bid: Bid) => bid.value
+});
 ```
 
 ### .enqueue(element[, priority])
@@ -69,11 +92,11 @@ adds an element with a numeric priority to the queue. Priority is not required h
   </tr>
   <tr>
     <td>
-      element: any
+      element: T
       <br />
       priority: number
     </td>
-    <td align="center">MinPriorityQueue | MaxPriorityQueue</td>
+    <td align="center">MinPriorityQueue&lt;T&gt; | MaxPriorityQueue&lt;T&gt;</td>
     <td align="center">O(log(n))</td>
   </tr>
 </table>
@@ -112,7 +135,7 @@ returns the element with highest priority in the queue.
     <th align="center">runtime</th>
   </tr>
   <tr>
-    <td align="center">object</td>
+    <td align="center">PriorityQueueItem&lt;T&gt;</td>
     <td align="center">O(1)</td>
   </tr>
 </table>
@@ -134,7 +157,7 @@ returns an element with a lowest priority in the queue.
     <th align="center">runtime</th>
   </tr>
   <tr>
-    <td align="center">object</td>
+    <td align="center">PriorityQueueItem&lt;T&gt;</td>
     <td align="center">O(1)</td>
   </tr>
 </table>
@@ -160,7 +183,7 @@ removes and returns the element with highest priority in the queue.
     <th align="center">runtime</th>
   </tr>
   <tr>
-    <td align="center">object</td>
+    <td align="center">PriorityQueueItem&lt;T&gt;</td>
     <td align="center">O(log(n))</td>
   </tr>
 </table>
@@ -229,7 +252,7 @@ returns a sorted array of elements by their priorities from highest to lowest.
     <th align="center">runtime</th>
   </tr>
   <tr>
-    <td align="center">array&lt;object&gt;</td>
+    <td align="center">PriorityQueueItem&lt;T&gt;[]</td>
     <td align="center">O(n*log(n))</td>
   </tr>
 </table>
