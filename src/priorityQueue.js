@@ -14,7 +14,7 @@ class PriorityQueue {
   constructor(options = {}) {
     const { priority, compare } = options;
     if (compare) {
-      if (typeof priority !== 'function') {
+      if (typeof compare !== 'function') {
         throw new Error('.constructor expects a valid compare function');
       }
       this._compare = compare;
