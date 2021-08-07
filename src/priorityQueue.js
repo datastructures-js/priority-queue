@@ -12,11 +12,19 @@ class PriorityQueue {
    * @params {object} [options]
    */
   constructor(options = {}) {
-    const { priority } = options;
-    if (priority !== undefined && typeof priority !== 'function') {
-      throw new Error('.constructor expects a valid priority function');
+    const { priority, compare } = options;
+    if (compare) {
+      if (typeof priority !== 'function') {
+        throw new Error('.constructor expects a valid compare function');
+      }
+      this._compare = compare;
+    } else {
+      if (priority !== undefined && typeof priority !== 'function') {
+        throw new Error('.constructor expects a valid priority function');
+      }
+
+      this._priority = priority || ((el) => +el);
     }
-    this._priorityCb = priority || ((el) => +el);
   }
 
   /**
@@ -53,6 +61,11 @@ class PriorityQueue {
    */
   front() {
     if (this.isEmpty()) return null;
+
+    if (this._compare) {
+      return this._heap.root();
+    }
+
     return this._getElementWithPriority(this._heap.root());
   }
 
@@ -63,6 +76,11 @@ class PriorityQueue {
    */
   back() {
     if (this.isEmpty()) return null;
+
+    if (this._compare) {
+      return this._heap.leaf();
+    }
+
     return this._getElementWithPriority(this._heap.leaf());
   }
 
@@ -74,18 +92,23 @@ class PriorityQueue {
    * @throws {Error} if priority is not a valid number
    */
   enqueue(element, p) {
+    if (this._compare) {
+      this._heap.insert(element);
+      return this;
+    }
+
     if (p && Number.isNaN(+p)) {
       throw new Error('.enqueue expects a numeric priority');
     }
 
-    if (Number.isNaN(+p) && Number.isNaN(this._priorityCb(element))) {
+    if (Number.isNaN(+p) && Number.isNaN(this._priority(element))) {
       throw new Error(
         '.enqueue expects a numeric priority '
         + 'or a constructor callback that returns a number'
       );
     }
 
-    const priority = !Number.isNaN(+p) ? p : this._priorityCb(element);
+    const priority = !Number.isNaN(+p) ? p : this._priority(element);
     this._heap.insert(+priority, element);
     return this;
   }
@@ -97,6 +120,11 @@ class PriorityQueue {
    */
   dequeue() {
     if (this.isEmpty()) return null;
+
+    if (this._compare) {
+      return this._heap.extractRoot();
+    }
+
     return this._getElementWithPriority(this._heap.extractRoot());
   }
 
@@ -106,6 +134,10 @@ class PriorityQueue {
    * @returns {array}
    */
   toArray() {
+    if (this._compare) {
+      return this._heap.clone().sort().reverse();
+    }
+
     return this._heap
       .clone()
       .sort()

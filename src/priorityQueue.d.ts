@@ -1,5 +1,6 @@
 export interface PriorityQueueOptions<T> {
   priority?: (element: T) => number;
+  compare?: (a: T, b: T) => number;
 }
 
 export interface PriorityQueueItem<T> {
