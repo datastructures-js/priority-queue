@@ -52,7 +52,9 @@ import {
 ```
 
 ### constructor
-The constructor accepts a callback to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself.
+
+#### with priority
+The constructor accepts a priority callback option to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself. Use this option for simple priority queues where the priority is a known preimitive value and does not require custom comparison logic.
 
 ##### JS
 ```js
@@ -78,6 +80,41 @@ interface Bid {
 }
 const biddersQueue = new MaxPriorityQueue<Bid>({
   priority: (bid: Bid) => bid.value
+});
+```
+
+#### with comparator
+The constructor also accepts a compare callback option to allow using complex comparison logic between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
+
+##### JS
+```js
+const employeesQueue = new MaxPriorityQueue({
+  compare: (e1, e2) => {
+    if (e1.salary > e2.salary) return -1;
+    if (e1.salary < e2.salary) return 1;
+
+    // salaries are the same, compare rank
+    return e1.rank < e2.rank ? 1 : -1;
+  }
+});
+```
+
+##### TS
+```js
+interface Employee {
+  name: string;
+  salary: number;
+  rank: number;
+}
+
+const employeesQueue = new MaxPriorityQueue<Employee>({
+  compare: (e1, e2) => {
+    if (e1.salary > e2.salary) return -1;
+    if (e1.salary < e2.salary) return 1;
+
+    // salaries are the same, compare rank
+    return e1.rank < e2.rank ? 1 : -1;
+  }
 });
 ```
 
