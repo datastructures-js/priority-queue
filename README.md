@@ -54,7 +54,7 @@ import {
 ### constructor
 
 #### with priority
-The constructor accepts a priority callback option to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself. Use this option for simple priority queues where the priority is a known preimitive value and does not require custom comparison logic.
+The constructor accepts a priority callback option to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself. Use this option when the priority is a single value and does not require complex comparison.
 
 ##### JS
 ```js
@@ -84,7 +84,7 @@ const biddersQueue = new MaxPriorityQueue<Bid>({
 ```
 
 #### with comparator
-The constructor also accepts a compare callback option to allow using complex comparison logic between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
+The constructor also accepts a compare callback option to allow using complex comparison between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
 
 ##### JS
 ```js
