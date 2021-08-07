@@ -90,8 +90,8 @@ The constructor also accepts a compare callback option to allow using complex co
 ```js
 const employeesQueue = new MaxPriorityQueue({
   compare: (e1, e2) => {
-    if (e1.salary > e2.salary) return -1;
-    if (e1.salary < e2.salary) return 1;
+    if (e1.salary > e2.salary) return -1; // do not swap
+    if (e1.salary < e2.salary) return 1; // swap
 
     // salaries are the same, compare rank
     return e1.rank < e2.rank ? 1 : -1;
@@ -109,8 +109,8 @@ interface Employee {
 
 const employeesQueue = new MaxPriorityQueue<Employee>({
   compare: (e1, e2) => {
-    if (e1.salary > e2.salary) return -1;
-    if (e1.salary < e2.salary) return 1;
+    if (e1.salary > e2.salary) return -1; // do not swap
+    if (e1.salary < e2.salary) return 1; // swap
 
     // salaries are the same, compare rank
     return e1.rank < e2.rank ? 1 : -1;
