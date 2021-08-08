@@ -118,7 +118,9 @@ const employeesQueue = new MaxPriorityQueue<Employee>({
 });
 ```
 
-### .enqueue(element[, priority])
+### .enqueue
+
+#### with priority - .enqueue(element[, priority])
 adds an element with a numeric priority to the queue. Priority is not required here if a priority callback has been provided in the constructor. If passed here with a constructor callback, it will override the callback.
 
 <table>
@@ -161,6 +163,31 @@ biddersQueue
   .enqueue({ name: 'bidder w', value: 2500 })
   .enqueue({ name: 'bidder z', value: 3500 }) // highest priority
   .enqueue({ name: 'bidder x', value: 3000 });
+```
+
+#### with comparator - .enqueue(element)
+adds an element based on its comparison with other elements in the queue.
+
+<table>
+  <tr>
+    <th align="center">params</th>
+    <th align="center">return</th>
+    <th align="center">runtime</th>
+  </tr>
+  <tr>
+    <td>element: T</td>
+    <td align="center">MinPriorityQueue&lt;T&gt; | MaxPriorityQueue&lt;T&gt;</td>
+    <td align="center">O(log(n))</td>
+  </tr>
+</table>
+
+```js
+employeesQueue
+  .enqueue({ name: 'employee 1', salary: 2000, rank: 1 });
+  .enqueue({ name: 'employee 2', salary: 1500, rank: 0 });
+  .enqueue({ name: 'employee 3', salary: 4000, rank: 4 });
+  .enqueue({ name: 'employee 4', salary: 2000, rank: 2 });
+  .enqueue({ name: 'employee 5', salary: 3000, rank: 3 });
 ```
 
 ### .front()
