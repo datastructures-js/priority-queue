@@ -1,6 +1,6 @@
 {
   "name": "@datastructures-js/priority-queue",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "description": "a performant priority queue implementation using a Heap data structure.",
   "main": "index.js",
   "scripts": {
