@@ -433,7 +433,7 @@ console.log(biddersQueue.toArray());
 </table>
 
 ```js
-console.log(biddersQueue.toArray());
+console.log(employeesQueue.toArray());
 /*
 [
   { name: 'employee 3', salary: 4000, rank: 4 },
