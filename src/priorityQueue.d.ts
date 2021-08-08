@@ -12,10 +12,10 @@ export abstract class PriorityQueue<T> {
   constructor(options?: PriorityQueueOptions<T>);
   size(): number;
   isEmpty(): boolean;
-  front(): PriorityQueueItem<T>;
-  back(): PriorityQueueItem<T>;
+  front(): PriorityQueueItem<T> | T;
+  back(): PriorityQueueItem<T> | T;
   enqueue(element: T, priority?: number): PriorityQueue<T>;
-  dequeue(): PriorityQueueItem<T>;
-  toArray(): PriorityQueueItem<T>[];
+  dequeue(): PriorityQueueItem<T> | T;
+  toArray(): (PriorityQueueItem<T> | T)[];
   clear(): void;
 }
