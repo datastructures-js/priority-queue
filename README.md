@@ -183,15 +183,17 @@ adds an element based on its comparison with other elements in the queue.
 
 ```js
 employeesQueue
-  .enqueue({ name: 'employee 1', salary: 2000, rank: 1 });
-  .enqueue({ name: 'employee 2', salary: 1500, rank: 0 });
-  .enqueue({ name: 'employee 3', salary: 4000, rank: 4 });
-  .enqueue({ name: 'employee 4', salary: 2000, rank: 2 });
+  .enqueue({ name: 'employee 1', salary: 2000, rank: 1 })
+  .enqueue({ name: 'employee 2', salary: 1500, rank: 0 })
+  .enqueue({ name: 'employee 3', salary: 4000, rank: 4 })
+  .enqueue({ name: 'employee 4', salary: 2000, rank: 2 })
   .enqueue({ name: 'employee 5', salary: 3000, rank: 3 });
 ```
 
 ### .front()
 returns the element with highest priority in the queue.
+
+#### with priority
 
 <table>
   <tr>
@@ -212,8 +214,27 @@ console.log(patientsQueue.front()); // { priority: 1, element: 'patient y' }
 console.log(biddersQueue.front()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
 ```
 
+#### with comparator
+
+<table>
+  <tr>
+    <th align="center">return</th>
+    <th align="center">runtime</th>
+  </tr>
+  <tr>
+    <td align="center">T</td>
+    <td align="center">O(1)</td>
+  </tr>
+</table>
+
+```js
+console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
+```
+
 ### .back()
 returns an element with a lowest priority in the queue.
+
+#### with priority
 
 <table>
   <tr>
@@ -238,8 +259,27 @@ biddersQueue.enqueue({ name: 'bidder c', value: 1000 }); // lowest priority
 console.log(biddersQueue.back()); // { priority: 1000, element: { name: 'bidder y', value: 1000 } }
 ```
 
+#### with comparator
+
+<table>
+  <tr>
+    <th align="center">return</th>
+    <th align="center">runtime</th>
+  </tr>
+  <tr>
+    <td align="center">T</td>
+    <td align="center">O(1)</td>
+  </tr>
+</table>
+
+```js
+console.log(employeesQueue.back()); // { name: 'employee 2', salary: 1500, rank: 0 }
+```
+
 ### .dequeue()
 removes and returns the element with highest priority in the queue.
+
+#### with priority
 
 <table>
   <tr>
@@ -261,6 +301,27 @@ console.log(patientsQueue.front()); // { priority: 2, element: 'patient x' }
 
 console.log(biddersQueue.dequeue()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
 console.log(biddersQueue.front()); // { priority: 3000, element: { name: 'bidder x', value: 3000 } }
+```
+
+#### with comparator
+
+<table>
+  <tr>
+    <th align="center">return</th>
+    <th align="center">runtime</th>
+  </tr>
+  <tr>
+    <td align="center">T</td>
+    <td align="center">O(log(n))</td>
+  </tr>
+</table>
+
+```js
+console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
+console.log(employeesQueue.dequeue()); // { name: 'employee 5', salary: 3000, rank: 3 }
+console.log(employeesQueue.dequeue()); // { name: 'employee 4', salary: 2000, rank: 2 }
+console.log(employeesQueue.dequeue()); // { name: 'employee 1', salary: 2000, rank: 1 }
+console.log(employeesQueue.dequeue()); // { name: 'employee 2', salary: 1500, rank: 0 }
 ```
 
 ### .isEmpty()
@@ -310,6 +371,8 @@ console.log(biddersQueue.size()); // 5
 ### .toArray()
 returns a sorted array of elements by their priorities from highest to lowest.
 
+#### with priority
+
 <table>
   <tr>
     <th align="center">return</th>
@@ -352,6 +415,32 @@ console.log(biddersQueue.toArray());
   { priority: 1000, element: { name: 'bidder y', value: 1000 } },
   { priority: 1000, element: { name: 'bidder m', value: 1000 } },
   { priority: 1000, element: { name: 'bidder c', value: 1000 } }
+]
+*/
+```
+
+#### with comparator
+
+<table>
+  <tr>
+    <th align="center">return</th>
+    <th align="center">runtime</th>
+  </tr>
+  <tr>
+    <td align="center">T[]</td>
+    <td align="center">O(n*log(n))</td>
+  </tr>
+</table>
+
+```js
+console.log(biddersQueue.toArray());
+/*
+[
+  { name: 'employee 3', salary: 4000, rank: 4 },
+  { name: 'employee 5', salary: 3000, rank: 3 },
+  { name: 'employee 4', salary: 2000, rank: 2 },
+  { name: 'employee 1', salary: 2000, rank: 1 },
+  { name: 'employee 2', salary: 1500, rank: 0 }
 ]
 */
 ```
