@@ -108,7 +108,7 @@ interface Employee {
 }
 
 const employeesQueue = new MaxPriorityQueue<Employee>({
-  compare: (e1, e2) => {
+  compare: (e1: Employee, e2: Employee): number => {
     if (e1.salary > e2.salary) return -1; // do not swap
     if (e1.salary < e2.salary) return 1; // swap
 
