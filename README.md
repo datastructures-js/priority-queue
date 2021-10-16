@@ -46,6 +46,7 @@ const { MinPriorityQueue, MaxPriorityQueue } = require('@datastructures-js/prior
 import {
   MinPriorityQueue,
   MaxPriorityQueue,
+  PriorityQueue,
   PriorityQueueOptions, // queue options interface
   PriorityQueueItem // queue item interface
 } from '@datastructures-js/priority-queue';
@@ -66,6 +67,17 @@ const patientsQueue = new MinPriorityQueue();
 
 // empty queue with priority returned from a prop of the queued object
 const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
+
+// empty queue with comparator, see comparator
+const employeesQueue = new PriorityQueue({
+  compare: (e1, e2) => {
+    if (e1.salary > e2.salary) return -1; // do not swap
+    if (e1.salary < e2.salary) return 1; // swap
+
+    // salaries are the same, compare rank
+    return e1.rank < e2.rank ? 1 : -1;
+  }
+});
 ```
 
 ##### TS
@@ -86,19 +98,6 @@ const biddersQueue = new MaxPriorityQueue<Bid>({
 #### with comparator
 The constructor also accepts a compare callback option to allow using complex comparison between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
 
-##### JS
-```js
-const employeesQueue = new MaxPriorityQueue({
-  compare: (e1, e2) => {
-    if (e1.salary > e2.salary) return -1; // do not swap
-    if (e1.salary < e2.salary) return 1; // swap
-
-    // salaries are the same, compare rank
-    return e1.rank < e2.rank ? 1 : -1;
-  }
-});
-```
-
 ##### TS
 ```js
 interface Employee {
@@ -107,7 +106,7 @@ interface Employee {
   rank: number;
 }
 
-const employeesQueue = new MaxPriorityQueue<Employee>({
+const employeesQueue = new PriorityQueue<Employee>({
   compare: (e1: Employee, e2: Employee): number => {
     if (e1.salary > e2.salary) return -1; // do not swap
     if (e1.salary < e2.salary) return 1; // swap

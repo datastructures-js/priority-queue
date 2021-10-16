@@ -5,6 +5,8 @@
  * @abstract
  * @class PriorityQueue
  */
+const { CustomHeap } = require('@datastructures-js/heap');
+
 class PriorityQueue {
   /**
    * Creates a priority queue
@@ -18,6 +20,7 @@ class PriorityQueue {
         throw new Error('.constructor expects a valid compare function');
       }
       this._compare = compare;
+      this._heap = new CustomHeap(this._compare);
     } else {
       if (priority !== undefined && typeof priority !== 'function') {
         throw new Error('.constructor expects a valid priority function');
