@@ -1,12 +1,13 @@
 /**
  * @copyright 2020 Eyas Ranjous <eyas.ranjous@gmail.com>
  * @license MIT
- *
- * @abstract
- * @class PriorityQueue
  */
+
 const { CustomHeap } = require('@datastructures-js/heap');
 
+/**
+ * @class PriorityQueue
+ */
 class PriorityQueue {
   /**
    * Creates a priority queue
