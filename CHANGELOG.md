@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.3.0] - 2021-10-26
+### Added
+- PriorityQueue as a type for queue with comparator.
+
 ## [5.2.0] - 2021-08-08
 ### Added
 - ability to create a priority queue with a comparator.
