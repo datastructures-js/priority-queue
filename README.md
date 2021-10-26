@@ -100,7 +100,7 @@ const employeesQueue = new PriorityQueue<Employee>({
 ```
 
 #### MinPriorityQueue/MaxPriorityQueue
-The constructor accepts a priority callback option to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself. Use this option when the priority is a single value and does not require complex comparison.
+The constructor accepts a priority callback option to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself. Use this queue type when the priority is a known value and does not require complex comparison.
 
 ##### JS
 ```js
