@@ -3,7 +3,7 @@
  * @license MIT
  */
 
-const { MinHeap, CustomHeap } = require('@datastructures-js/heap');
+const { MinHeap } = require('@datastructures-js/heap');
 const { PriorityQueue } = require('./priorityQueue');
 
 /**
@@ -13,9 +13,7 @@ const { PriorityQueue } = require('./priorityQueue');
 class MinPriorityQueue extends PriorityQueue {
   constructor(options) {
     super(options);
-    if (this._compare) {
-      this._heap = new CustomHeap(this._compare);
-    } else {
+    if (!this._compare) {
       this._heap = new MinHeap();
     }
   }
