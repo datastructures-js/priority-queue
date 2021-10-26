@@ -141,7 +141,7 @@ adds an element based on its comparison with other elements in the queue.
   </tr>
   <tr>
     <td>element: T</td>
-    <td align="center">MinPriorityQueue&lt;T&gt; | MaxPriorityQueue&lt;T&gt;</td>
+    <td align="center">PriorityQueue&lt;T&gt;</td>
     <td align="center">O(log(n))</td>
   </tr>
 </table>
