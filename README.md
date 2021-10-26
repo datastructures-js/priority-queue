@@ -61,8 +61,8 @@ import {
 ```
 
 ### constructor
-#### with comparator
-The constructor also accepts a compare callback option to allow using complex comparison between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
+#### PriorityQueue
+The constructor requires a compare callback to compare between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
 
 ##### JS
 ```js
@@ -99,7 +99,7 @@ const employeesQueue = new PriorityQueue<Employee>({
 });
 ```
 
-#### with priority
+#### MinPriorityQueue/MaxPriorityQueue
 The constructor accepts a priority callback option to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself. Use this option when the priority is a single value and does not require complex comparison.
 
 ##### JS
@@ -130,7 +130,7 @@ const biddersQueue = new MaxPriorityQueue<Bid>({
 ```
 
 ### .enqueue
-#### with comparator - .enqueue(element)
+#### PriorityQueue - .enqueue(element)
 adds an element based on its comparison with other elements in the queue.
 
 <table>
@@ -155,7 +155,7 @@ employeesQueue
   .enqueue({ name: 'employee 5', salary: 3000, rank: 3 });
 ```
 
-#### with priority - .enqueue(element[, priority])
+#### MinPriorityQueue/MaxPriorityQueue - .enqueue(element[, priority])
 adds an element with a numeric priority to the queue. Priority is not required here if a priority callback has been provided in the constructor. If passed here with a constructor callback, it will override the callback.
 
 <table>
@@ -203,7 +203,7 @@ biddersQueue
 ### .front()
 returns the element with highest priority in the queue.
 
-#### with comparator
+#### PriorityQueue
 
 <table>
   <tr>
@@ -220,7 +220,7 @@ returns the element with highest priority in the queue.
 console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
 ```
 
-#### with priority
+#### MinPriorityQueue/MaxPriorityQueue
 
 <table>
   <tr>
@@ -245,7 +245,7 @@ console.log(biddersQueue.front()); // { priority: 3500, element: { name: 'bidder
 ### .back()
 returns an element with a lowest priority in the queue.
 
-#### with comparator
+#### PriorityQueue
 
 <table>
   <tr>
@@ -262,7 +262,7 @@ returns an element with a lowest priority in the queue.
 console.log(employeesQueue.back()); // { name: 'employee 2', salary: 1500, rank: 0 }
 ```
 
-#### with priority
+#### MinPriorityQueue/MaxPriorityQueue
 
 <table>
   <tr>
@@ -291,7 +291,7 @@ console.log(biddersQueue.back()); // { priority: 1000, element: { name: 'bidder 
 ### .dequeue()
 removes and returns the element with highest priority in the queue.
 
-#### with comparator
+#### PriorityQueue
 
 <table>
   <tr>
@@ -312,7 +312,7 @@ console.log(employeesQueue.dequeue()); // { name: 'employee 1', salary: 2000, ra
 console.log(employeesQueue.dequeue()); // { name: 'employee 2', salary: 1500, rank: 0 }
 ```
 
-#### with priority
+#### MinPriorityQueue/MaxPriorityQueue
 
 <table>
   <tr>
@@ -383,7 +383,7 @@ console.log(biddersQueue.size()); // 5
 ### .toArray()
 returns a sorted array of elements by their priorities from highest to lowest.
 
-#### with comparator
+#### PriorityQueue
 
 <table>
   <tr>
@@ -409,7 +409,7 @@ console.log(employeesQueue.toArray());
 */
 ```
 
-#### with priority
+#### MinPriorityQueue/MaxPriorityQueue
 
 <table>
   <tr>
