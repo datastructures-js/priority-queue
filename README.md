@@ -1,10 +1,9 @@
 # @datastructures-js/priority-queue
 
-[![build:?](https://travis-ci.org/datastructures-js/priority-queue.svg?branch=master)](https://travis-ci.org/datastructures-js/priority-queue) 
 [![npm](https://img.shields.io/npm/v/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 [![npm](https://img.shields.io/npm/dm/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 
-A performant priority queue implementation using a Heap data structure.
+A heap-based implemention of priority queue in javascript.
 
 <img src="https://user-images.githubusercontent.com/6517308/121813242-859a9700-cc6b-11eb-99c0-49e5bb63005b.jpg">
 
@@ -14,14 +13,15 @@ A performant priority queue implementation using a Heap data structure.
 * [import](#import)
 * [API](#api)
   * [constructor](#constructor)
-  * [.enqueue](#enqueue)
-  * [.front](#front)
-  * [.back](#back)
-  * [.dequeue](#dequeue)
-  * [.isEmpty](#isEmpty)
-  * [.size](#size)
-  * [.toArray](#toarray)
-  * [.clear](#clear)
+  * [enqueue](#enqueue)
+  * [front](#front)
+  * [back](#back)
+  * [dequeue](#dequeue)
+  * [isEmpty](#isEmpty)
+  * [size](#size)
+  * [toArray](#toarray)
+  * [fromArray](#toarray)
+  * [clear](#clear)
  * [Build](#build)
  * [License](#license)
 
@@ -32,11 +32,7 @@ npm install --save @datastructures-js/priority-queue
 ```
 
 ## API
-PriorityQueue in this repo is implemented as 3 types:
-
-- **PriorityQueue** that accepts a custom comparator between elements.
-- **MinPriorityQueue** which considers an element with smaller priority number as higher in priority.
-- **MaxPriorityQueue** which cosiders an element with bigger priority number as higher in priority.
+PriorityQueue class allows using a comparator function between values. MinPriorityQueue & MaxPriorityQueue can be used for primitive values and objects with known comparison prop.
 
 ### require
 
@@ -55,152 +51,103 @@ import {
   PriorityQueue,
   MinPriorityQueue,
   MaxPriorityQueue,
-  PriorityQueueOptions, // queue options interface
-  PriorityQueueItem // queue item interface for min/max queue
 } from '@datastructures-js/priority-queue';
 ```
 
 ### constructor
 #### PriorityQueue
-The constructor requires a compare callback to compare between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
-
-##### JS
-```js
-// empty queue with comparator
-const employeesQueue = new PriorityQueue({
-  compare: (e1, e2) => {
-    if (e1.salary > e2.salary) return -1; // do not swap
-    if (e1.salary < e2.salary) return 1; // swap
-
-    // salaries are the same, compare rank
-    return e1.rank < e2.rank ? 1 : -1;
-  }
-});
-```
+constructor requires a compare function. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
 
 ##### TS
-```js
-// queued element type
-interface Employee {
-  name: string;
-  salary: number;
-  rank: number;
+```ts
+interface ICar {
+  year: number;
+  price: number;
 }
 
-// empty queue with comparator
-const employeesQueue = new PriorityQueue<Employee>({
-  compare: (e1: Employee, e2: Employee): number => {
-    if (e1.salary > e2.salary) return -1; // do not swap
-    if (e1.salary < e2.salary) return 1; // swap
-
-    // salaries are the same, compare rank
-    return e1.rank < e2.rank ? 1 : -1;
+const carsQueue = new PriorityQueue<ICar>({
+  compare: (a: ICar, b: ICar) => {
+    if (a.year > b.year) {
+      return -1;
+    }
+    if (a.year < b.year) {
+      // prioratize newest cars
+      return 1;
+    }
+    // with least price
+    return a.price < b.price ? -1 : 1;
   }
 });
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
-The constructor accepts a priority callback option to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself. Use this queue type when the priority is a known value and does not require complex comparison.
-
 ##### JS
 ```js
-// empty queue with priority is the element value itself.
-const numbersQueue = new MinPriorityQueue();
-
-// empty queue, will provide priority in .enqueue
-const patientsQueue = new MinPriorityQueue();
-
-// empty queue with priority returned from a prop of the queued object
-const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
+const carsQueue = new PriorityQueue({
+  compare: (a, b) => {
+    if (a.year > b.year) {
+      return -1;
+    }
+    if (a.year < b.year) {
+      // prioratize newest cars
+      return 1;
+    }
+    // with least price
+    return a.price < b.price ? -1 : 1;
+  }
+});
 ```
 
+#### MinPriorityQueue, MaxPriorityQueue
+constructor accepts a priority callback for object values, and does not require any for primitive values.
+
 ##### TS
-```js
+```ts
 const numbersQueue = new MinPriorityQueue<number>();
 
-const patientsQueue = new MinPriorityQueue<string>();
-
-interface Bid {
-  name: string;
+interface IBid {
+  id: number;
   value: number;
 }
-const biddersQueue = new MaxPriorityQueue<Bid>({
-  priority: (bid: Bid) => bid.value
-});
+const bidsQueue = new MaxPriorityQueue<IBid>((bid: IBid) => bid.value);
 ```
 
-### .enqueue
-#### PriorityQueue - .enqueue(element)
-adds an element based on its comparison with other elements in the queue.
+##### JS
+```js
+const numbersQueue = new MinPriorityQueue();
+const bidsQueue = new MaxPriorityQueue((bid) => bid.value);
+```
 
-<table>
-  <tr>
-    <th align="center">params</th>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td>element: T</td>
-    <td align="center">PriorityQueue&lt;T&gt;</td>
-    <td align="center">O(log(n))</td>
-  </tr>
-</table>
+### enqueue
+adds a value based on its comparison with other values in the queue.
 
 ```js
-employeesQueue
-  .enqueue({ name: 'employee 1', salary: 2000, rank: 1 })
-  .enqueue({ name: 'employee 2', salary: 1500, rank: 0 })
-  .enqueue({ name: 'employee 3', salary: 4000, rank: 4 })
-  .enqueue({ name: 'employee 4', salary: 2000, rank: 2 })
-  .enqueue({ name: 'employee 5', salary: 3000, rank: 3 });
+const cars = [
+  { year: 2013, price: 35000 },
+  { year: 2010, price: 2000 },
+  { year: 2013, price: 30000 },
+  { year: 2017, price: 50000 },
+  { year: 2013, price: 25000 },
+  { year: 2015, price: 40000 },
+  { year: 2022, price: 70000 }
+];
+cars.forEach((car) => carsQueue.enqueue(car));
+
+const numbers = [3, -2, 5, 0, -1, -5, 4];
+numbers.forEach((num) => numbersQueue.enqueue(num));
+
+const bids = [
+  { id: 1, value: 1000 },
+  { id: 2, value: 20000 },
+  { id: 3, value: 1000 },
+  { id: 4, value: 1500 },
+  { id: 5, value: 12000 },
+  { id: 6, value: 4000 },
+  { id: 7, value: 8000 }
+];
+bids.forEach((bid) => bidsQueue.enqueue(bid));
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue - .enqueue(element[, priority])
-adds an element with a numeric priority to the queue. Priority is not required here if a priority callback has been provided in the constructor. If passed here with a constructor callback, it will override the callback.
-
-<table>
-  <tr>
-    <th align="center">params</th>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td>
-      element: T
-      <br />
-      priority: number
-    </td>
-    <td align="center">MinPriorityQueue&lt;T&gt; | MaxPriorityQueue&lt;T&gt;</td>
-    <td align="center">O(log(n))</td>
-  </tr>
-</table>
-
-```js
-// MinPriorityQueue Example, where priority is the number element itself
-numbersQueue
-  .enqueue(10)
-  .enqueue(-7)
-  .enqueue(2)
-  .enqueue(-1)
-  .enqueue(-17)
-  .enqueue(33);
-
-// MinPriorityQueue Example, where priority is the patient's turn
-patientsQueue
-  .enqueue('patient y', 1) // highest priority
-  .enqueue('patient z', 3)
-  .enqueue('patient w', 4) // lowest priority
-  .enqueue('patient x', 2);
-
-// MaxPriorityQueue Example, where priority is the bid's value.
-biddersQueue
-  .enqueue({ name: 'bidder y', value: 1000 }) // lowest priority
-  .enqueue({ name: 'bidder w', value: 2500 })
-  .enqueue({ name: 'bidder z', value: 3500 }) // highest priority
-  .enqueue({ name: 'bidder x', value: 3000 });
-```
-
-### .front()
+### front()
 returns the element with highest priority in the queue.
 
 #### PriorityQueue
