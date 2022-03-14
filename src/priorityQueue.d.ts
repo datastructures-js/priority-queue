@@ -1,6 +1,6 @@
 import { ICompare } from '@datastructures-js/heap';
 
-export abstract class PriorityQueue<T> {
+export class PriorityQueue<T> {
   constructor(compare: ICompare<T>, values?: T[]);
   size(): number;
   isEmpty(): boolean;

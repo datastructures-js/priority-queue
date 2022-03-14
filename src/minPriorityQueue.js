@@ -94,9 +94,10 @@ class MinPriorityQueue {
   /**
    * Creates a priority queue from an existing array
    * @public
+   * @static
    * @returns {MinPriorityQueue}
    */
-  fromArray(values, getCompareValue) {
+  static fromArray(values, getCompareValue) {
     return new MinPriorityQueue(getCompareValue, values);
   }
 }

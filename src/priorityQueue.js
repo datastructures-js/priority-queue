@@ -98,9 +98,10 @@ class PriorityQueue {
   /**
    * Creates a priority queue from an existing array
    * @public
+   * @static
    * @returns {PriorityQueue}
    */
-  fromArray(values, compare) {
+  static fromArray(values, compare) {
     return new PriorityQueue(compare, values);
   }
 }

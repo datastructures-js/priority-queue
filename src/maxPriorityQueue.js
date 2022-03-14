@@ -95,9 +95,10 @@ class MaxPriorityQueue {
   /**
    * Creates a priority queue from an existing array
    * @public
+   * @static
    * @returns {MaxPriorityQueue}
    */
-  fromArray(values, getCompareValue) {
+  static fromArray(values, getCompareValue) {
     return new MaxPriorityQueue(getCompareValue, values);
   }
 }
