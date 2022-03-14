@@ -8,21 +8,19 @@ const { Heap } = require('@datastructures-js/heap');
 /**
  * @class PriorityQueue
  */
-class PriorityQueue extends Heap {
+class PriorityQueue {
   /**
    * Creates a priority queue
-   * @params {object} options
+   * @params {function} compare
    */
-  constructor(options = {}) {
-    if (typeof options !== 'object') {
-      throw new Error('PriorityQueue constructor expects an object');
-    }
-
-    const { compare } = options;
+  constructor(compare, _values) {
     if (typeof compare !== 'function') {
-      throw new Error('PriorityQueue constructor expects a valid compare function prop');
+      throw new Error('PriorityQueue constructor expects a compare function');
     }
-    super(compare);
+    this._heap = new Heap(compare, _values);
+    if (_values) {
+      this._heap.fix();
+    }
   }
 
   /**
@@ -31,7 +29,7 @@ class PriorityQueue extends Heap {
    * @returns {number|string|object}
    */
   front() {
-    return super.root();
+    return this._heap.root();
   }
 
   /**
@@ -40,7 +38,7 @@ class PriorityQueue extends Heap {
    * @returns {number|string|object}
    */
   back() {
-    return super.leaf();
+    return this._heap.leaf();
   }
 
   /**
@@ -50,7 +48,7 @@ class PriorityQueue extends Heap {
    * @returns {PriorityQueue}
    */
   enqueue(value) {
-    return super.insert(value);
+    return this._heap.insert(value);
   }
 
   /**
@@ -59,7 +57,33 @@ class PriorityQueue extends Heap {
    * @returns {number|string|object}
    */
   dequeue() {
-    return super.extractRoot();
+    return this._heap.extractRoot();
+  }
+
+  /**
+   * Returns the number of elements in the queue
+   * @public
+   * @returns {number}
+   */
+  size() {
+    return this._heap.size();
+  }
+
+  /**
+   * Checks if the queue is empty
+   * @public
+   * @returns {boolean}
+   */
+  isEmpty() {
+    return this._heap.isEmpty();
+  }
+
+  /**
+   * Clears the queue
+   * @public
+   */
+  clear() {
+    this._heap.clear();
   }
 
   /**
@@ -68,7 +92,16 @@ class PriorityQueue extends Heap {
    * @returns {array}
    */
   toArray() {
-    return super.clone().sort().reverse();
+    return this._heap.clone().sort().reverse();
+  }
+
+  /**
+   * Creates a priority queue from an existing array
+   * @public
+   * @returns {PriorityQueue}
+   */
+  fromArray(values, compare) {
+    return new PriorityQueue(compare, values);
   }
 }
 

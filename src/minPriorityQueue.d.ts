@@ -1,3 +1,14 @@
-import { PriorityQueue } from './priorityQueue';
+import { IGetCompareValue } from '@datastructures-js/heap';
 
-export class MinPriorityQueue<T> extends PriorityQueue<T> {}
+export abstract class MinPriorityQueue<T> {
+  constructor(getCompareValue?: IGetCompareValue<T>, values?: T[]);
+  size(): number;
+  isEmpty(): boolean;
+  front(): T;
+  back(): T;
+  enqueue(value: T): MinPriorityQueue<T>;
+  dequeue(): T;
+  toArray(): T[];
+  clear(): void;
+  static fromtArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MinPriorityQueue<T>;
+}

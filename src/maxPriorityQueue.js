@@ -9,17 +9,15 @@ const { MaxHeap } = require('@datastructures-js/heap');
  * @class MaxPriorityQueue
  * @extends MaxHeap
  */
-class MaxPriorityQueue extends MaxHeap {
-  constructor(options = {}) {
-    if (options && typeof options !== 'object') {
-      throw new Error('MaxPriorityQueue constructor accepts an object');
+class MaxPriorityQueue {
+  constructor(getCompareValue, _values) {
+    if (getCompareValue && typeof getCompareValue !== 'function') {
+      throw new Error('MinPriorityQueue accepts a callback with object items');
     }
-
-    const { priority } = options;
-    if (priority !== undefined && typeof priority !== 'function') {
-      throw new Error('MaxPriorityQueue expects a valid priority function');
+    this._heap = new MaxHeap(getCompareValue, _values);
+    if (_values) {
+      this._heap.fix();
     }
-    super(priority);
   }
 
   /**
@@ -28,7 +26,7 @@ class MaxPriorityQueue extends MaxHeap {
    * @returns {number|string|object}
    */
   front() {
-    return super.root();
+    return this._heap.root();
   }
 
   /**
@@ -37,17 +35,17 @@ class MaxPriorityQueue extends MaxHeap {
    * @returns {number|string|object}
    */
   back() {
-    return super.leaf();
+    return this._heap.leaf();
   }
 
   /**
    * Adds a value to the queue
    * @public
    * @param {number|string|object} value
-   * @returns {PriorityQueue}
+   * @returns {MaxPriorityQueue}
    */
   enqueue(value) {
-    return super.insert(value);
+    return this._heap.insert(value);
   }
 
   /**
@@ -56,7 +54,33 @@ class MaxPriorityQueue extends MaxHeap {
    * @returns {number|string|object}
    */
   dequeue() {
-    return super.extractRoot();
+    return this._heap.extractRoot();
+  }
+
+  /**
+   * Returns the number of elements in the queue
+   * @public
+   * @returns {number}
+   */
+  size() {
+    return this._heap.size();
+  }
+
+  /**
+   * Checks if the queue is empty
+   * @public
+   * @returns {boolean}
+   */
+  isEmpty() {
+    return this._heap.isEmpty();
+  }
+
+  /**
+   * Clears the queue
+   * @public
+   */
+  clear() {
+    this._heap.clear();
   }
 
   /**
@@ -65,7 +89,16 @@ class MaxPriorityQueue extends MaxHeap {
    * @returns {array}
    */
   toArray() {
-    return super.clone().sort().reverse();
+    return this._heap.clone().sort().reverse();
+  }
+
+  /**
+   * Creates a priority queue from an existing array
+   * @public
+   * @returns {MaxPriorityQueue}
+   */
+  fromArray(values, getCompareValue) {
+    return new MaxPriorityQueue(getCompareValue, values);
   }
 }
 

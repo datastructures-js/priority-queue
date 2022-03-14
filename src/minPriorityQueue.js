@@ -7,19 +7,16 @@ const { MinHeap } = require('@datastructures-js/heap');
 
 /**
  * @class MinPriorityQueue
- * @extends PriorityQueue
  */
-class MinPriorityQueue extends MinHeap {
-  constructor(options = {}) {
-    if (options && typeof options !== 'object') {
-      throw new Error('MinPriorityQueue constructor accepts an object');
+class MinPriorityQueue {
+  constructor(getCompareValue, _values) {
+    if (getCompareValue && typeof getCompareValue !== 'function') {
+      throw new Error('MinPriorityQueue accepts a callback with object items');
     }
-
-    const { priority } = options;
-    if (priority !== undefined && typeof priority !== 'function') {
-      throw new Error('MinPriorityQueue expects a valid priority function');
+    this._heap = new MinHeap(getCompareValue, _values);
+    if (_values) {
+      this._heap.fix();
     }
-    super(priority);
   }
 
   /**
@@ -28,7 +25,7 @@ class MinPriorityQueue extends MinHeap {
    * @returns {number|string|object}
    */
   front() {
-    return super.root();
+    return this._heap.root();
   }
 
   /**
@@ -37,17 +34,17 @@ class MinPriorityQueue extends MinHeap {
    * @returns {number|string|object}
    */
   back() {
-    return super.leaf();
+    return this._heap.leaf();
   }
 
   /**
    * Adds a value to the queue
    * @public
    * @param {number|string|object} value
-   * @returns {PriorityQueue}
+   * @returns {MinPriorityQueue}
    */
   enqueue(value) {
-    return super.insert(value);
+    return this._heap.insert(value);
   }
 
   /**
@@ -56,7 +53,33 @@ class MinPriorityQueue extends MinHeap {
    * @returns {number|string|object}
    */
   dequeue() {
-    return super.extractRoot();
+    return this._heap.extractRoot();
+  }
+
+  /**
+   * Returns the number of elements in the queue
+   * @public
+   * @returns {number}
+   */
+  size() {
+    return this._heap.size();
+  }
+
+  /**
+   * Checks if the queue is empty
+   * @public
+   * @returns {boolean}
+   */
+  isEmpty() {
+    return this._heap.isEmpty();
+  }
+
+  /**
+   * Clears the queue
+   * @public
+   */
+  clear() {
+    this._heap.clear();
   }
 
   /**
@@ -65,7 +88,16 @@ class MinPriorityQueue extends MinHeap {
    * @returns {array}
    */
   toArray() {
-    return super.clone().sort().reverse();
+    return this._heap.clone().sort().reverse();
+  }
+
+  /**
+   * Creates a priority queue from an existing array
+   * @public
+   * @returns {MinPriorityQueue}
+   */
+  fromArray(values, getCompareValue) {
+    return new MinPriorityQueue(getCompareValue, values);
   }
 }
 
