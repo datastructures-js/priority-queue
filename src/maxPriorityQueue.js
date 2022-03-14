@@ -12,7 +12,7 @@ const { MaxHeap } = require('@datastructures-js/heap');
 class MaxPriorityQueue {
   constructor(getCompareValue, _values) {
     if (getCompareValue && typeof getCompareValue !== 'function') {
-      throw new Error('MinPriorityQueue accepts a callback for object items');
+      throw new Error('MinPriorityQueue constructor accepts an optional callback');
     }
     this._heap = new MaxHeap(getCompareValue, _values);
     if (_values) {
