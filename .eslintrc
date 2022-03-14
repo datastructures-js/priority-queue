@@ -1,6 +1,6 @@
 {
   "rules": {
-    "max-len": ["error", { "code": 80, "ignoreComments": true }],
+    "max-len": ["error", { "code": 100, "ignoreComments": true }],
     "comma-dangle": ["error", {
       "functions": "ignore"
     }],
