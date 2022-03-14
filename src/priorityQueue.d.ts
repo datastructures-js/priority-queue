@@ -10,5 +10,5 @@ export abstract class PriorityQueue<T> {
   dequeue(): T;
   toArray(): T[];
   clear(): void;
-  static fromtArray<T>(values: T[], compare: ICompare<T>): PriorityQueue<T>;
+  static fromArray<T>(values: T[], compare: ICompare<T>): PriorityQueue<T>;
 }

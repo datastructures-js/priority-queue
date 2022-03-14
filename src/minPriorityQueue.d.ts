@@ -10,5 +10,5 @@ export abstract class MinPriorityQueue<T> {
   dequeue(): T;
   toArray(): T[];
   clear(): void;
-  static fromtArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MinPriorityQueue<T>;
+  static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MinPriorityQueue<T>;
 }

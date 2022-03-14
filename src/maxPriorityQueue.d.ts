@@ -10,5 +10,5 @@ export abstract class MaxPriorityQueue<T> {
   dequeue(): T;
   toArray(): T[];
   clear(): void;
-  static fromtArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MaxPriorityQueue<T>;
+  static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MaxPriorityQueue<T>;
 }
