@@ -11,7 +11,7 @@ const { MinHeap } = require('@datastructures-js/heap');
 class MinPriorityQueue {
   constructor(getCompareValue, _values) {
     if (getCompareValue && typeof getCompareValue !== 'function') {
-      throw new Error('MinPriorityQueue accepts a callback with object items');
+      throw new Error('MinPriorityQueue accepts a callback for object items');
     }
     this._heap = new MinHeap(getCompareValue, _values);
     if (_values) {
