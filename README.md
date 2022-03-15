@@ -13,7 +13,7 @@ A heap-based implemention of priority queue in javascript with typescipt support
 * [import](#import)
 * [API](#api)
   * [constructor](#constructor)
-  * [fromArray](#toarray)
+  * [fromArray](#fromarray)
   * [enqueue](#enqueue)
   * [front](#front)
   * [back](#back)
