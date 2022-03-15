@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 [![npm](https://img.shields.io/npm/dm/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 
-A heap-based implemention of priority queue in javascript.
+A heap-based implemention of priority queue in javascript with typescipt support.
 
 <img src="https://user-images.githubusercontent.com/6517308/121813242-859a9700-cc6b-11eb-99c0-49e5bb63005b.jpg">
 
@@ -13,6 +13,7 @@ A heap-based implemention of priority queue in javascript.
 * [import](#import)
 * [API](#api)
   * [constructor](#constructor)
+  * [fromArray](#toarray)
   * [enqueue](#enqueue)
   * [front](#front)
   * [back](#back)
@@ -20,7 +21,6 @@ A heap-based implemention of priority queue in javascript.
   * [isEmpty](#isEmpty)
   * [size](#size)
   * [toArray](#toarray)
-  * [fromArray](#toarray)
   * [clear](#clear)
  * [Build](#build)
  * [License](#license)
@@ -32,7 +32,7 @@ npm install --save @datastructures-js/priority-queue
 ```
 
 ## API
-PriorityQueue class allows using a comparator function between values. MinPriorityQueue & MaxPriorityQueue can be used for primitive values and objects with known comparison prop.
+PriorityQueue class allows using a compare function between values. MinPriorityQueue & MaxPriorityQueue can be used for primitive values and objects with known comparison prop.
 
 ### require
 
@@ -40,7 +40,7 @@ PriorityQueue class allows using a comparator function between values. MinPriori
 const {
   PriorityQueue,
   MinPriorityQueue,
-  MaxPriorityQueue
+  MaxPriorityQueue,
 } = require('@datastructures-js/priority-queue');
 ```
 
@@ -51,12 +51,14 @@ import {
   PriorityQueue,
   MinPriorityQueue,
   MaxPriorityQueue,
+  ICompare,
+  IGetCompareValue,
 } from '@datastructures-js/priority-queue';
 ```
 
 ### constructor
 #### PriorityQueue
-constructor requires a compare function. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
+constructor requires a compare function that works similar to javascript sort callback, returning a number bigger than 0, means swap elemens.
 
 ##### TS
 ```ts
@@ -65,19 +67,19 @@ interface ICar {
   price: number;
 }
 
-const carsQueue = new PriorityQueue<ICar>({
-  compare: (a: ICar, b: ICar) => {
-    if (a.year > b.year) {
-      return -1;
-    }
-    if (a.year < b.year) {
-      // prioratize newest cars
-      return 1;
-    }
-    // with least price
-    return a.price < b.price ? -1 : 1;
+const compareCars: ICompare<ICar> = (a, b) => {
+  if (a.year > b.year) {
+    return -1;
   }
-});
+  if (a.year < b.year) {
+    // prioratize newest cars
+    return 1;
+  }
+  // with least price
+  return a.price < b.price ? -1 : 1;
+};
+
+const carsQueue = new PriorityQueue<ICar>(compareCars);
 ```
 
 ##### JS
@@ -98,7 +100,7 @@ const carsQueue = new PriorityQueue({
 ```
 
 #### MinPriorityQueue, MaxPriorityQueue
-constructor accepts a priority callback for object values, and does not require any for primitive values.
+constructor requires a callback for object queues to indicate which prop is used for comparison, and does not require any for number or string ones.
 
 ##### TS
 ```ts
@@ -116,6 +118,11 @@ const bidsQueue = new MaxPriorityQueue<IBid>((bid: IBid) => bid.value);
 const numbersQueue = new MinPriorityQueue();
 const bidsQueue = new MaxPriorityQueue((bid) => bid.value);
 ```
+
+### fromArray
+If queue is being created from an existing array, and there is no desire to use an extra space, this static function can be used to turn the array into a priority queue.
+
+
 
 ### enqueue
 adds a value based on its comparison with other values in the queue.
