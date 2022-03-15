@@ -84,8 +84,7 @@ const carsQueue = new PriorityQueue<ICar>(compareCars);
 
 ##### JS
 ```js
-const carsQueue = new PriorityQueue({
-  compare: (a, b) => {
+const carsQueue = new PriorityQueue((a, b) => {
     if (a.year > b.year) {
       return -1;
     }
