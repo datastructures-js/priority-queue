@@ -1,7 +1,7 @@
-import { IGetCompareValue } from '@datastructures-js/heap';
+import { MaxHeap, IGetCompareValue } from '@datastructures-js/heap';
 
 export abstract class MaxPriorityQueue<T> {
-  constructor(getCompareValue?: IGetCompareValue<T>, values?: T[]);
+  constructor(getCompareValue?: IGetCompareValue<T>, heap?: MaxHeap);
   size(): number;
   isEmpty(): boolean;
   front(): T;

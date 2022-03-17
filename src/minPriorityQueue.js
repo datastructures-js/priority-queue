@@ -3,20 +3,23 @@
  * @license MIT
  */
 
-const { MinHeap } = require('@datastructures-js/heap');
+const { Heap, MinHeap } = require('@datastructures-js/heap');
+
+const getMinCompare = (getCompareValue) => (a, b) => {
+  const aVal = typeof getCompareValue === 'function' ? getCompareValue(a) : a;
+  const bVal = typeof getCompareValue === 'function' ? getCompareValue(b) : b;
+  return aVal < bVal ? -1 : 1;
+};
 
 /**
  * @class MinPriorityQueue
  */
 class MinPriorityQueue {
-  constructor(getCompareValue, _values) {
+  constructor(getCompareValue, _heap) {
     if (getCompareValue && typeof getCompareValue !== 'function') {
       throw new Error('MinPriorityQueue constructor accepts an optional callback');
     }
-    this._heap = new MinHeap(getCompareValue, _values);
-    if (_values) {
-      this._heap.fix();
-    }
+    this._heap = _heap || new MinHeap(getCompareValue);
   }
 
   /**
@@ -98,7 +101,11 @@ class MinPriorityQueue {
    * @returns {MinPriorityQueue}
    */
   static fromArray(values, getCompareValue) {
-    return new MinPriorityQueue(getCompareValue, values);
+    const heap = new Heap(getMinCompare(getCompareValue), values);
+    return new MinPriorityQueue(
+      getCompareValue,
+      new MinHeap(getCompareValue, heap).fix()
+    );
   }
 }
 

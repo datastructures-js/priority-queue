@@ -3,21 +3,24 @@
  * @license MIT
  */
 
-const { MaxHeap } = require('@datastructures-js/heap');
+const { Heap, MaxHeap } = require('@datastructures-js/heap');
+
+const getMaxCompare = (getCompareValue) => (a, b) => {
+  const aVal = typeof getCompareValue === 'function' ? getCompareValue(a) : a;
+  const bVal = typeof getCompareValue === 'function' ? getCompareValue(b) : b;
+  return aVal < bVal ? 1 : -1;
+};
 
 /**
  * @class MaxPriorityQueue
  * @extends MaxHeap
  */
 class MaxPriorityQueue {
-  constructor(getCompareValue, _values) {
+  constructor(getCompareValue, _heap) {
     if (getCompareValue && typeof getCompareValue !== 'function') {
-      throw new Error('MinPriorityQueue constructor accepts an optional callback');
+      throw new Error('MaxPriorityQueue constructor accepts an optional callback');
     }
-    this._heap = new MaxHeap(getCompareValue, _values);
-    if (_values) {
-      this._heap.fix();
-    }
+    this._heap = _heap || new MaxHeap(getCompareValue);
   }
 
   /**
@@ -99,7 +102,11 @@ class MaxPriorityQueue {
    * @returns {MaxPriorityQueue}
    */
   static fromArray(values, getCompareValue) {
-    return new MaxPriorityQueue(getCompareValue, values);
+    const heap = new Heap(getMaxCompare(getCompareValue), values);
+    return new MaxPriorityQueue(
+      getCompareValue,
+      new MaxHeap(getCompareValue, heap).fix()
+    );
   }
 }
 
