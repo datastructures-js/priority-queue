@@ -67,7 +67,7 @@ interface ICar {
   price: number;
 }
 
-const compareCars: ICompare<ICar> = (a, b) => {
+const compareCars: ICompare<ICar> = (a: ICar, b: ICar) => {
   if (a.year > b.year) {
     return -1;
   }
