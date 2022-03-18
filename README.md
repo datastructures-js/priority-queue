@@ -99,7 +99,7 @@ const carsQueue = new PriorityQueue((a, b) => {
 ```
 
 #### MinPriorityQueue, MaxPriorityQueue
-constructor requires a callback for object queues to indicate which prop is used for comparison, and does not require any for number or string ones.
+constructor requires a callback for object values to indicate which prop is used for comparison, and does not require any for primitive values like numbers or strings.
 
 ##### TS
 ```ts
