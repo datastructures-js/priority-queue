@@ -18,7 +18,7 @@ const getMaxCompare = (getCompareValue) => (a, b) => {
 class MaxPriorityQueue {
   constructor(getCompareValue, _heap) {
     if (getCompareValue && typeof getCompareValue !== 'function') {
-      throw new Error('MaxPriorityQueue constructor accepts an optional callback');
+      throw new Error('MaxPriorityQueue constructor requires a callback for object values');
     }
     this._heap = _heap || new MaxHeap(getCompareValue);
   }

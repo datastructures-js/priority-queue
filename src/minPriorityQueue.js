@@ -17,7 +17,7 @@ const getMinCompare = (getCompareValue) => (a, b) => {
 class MinPriorityQueue {
   constructor(getCompareValue, _heap) {
     if (getCompareValue && typeof getCompareValue !== 'function') {
-      throw new Error('MinPriorityQueue constructor accepts an optional callback');
+      throw new Error('MinPriorityQueue constructor requires a callback for object values');
     }
     this._heap = _heap || new MinHeap(getCompareValue);
   }
