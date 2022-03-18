@@ -109,7 +109,8 @@ interface IBid {
   id: number;
   value: number;
 }
-const bidsQueue = new MaxPriorityQueue<IBid>((bid: IBid) => bid.value);
+const getBidValue: IGetCompareValue<IBid> = (bid) => bid.value;
+const bidsQueue = new MaxPriorityQueue<IBid>(getBidValue);
 ```
 
 ##### JS
@@ -119,9 +120,61 @@ const bidsQueue = new MaxPriorityQueue((bid) => bid.value);
 ```
 
 ### fromArray
-If queue is being created from an existing array, and there is no desire to use an extra space, this static function can be used to turn the array into a priority queue.
+If queue is being created from an existing array, and there is no need to use an extra space, this static function can be used to turn the array into a priority queue.
 
+#### PriorityQueue
+##### TS
+```ts
+const numbers = [3, -2, 5, 0, -1, -5, 4];
 
+const pq = PriorityQueue.fromArray<number>(numbers, (a, b) => a - b);
+
+console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
+pq.dequeue();
+pq.dequeue();
+pq.dequeue();
+console.log(numbers); // [ 0, 3, 4, 5 ]
+```
+
+##### JS
+```ts
+const numbers = [3, -2, 5, 0, -1, -5, 4];
+
+const pq = PriorityQueue.fromArray(numbers, (a, b) => a - b);
+
+console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
+pq.dequeue();
+pq.dequeue();
+pq.dequeue();
+console.log(numbers); // [ 0, 3, 4, 5 ]
+```
+
+#### MinPriorityQueue, MaxPriorityQueue
+##### TS
+```ts
+const numbers = [3, -2, 5, 0, -1, -5, 4];
+
+const mpq = MaxPriorityQueue.fromArray<number>(numbers);
+
+console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
+mpq.dequeue();
+mpq.dequeue();
+mpq.dequeue();
+console.log(numbers); // [ 0, 3, 4, 5 ]
+```
+
+##### JS
+```ts
+const numbers = [3, -2, 5, 0, -1, -5, 4];
+
+const mpq = MaxPriorityQueue.fromArray<number>(numbers, (a, b) => a - b);
+
+console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
+mpq.dequeue();
+mpq.dequeue();
+mpq.dequeue();
+console.log(numbers); // [ 0, 3, 4, 5 ]
+```
 
 ### enqueue
 adds a value based on its comparison with other values in the queue.
