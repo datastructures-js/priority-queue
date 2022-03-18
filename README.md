@@ -120,7 +120,7 @@ const bidsQueue = new MaxPriorityQueue((bid) => bid.value);
 ```
 
 ### fromArray
-If queue is being created from an existing array, and there is no need to use an extra space, this static function can be used to turn the array into a priority queue.
+If the queue is being created from an existing array, and there is no need to use an extra space, this static function can be used to turn an array into a priority queue.
 
 #### PriorityQueue
 ##### TS
@@ -130,9 +130,9 @@ const numbers = [3, -2, 5, 0, -1, -5, 4];
 const pq = PriorityQueue.fromArray<number>(numbers, (a, b) => a - b);
 
 console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
-pq.dequeue();
-pq.dequeue();
-pq.dequeue();
+pq.dequeue(); // -5
+pq.dequeue(); // -2
+pq.dequeue(); // -1
 console.log(numbers); // [ 0, 3, 4, 5 ]
 ```
 
@@ -157,23 +157,23 @@ const numbers = [3, -2, 5, 0, -1, -5, 4];
 const mpq = MaxPriorityQueue.fromArray<number>(numbers);
 
 console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
-mpq.dequeue();
-mpq.dequeue();
-mpq.dequeue();
-console.log(numbers); // [ 0, 3, 4, 5 ]
+mpq.dequeue(); // 5
+mpq.dequeue(); // 4
+mpq.dequeue(); // 3
+console.log(numbers); // [ 0, -1, -5, -2 ]
 ```
 
 ##### JS
 ```ts
 const numbers = [3, -2, 5, 0, -1, -5, 4];
 
-const mpq = MaxPriorityQueue.fromArray<number>(numbers, (a, b) => a - b);
+const mpq = MaxPriorityQueue.fromArray<number>(numbers);
 
 console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
-mpq.dequeue();
-mpq.dequeue();
-mpq.dequeue();
-console.log(numbers); // [ 0, 3, 4, 5 ]
+mpq.dequeue(); // 5
+mpq.dequeue(); // 4
+mpq.dequeue(); // 3
+console.log(numbers); // [ 0, -1, -5, -2 ]
 ```
 
 ### enqueue
