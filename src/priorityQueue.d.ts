@@ -1,21 +1,14 @@
-export interface PriorityQueueOptions<T> {
-  priority?: (element: T) => number;
-  compare?: (a: T, b: T) => number;
-}
+import { ICompare } from '@datastructures-js/heap';
 
-export interface PriorityQueueItem<T> {
-  priority: number;
-  element: T;
-}
-
-export abstract class PriorityQueue<T> {
-  constructor(options?: PriorityQueueOptions<T>);
+export class PriorityQueue<T> {
+  constructor(compare: ICompare<T>, values?: T[]);
   size(): number;
   isEmpty(): boolean;
-  front(): PriorityQueueItem<T> | T;
-  back(): PriorityQueueItem<T> | T;
-  enqueue(element: T, priority?: number): PriorityQueue<T>;
-  dequeue(): PriorityQueueItem<T> | T;
-  toArray(): (PriorityQueueItem<T> | T)[];
+  front(): T;
+  back(): T;
+  enqueue(value: T): PriorityQueue<T>;
+  dequeue(): T;
+  toArray(): T[];
   clear(): void;
+  static fromArray<T>(values: T[], compare: ICompare<T>): PriorityQueue<T>;
 }

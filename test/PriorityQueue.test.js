@@ -1,118 +1,124 @@
 const { expect } = require('chai');
+const { Heap } = require('../src/PriorityQueue');
 const { PriorityQueue } = require('../src/priorityQueue');
 
-describe('PriorityQueue tests', () => {
-  describe('with comparator', () => {
-    let employeesQueue;
+describe('PriorityQueue', () => {
+  const numComparator = (a, b) => a.id - b.id;
+  const numValues = [
+    { id: 50 },
+    { id: 80 },
+    { id: 30 },
+    { id: 90 },
+    { id: 60 },
+    { id: 40 },
+    { id: 20 }
+  ];
 
-    describe('constructor(options)', () => {
-      it('creates an instance', () => {
-        employeesQueue = new PriorityQueue({
-          compare: (e1, e2) => e2.salary - e1.salary
-        });
-        expect(employeesQueue).to.be.instanceof(PriorityQueue);
-      });
+  const charComparator = (a, b) => (
+    a.id < b.id ? 1 : -1
+  );
+  const charValues = [
+    { id: 'm' },
+    { id: 'x' },
+    { id: 'f' },
+    { id: 'b' },
+    { id: 'z' },
+    { id: 'k' },
+    { id: 'c' }
+  ];
+
+  describe('PriorityQueue with min logic', () => {
+    const minQ = new PriorityQueue(numComparator);
+
+    it('enqueue', () => {
+      numValues.forEach((value) => minQ.enqueue(value));
     });
 
-    describe('enqueue(element)', () => {
-      it('should queue elements', () => {
-        employeesQueue.enqueue({ name: 'employee 1', salary: 2000 });
-        employeesQueue.enqueue({ name: 'employee 2', salary: 1500 });
-        employeesQueue.enqueue({ name: 'employee 3', salary: 4000 });
-        employeesQueue.enqueue({ name: 'employee 4', salary: 2500 });
-        employeesQueue.enqueue({ name: 'employee 5', salary: 3000 });
-      });
+    it('toArray', () => {
+      expect(minQ.toArray()).to.eql(numValues.slice().sort((a, b) => a.id - b.id));
     });
 
-    describe('.size()', () => {
-      it('should have length of 5', () => {
-        expect(employeesQueue.size()).to.equal(5);
-      });
+    it('front', () => {
+      expect(minQ.front()).to.eql({ id: 20 });
     });
 
-    describe('.front()', () => {
-      it('should get the front element', () => {
-        expect(employeesQueue.front()).to.deep.equal({
-          name: 'employee 3',
-          salary: 4000
-        });
-      });
+    it('back', () => {
+      expect(minQ.back()).to.eql({ id: 90 });
     });
 
-    describe('.back()', () => {
-      it('should get the back element', () => {
-        expect(employeesQueue.back()).to.deep.equal({
-          name: 'employee 2',
-          salary: 1500
-        });
-      });
+    it('size', () => {
+      expect(minQ.size()).to.equal(7);
     });
 
-    describe('.toArray()' , () => {
-      it('returns a sorted array from the queue', () => {
-        expect(employeesQueue.toArray()).to.deep.equal([
-          {
-            name: 'employee 3',
-            salary: 4000
-          },
-          {
-            name: 'employee 5',
-            salary: 3000
-          },
-          {
-            name: 'employee 4',
-            salary: 2500
-          },
-          {
-            name: 'employee 1',
-            salary: 2000
-          },
-          {
-            name: 'employee 2',
-            salary: 1500
-          },
-        ]);
-      });
+    it('isEmpty', () => {
+      expect(minQ.isEmpty()).to.equal(false);
     });
 
-    describe('.isEmpty()', () => {
-      it('should not be empty', () => {
-        expect(employeesQueue.isEmpty()).to.equal(false);
-      });
+    it('dequeue', () => {
+      expect(minQ.dequeue()).to.deep.equal({ id: 20 });
+      expect(minQ.dequeue()).to.deep.equal({ id: 30 });
+      expect(minQ.dequeue()).to.deep.equal({ id: 40 });
+      expect(minQ.dequeue()).to.deep.equal({ id: 50 });
+      expect(minQ.dequeue()).to.deep.equal({ id: 60 });
+      expect(minQ.dequeue()).to.deep.equal({ id: 80 });
+      expect(minQ.dequeue()).to.deep.equal({ id: 90 });
+      expect(minQ.isEmpty()).to.equal(true);
+    });
+  });
+
+  describe('PriorityQueue with max logic', () => {
+    const maxQ = new PriorityQueue(charComparator);
+
+    it('enqueue', () => {
+      charValues.forEach((value) => maxQ.enqueue(value));
     });
 
-    describe('.dequeue()', () => {
-      it('should dequeue elements by priority', () => {
-        expect(employeesQueue.dequeue()).to.deep.equal({
-          name: 'employee 3',
-          salary: 4000
-        });
-        expect(employeesQueue.dequeue()).to.deep.equal({
-          name: 'employee 5',
-          salary: 3000
-        });
-        expect(employeesQueue.dequeue()).to.deep.equal({
-          name: 'employee 4',
-          salary: 2500
-        });
-        expect(employeesQueue.dequeue()).to.deep.equal({
-          name: 'employee 1',
-          salary: 2000
-        });
-      });
+    it('toArray', () => {
+      expect(maxQ.toArray())
+        .to.eql(charValues.slice().sort((a, b) => (
+          a.id > b.id ? -1 : 1
+        )));
     });
 
-    describe('.clear()', () => {
-      it('should clear the queue', () => {
-        expect(employeesQueue.size()).to.equal(1);
-        employeesQueue.clear();
-        expect(employeesQueue.size()).to.equal(0);
-        expect(employeesQueue.isEmpty()).to.equal(true);
-        expect(employeesQueue.toArray()).to.deep.equal([]);
-        expect(employeesQueue.front()).to.equal(null);
-        expect(employeesQueue.back()).to.equal(null);
-        expect(employeesQueue.dequeue()).to.equal(null);
-      });
+    it('front', () => {
+      expect(maxQ.front()).to.eql({ id: 'z' });
+    });
+
+    it('back', () => {
+      expect(maxQ.back()).to.eql({ id: 'b' });
+    });
+
+    it('size', () => {
+      expect(maxQ.size()).to.equal(7);
+    });
+
+    it('isEmpty', () => {
+      expect(maxQ.isEmpty()).to.equal(false);
+    });
+
+    it('dequeue', () => {
+      expect(maxQ.dequeue()).to.deep.equal({ id: 'z' });
+      expect(maxQ.dequeue()).to.deep.equal({ id: 'x' });
+      expect(maxQ.dequeue()).to.deep.equal({ id: 'm' });
+      expect(maxQ.dequeue()).to.deep.equal({ id: 'k' });
+      expect(maxQ.dequeue()).to.deep.equal({ id: 'f' });
+      expect(maxQ.dequeue()).to.deep.equal({ id: 'c' });
+      expect(maxQ.dequeue()).to.deep.equal({ id: 'b' });
+      expect(maxQ.isEmpty()).to.equal(true);
+    });
+  });
+
+  describe('fromArray', () => {
+    it('min PriorityQueue from array', () => {
+      const q = PriorityQueue.fromArray(numValues, numComparator);
+      expect(q.toArray()).to.eql(numValues.slice().sort((a, b) => a.id - b.id));
+    });
+
+    it('max PriorityQueue from array', () => {
+      const q = PriorityQueue.fromArray(charValues, charComparator);
+      expect(q.toArray()).to.eql(charValues.slice().sort((a, b) => (
+        a.id > b.id ? -1 : 1
+      )));
     });
   });
 });

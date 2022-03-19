@@ -1,10 +1,9 @@
 # @datastructures-js/priority-queue
 
-[![build:?](https://travis-ci.org/datastructures-js/priority-queue.svg?branch=master)](https://travis-ci.org/datastructures-js/priority-queue) 
 [![npm](https://img.shields.io/npm/v/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 [![npm](https://img.shields.io/npm/dm/@datastructures-js/priority-queue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/@datastructures-js/priority-queue)
 
-A performant priority queue implementation using a Heap data structure.
+A heap-based implementation of priority queue in javascript with typescript support.
 
 <img src="https://user-images.githubusercontent.com/6517308/121813242-859a9700-cc6b-11eb-99c0-49e5bb63005b.jpg">
 
@@ -14,14 +13,15 @@ A performant priority queue implementation using a Heap data structure.
 * [import](#import)
 * [API](#api)
   * [constructor](#constructor)
-  * [.enqueue](#enqueue)
-  * [.front](#front)
-  * [.back](#back)
-  * [.dequeue](#dequeue)
-  * [.isEmpty](#isEmpty)
-  * [.size](#size)
-  * [.toArray](#toarray)
-  * [.clear](#clear)
+  * [fromArray](#fromarray)
+  * [enqueue](#enqueue)
+  * [front](#front)
+  * [back](#back)
+  * [dequeue](#dequeue)
+  * [isEmpty](#isEmpty)
+  * [size](#size)
+  * [toArray](#toarray)
+  * [clear](#clear)
  * [Build](#build)
  * [License](#license)
 
@@ -32,11 +32,7 @@ npm install --save @datastructures-js/priority-queue
 ```
 
 ## API
-PriorityQueue in this repo is implemented as 3 types:
-
-- **PriorityQueue** that accepts a custom comparator between elements.
-- **MinPriorityQueue** which considers an element with smaller priority number as higher in priority.
-- **MaxPriorityQueue** which cosiders an element with bigger priority number as higher in priority.
+PriorityQueue class allows using a compare function between values. MinPriorityQueue & MaxPriorityQueue can be used for primitive values and objects with known comparison prop.
 
 ### require
 
@@ -44,7 +40,7 @@ PriorityQueue in this repo is implemented as 3 types:
 const {
   PriorityQueue,
   MinPriorityQueue,
-  MaxPriorityQueue
+  MaxPriorityQueue,
 } = require('@datastructures-js/priority-queue');
 ```
 
@@ -55,436 +51,264 @@ import {
   PriorityQueue,
   MinPriorityQueue,
   MaxPriorityQueue,
-  PriorityQueueOptions, // queue options interface
-  PriorityQueueItem // queue item interface for min/max queue
+  ICompare,
+  IGetCompareValue,
 } from '@datastructures-js/priority-queue';
 ```
 
 ### constructor
 #### PriorityQueue
-The constructor requires a compare callback to compare between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
-
-##### JS
-```js
-// empty queue with comparator
-const employeesQueue = new PriorityQueue({
-  compare: (e1, e2) => {
-    if (e1.salary > e2.salary) return -1; // do not swap
-    if (e1.salary < e2.salary) return 1; // swap
-
-    // salaries are the same, compare rank
-    return e1.rank < e2.rank ? 1 : -1;
-  }
-});
-```
+constructor requires a compare function that works similar to javascript sort callback, returning a number bigger than 0, means swap elemens.
 
 ##### TS
-```js
-// queued element type
-interface Employee {
-  name: string;
-  salary: number;
-  rank: number;
+```ts
+interface ICar {
+  year: number;
+  price: number;
 }
 
-// empty queue with comparator
-const employeesQueue = new PriorityQueue<Employee>({
-  compare: (e1: Employee, e2: Employee): number => {
-    if (e1.salary > e2.salary) return -1; // do not swap
-    if (e1.salary < e2.salary) return 1; // swap
+const compareCars: ICompare<ICar> = (a: ICar, b: ICar) => {
+  if (a.year > b.year) {
+    return -1;
+  }
+  if (a.year < b.year) {
+    // prioratize newest cars
+    return 1;
+  }
+  // with least price
+  return a.price < b.price ? -1 : 1;
+};
 
-    // salaries are the same, compare rank
-    return e1.rank < e2.rank ? 1 : -1;
+const carsQueue = new PriorityQueue<ICar>(compareCars);
+```
+
+##### JS
+```js
+const carsQueue = new PriorityQueue((a, b) => {
+    if (a.year > b.year) {
+      return -1;
+    }
+    if (a.year < b.year) {
+      // prioratize newest cars
+      return 1;
+    }
+    // with least price
+    return a.price < b.price ? -1 : 1;
   }
 });
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
-The constructor accepts a priority callback option to get the numeric priority from the queued element. If not passed, the constructor adds a default priority callback that returns the numeric value of the element itself. Use this queue type when the priority is a known value and does not require complex comparison.
-
-##### JS
-```js
-// empty queue with priority is the element value itself.
-const numbersQueue = new MinPriorityQueue();
-
-// empty queue, will provide priority in .enqueue
-const patientsQueue = new MinPriorityQueue();
-
-// empty queue with priority returned from a prop of the queued object
-const biddersQueue = new MaxPriorityQueue({ priority: (bid) => bid.value });
-```
+#### MinPriorityQueue, MaxPriorityQueue
+constructor requires a callback for object values to indicate which prop is used for comparison, and does not require any for primitive values like numbers or strings.
 
 ##### TS
-```js
+```ts
 const numbersQueue = new MinPriorityQueue<number>();
 
-const patientsQueue = new MinPriorityQueue<string>();
-
-interface Bid {
-  name: string;
+interface IBid {
+  id: number;
   value: number;
 }
-const biddersQueue = new MaxPriorityQueue<Bid>({
-  priority: (bid: Bid) => bid.value
-});
+const getBidValue: IGetCompareValue<IBid> = (bid) => bid.value;
+const bidsQueue = new MaxPriorityQueue<IBid>(getBidValue);
 ```
 
-### .enqueue
-#### PriorityQueue - .enqueue(element)
-adds an element based on its comparison with other elements in the queue.
-
-<table>
-  <tr>
-    <th align="center">params</th>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td>element: T</td>
-    <td align="center">PriorityQueue&lt;T&gt;</td>
-    <td align="center">O(log(n))</td>
-  </tr>
-</table>
-
+##### JS
 ```js
-employeesQueue
-  .enqueue({ name: 'employee 1', salary: 2000, rank: 1 })
-  .enqueue({ name: 'employee 2', salary: 1500, rank: 0 })
-  .enqueue({ name: 'employee 3', salary: 4000, rank: 4 })
-  .enqueue({ name: 'employee 4', salary: 2000, rank: 2 })
-  .enqueue({ name: 'employee 5', salary: 3000, rank: 3 });
+const numbersQueue = new MinPriorityQueue();
+const bidsQueue = new MaxPriorityQueue((bid) => bid.value);
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue - .enqueue(element[, priority])
-adds an element with a numeric priority to the queue. Priority is not required here if a priority callback has been provided in the constructor. If passed here with a constructor callback, it will override the callback.
-
-<table>
-  <tr>
-    <th align="center">params</th>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td>
-      element: T
-      <br />
-      priority: number
-    </td>
-    <td align="center">MinPriorityQueue&lt;T&gt; | MaxPriorityQueue&lt;T&gt;</td>
-    <td align="center">O(log(n))</td>
-  </tr>
-</table>
-
-```js
-// MinPriorityQueue Example, where priority is the number element itself
-numbersQueue
-  .enqueue(10)
-  .enqueue(-7)
-  .enqueue(2)
-  .enqueue(-1)
-  .enqueue(-17)
-  .enqueue(33);
-
-// MinPriorityQueue Example, where priority is the patient's turn
-patientsQueue
-  .enqueue('patient y', 1) // highest priority
-  .enqueue('patient z', 3)
-  .enqueue('patient w', 4) // lowest priority
-  .enqueue('patient x', 2);
-
-// MaxPriorityQueue Example, where priority is the bid's value.
-biddersQueue
-  .enqueue({ name: 'bidder y', value: 1000 }) // lowest priority
-  .enqueue({ name: 'bidder w', value: 2500 })
-  .enqueue({ name: 'bidder z', value: 3500 }) // highest priority
-  .enqueue({ name: 'bidder x', value: 3000 });
-```
-
-### .front()
-returns the element with highest priority in the queue.
+### fromArray
+If the queue is being created from an existing array, and there is no desire to use an extra O(n) space, this static function can turn an array into a priority queue in O(n*log(n)) runtime.
 
 #### PriorityQueue
+##### TS
+```ts
+const numbers = [3, -2, 5, 0, -1, -5, 4];
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">T</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
+const pq = PriorityQueue.fromArray<number>(numbers, (a, b) => a - b);
 
-```js
-console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
+console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
+pq.dequeue(); // -5
+pq.dequeue(); // -2
+pq.dequeue(); // -1
+console.log(numbers); // [ 0, 3, 4, 5 ]
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
+##### JS
+```ts
+const numbers = [3, -2, 5, 0, -1, -5, 4];
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">PriorityQueueItem&lt;T&gt;</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
+const pq = PriorityQueue.fromArray(numbers, (a, b) => a - b);
 
-```js
-console.log(numbersQueue.front()); // { priority: -17, element: -17 }
-
-console.log(patientsQueue.front()); // { priority: 1, element: 'patient y' }
-
-console.log(biddersQueue.front()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
+console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
+pq.dequeue(); // -5
+pq.dequeue(); // -2
+pq.dequeue(); // -1
+console.log(numbers); // [ 0, 3, 4, 5 ]
 ```
 
+#### MinPriorityQueue, MaxPriorityQueue
+##### TS
+```ts
+const numbers = [3, -2, 5, 0, -1, -5, 4];
 
-### .back()
-returns an element with a lowest priority in the queue.
+const mpq = MaxPriorityQueue.fromArray<number>(numbers);
 
-#### PriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">T</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
-
-```js
-console.log(employeesQueue.back()); // { name: 'employee 2', salary: 1500, rank: 0 }
+console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
+mpq.dequeue(); // 5
+mpq.dequeue(); // 4
+mpq.dequeue(); // 3
+console.log(numbers); // [ 0, -1, -5, -2 ]
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
+##### JS
+```ts
+const numbers = [3, -2, 5, 0, -1, -5, 4];
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">PriorityQueueItem&lt;T&gt;</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
+const mpq = MaxPriorityQueue.fromArray(numbers);
 
-```js
-console.log(numbersQueue.back()); // { priority: 33, element: 33 }
-
-patientsQueue.enqueue('patient m', 4); // lowest priority
-patientsQueue.enqueue('patient c', 4); // lowest priority
-console.log(patientsQueue.back()); // { priority: 4, element: 'patient c' }
-
-biddersQueue.enqueue({ name: 'bidder m', value: 1000 }); // lowest priority
-biddersQueue.enqueue({ name: 'bidder c', value: 1000 }); // lowest priority
-console.log(biddersQueue.back()); // { priority: 1000, element: { name: 'bidder y', value: 1000 } }
+console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
+mpq.dequeue(); // 5
+mpq.dequeue(); // 4
+mpq.dequeue(); // 3
+console.log(numbers); // [ 0, -1, -5, -2 ]
 ```
 
-
-### .dequeue()
-removes and returns the element with highest priority in the queue.
-
-#### PriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">T</td>
-    <td align="center">O(log(n))</td>
-  </tr>
-</table>
+### enqueue
+adds a value based on its comparison with other values in the queue in O(log(n)) runtime.
 
 ```js
-console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
-console.log(employeesQueue.dequeue()); // { name: 'employee 5', salary: 3000, rank: 3 }
-console.log(employeesQueue.dequeue()); // { name: 'employee 4', salary: 2000, rank: 2 }
-console.log(employeesQueue.dequeue()); // { name: 'employee 1', salary: 2000, rank: 1 }
-console.log(employeesQueue.dequeue()); // { name: 'employee 2', salary: 1500, rank: 0 }
+const cars = [
+  { year: 2013, price: 35000 },
+  { year: 2010, price: 2000 },
+  { year: 2013, price: 30000 },
+  { year: 2017, price: 50000 },
+  { year: 2013, price: 25000 },
+  { year: 2015, price: 40000 },
+  { year: 2022, price: 70000 }
+];
+cars.forEach((car) => carsQueue.enqueue(car));
+
+const numbers = [3, -2, 5, 0, -1, -5, 4];
+numbers.forEach((num) => numbersQueue.enqueue(num));
+
+const bids = [
+  { id: 1, value: 1000 },
+  { id: 2, value: 20000 },
+  { id: 3, value: 1000 },
+  { id: 4, value: 1500 },
+  { id: 5, value: 12000 },
+  { id: 6, value: 4000 },
+  { id: 7, value: 8000 }
+];
+bids.forEach((bid) => bidsQueue.enqueue(bid));
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">PriorityQueueItem&lt;T&gt;</td>
-    <td align="center">O(log(n))</td>
-  </tr>
-</table>
+### front
+peeks on the value with highest priority in the queue.
 
 ```js
-console.log(numbersQueue.dequeue()); // { priority: -17, element: -17 }
-console.log(numbersQueue.front()); // { priority: -7, element: -7 }
-
-console.log(patientsQueue.dequeue()); // { priority: 1, element: 'patient y' }
-console.log(patientsQueue.front()); // { priority: 2, element: 'patient x' }
-
-console.log(biddersQueue.dequeue()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
-console.log(biddersQueue.front()); // { priority: 3000, element: { name: 'bidder x', value: 3000 } }
+console.log(carsQueue.front()); // { year: 2022, price: 70000 }
+console.log(numbersQueue.front()); // -5
+console.log(bidsQueue.front()); // { id: 2, value: 20000 }
 ```
 
-### .isEmpty()
+### back
+peeks on the value with a lowest priority in the queue.
+
+```js
+console.log(carsQueue.back()); // { year: 2010, price: 2000 }
+console.log(numbersQueue.back()); // 5
+console.log(bidsQueue.back()); // { id: 1, value: 1000 }
+```
+
+### dequeue
+removes and returns the element with highest priority in the queue in O(log(n)) runtime.
+
+```js
+console.log(carsQueue.dequeue()); // { year: 2022, price: 70000 }
+console.log(carsQueue.dequeue()); // { year: 2017, price: 50000 }
+console.log(carsQueue.dequeue()); // { year: 2015, price: 40000 }
+
+console.log(numbersQueue.dequeue()); // -5
+console.log(numbersQueue.dequeue()); // -2
+console.log(numbersQueue.dequeue()); // -1
+
+console.log(bidsQueue.dequeue()); // { id: 2, value: 20000 }
+console.log(bidsQueue.dequeue()); // { id: 5, value: 12000 }
+console.log(bidsQueue.dequeue()); // { id: 7, value: 8000 }
+```
+
+### isEmpty
 checks if the queue is empty.
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">boolean</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
-
 ```js
+console.log(carsQueue.isEmpty()); // false
 console.log(numbersQueue.isEmpty()); // false
-
-console.log(patientsQueue.isEmpty()); // false
-
-console.log(biddersQueue.isEmpty()); // false
+console.log(bidsQueue.isEmpty()); // false
 ```
 
-### .size()
+### size
 returns the number of elements in the queue.
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">number</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
 
 ```js
-console.log(numbersQueue.size()); // 5
-
-console.log(patientsQueue.size()); // 5
-
-console.log(biddersQueue.size()); // 5
+console.log(carsQueue.size()); // 4
+console.log(numbersQueue.size()); // 4
+console.log(bidsQueue.size()); // 4
 ```
 
-### .toArray()
-returns a sorted array of elements by their priorities from highest to lowest.
+### toArray
+returns a sorted array of elements by their priorities from highest to lowest in O(n*log(n)) runtime.
 
-#### PriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">T[]</td>
-    <td align="center">O(n*log(n))</td>
-  </tr>
-</table>
 
 ```js
-console.log(employeesQueue.toArray());
+console.log(carsQueue.toArray());
 /*
 [
-  { name: 'employee 3', salary: 4000, rank: 4 },
-  { name: 'employee 5', salary: 3000, rank: 3 },
-  { name: 'employee 4', salary: 2000, rank: 2 },
-  { name: 'employee 1', salary: 2000, rank: 1 },
-  { name: 'employee 2', salary: 1500, rank: 0 }
+  { year: 2013, price: 25000 },
+  { year: 2013, price: 30000 },
+  { year: 2013, price: 35000 },
+  { year: 2010, price: 2000 }
+]
+*/
+
+console.log(numbersQueue.toArray()); // [ 0, 3, 4, 5 ]
+
+console.log(bidsQueue.toArray());
+/*
+[
+  { id: 6, value: 4000 },
+  { id: 4, value: 1500 },
+  { id: 3, value: 1000 },
+  { id: 1, value: 1000 }
 ]
 */
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">PriorityQueueItem&lt;T&gt;[]</td>
-    <td align="center">O(n*log(n))</td>
-  </tr>
-</table>
-
-```js
-console.log(numbersQueue.toArray());
-/*
-[
-  { priority: -7, element: -7 },
-  { priority: -1, element: -1 },
-  { priority: 2, element: 2 },
-  { priority: 10, element: 10 },
-  { priority: 33, element: 33 }
-]
-*/
-
-console.log(patientsQueue.toArray());
-/*
-[
-  { priority: 2, element: 'patient x' },
-  { priority: 3, element: 'patient z' },
-  { priority: 4, element: 'patient c' },
-  { priority: 4, element: 'patient w' },
-  { priority: 4, element: 'patient m' }
-]
-*/
-
-console.log(biddersQueue.toArray());
-/*
-[
-  { priority: 3000, element: { name: 'bidder x', value: 3000 } },
-  { priority: 2500, element: { name: 'bidder w', value: 2500 } },
-  { priority: 1000, element: { name: 'bidder y', value: 1000 } },
-  { priority: 1000, element: { name: 'bidder m', value: 1000 } },
-  { priority: 1000, element: { name: 'bidder c', value: 1000 } }
-]
-*/
-```
-
-### .clear()
+### clear
 clears all elements in the queue.
 
-<table>
- <tr>
-  <th>runtime</th>
- </tr>
- <tr>
-  <td>O(1)</td>
- </tr>
-</table>
-
-
 ```js
+carsQueue.clear();
+console.log(carsQueue.size()); // 0
+console.log(carsQueue.front()); // null
+console.log(carsQueue.dequeue()); // null
+console.log(carsQueue.isEmpty()); // true
+
 numbersQueue.clear();
 console.log(numbersQueue.size()); // 0
 console.log(numbersQueue.front()); // null
 console.log(numbersQueue.dequeue()); // null
+console.log(numbersQueue.isEmpty()); // true
 
-patientsQueue.clear();
-console.log(patientsQueue.size()); // 0
-console.log(patientsQueue.front()); // null
-console.log(patientsQueue.dequeue()); // null
-
-biddersQueue.clear();
-console.log(biddersQueue.size()); // 0
-console.log(biddersQueue.front()); // null
-console.log(biddersQueue.dequeue()); // null
+bidsQueue.clear();
+console.log(bidsQueue.size()); // 0
+console.log(bidsQueue.front()); // null
+console.log(bidsQueue.dequeue()); // null
+console.log(bidsQueue.isEmpty()); // true
 ```
 
 ## Build
