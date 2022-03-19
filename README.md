@@ -296,16 +296,19 @@ carsQueue.clear();
 console.log(carsQueue.size()); // 0
 console.log(carsQueue.front()); // null
 console.log(carsQueue.dequeue()); // null
+console.log(carsQueue.isEmpty()); // true
 
 numbersQueue.clear();
 console.log(numbersQueue.size()); // 0
 console.log(numbersQueue.front()); // null
 console.log(numbersQueue.dequeue()); // null
+console.log(numbersQueue.isEmpty()); // true
 
 bidsQueue.clear();
 console.log(bidsQueue.size()); // 0
 console.log(bidsQueue.front()); // null
 console.log(bidsQueue.dequeue()); // null
+console.log(bidsQueue.isEmpty()); // true
 ```
 
 ## Build
