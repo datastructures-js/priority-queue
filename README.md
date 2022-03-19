@@ -211,33 +211,11 @@ returns the element with highest priority in the queue.
 
 #### PriorityQueue
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">T</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
-
 ```js
 console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
 ```
 
 #### MinPriorityQueue/MaxPriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">PriorityQueueItem&lt;T&gt;</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
 
 ```js
 console.log(numbersQueue.front()); // { priority: -17, element: -17 }
@@ -247,39 +225,16 @@ console.log(patientsQueue.front()); // { priority: 1, element: 'patient y' }
 console.log(biddersQueue.front()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
 ```
 
-
 ### .back()
 returns an element with a lowest priority in the queue.
 
 #### PriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">T</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
 
 ```js
 console.log(employeesQueue.back()); // { name: 'employee 2', salary: 1500, rank: 0 }
 ```
 
 #### MinPriorityQueue/MaxPriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">PriorityQueueItem&lt;T&gt;</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
 
 ```js
 console.log(numbersQueue.back()); // { priority: 33, element: 33 }
@@ -293,22 +248,10 @@ biddersQueue.enqueue({ name: 'bidder c', value: 1000 }); // lowest priority
 console.log(biddersQueue.back()); // { priority: 1000, element: { name: 'bidder y', value: 1000 } }
 ```
 
-
 ### .dequeue()
 removes and returns the element with highest priority in the queue.
 
 #### PriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">T</td>
-    <td align="center">O(log(n))</td>
-  </tr>
-</table>
 
 ```js
 console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
@@ -320,16 +263,6 @@ console.log(employeesQueue.dequeue()); // { name: 'employee 2', salary: 1500, ra
 
 #### MinPriorityQueue/MaxPriorityQueue
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">PriorityQueueItem&lt;T&gt;</td>
-    <td align="center">O(log(n))</td>
-  </tr>
-</table>
 
 ```js
 console.log(numbersQueue.dequeue()); // { priority: -17, element: -17 }
@@ -345,17 +278,6 @@ console.log(biddersQueue.front()); // { priority: 3000, element: { name: 'bidder
 ### .isEmpty()
 checks if the queue is empty.
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">boolean</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
-
 ```js
 console.log(numbersQueue.isEmpty()); // false
 
@@ -367,16 +289,6 @@ console.log(biddersQueue.isEmpty()); // false
 ### .size()
 returns the number of elements in the queue.
 
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">number</td>
-    <td align="center">O(1)</td>
-  </tr>
-</table>
 
 ```js
 console.log(numbersQueue.size()); // 5
@@ -390,17 +302,6 @@ console.log(biddersQueue.size()); // 5
 returns a sorted array of elements by their priorities from highest to lowest.
 
 #### PriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">T[]</td>
-    <td align="center">O(n*log(n))</td>
-  </tr>
-</table>
 
 ```js
 console.log(employeesQueue.toArray());
