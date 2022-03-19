@@ -1,7 +1,7 @@
 import { MinHeap, IGetCompareValue } from '@datastructures-js/heap';
 
-export abstract class MinPriorityQueue<T> {
-  constructor(getCompareValue?: IGetCompareValue<T>, heap?: MinHeap);
+export class MinPriorityQueue<T> {
+  constructor(getCompareValue?: IGetCompareValue<T>, heap?: MinHeap<T>);
   size(): number;
   isEmpty(): boolean;
   front(): T;
