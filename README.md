@@ -260,7 +260,7 @@ console.log(numbersQueue.size()); // 4
 console.log(bidsQueue.size()); // 4
 ```
 
-### .toArray()
+### toArray
 returns a sorted array of elements by their priorities from highest to lowest in O(n*log(n)) runtime.
 
 
@@ -288,7 +288,7 @@ console.log(bidsQueue.toArray());
 */
 ```
 
-### .clear()
+### clear
 clears all elements in the queue.
 
 ```js
