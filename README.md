@@ -177,7 +177,7 @@ console.log(numbers); // [ 0, -1, -5, -2 ]
 ```
 
 ### enqueue
-adds a value based on its comparison with other values in the queue.
+adds a value based on its comparison with other values in the queue in O(log(n)) runtime.
 
 ```js
 const cars = [
@@ -207,7 +207,7 @@ bids.forEach((bid) => bidsQueue.enqueue(bid));
 ```
 
 ### front
-returns the element with highest priority in the queue.
+peeks on the value with highest priority in the queue.
 
 ```js
 console.log(carsQueue.front()); // 
@@ -216,7 +216,7 @@ console.log(bidsQueue.front()); //
 ```
 
 ### back
-returns an element with a lowest priority in the queue.
+peeks on the value with a lowest priority in the queue.
 
 ```js
 console.log(carsQueue.front()); // 
@@ -225,7 +225,7 @@ console.log(bidsQueue.front()); //
 ```
 
 ### dequeue
-removes and returns the element with highest priority in the queue.
+removes and returns the element with highest priority in the queue in O(log(n)) runtime.
 
 ```js
 console.log(carsQueue.dequeue()); // 
