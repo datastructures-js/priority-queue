@@ -120,7 +120,7 @@ const bidsQueue = new MaxPriorityQueue((bid) => bid.value);
 ```
 
 ### fromArray
-If the queue is being created from an existing array, and there is no desire to use an extra space, this static function can turn an array into a priority queue. If the existing array should not be mutated, simply create the queue from a copy of it or add array values to an empty queue using enqueue.
+If the queue is being created from an existing array, and there is no desire to use an extra n space, this static function can turn an array into a priority queue. If the existing array should not be mutated, simply create the queue from a copy of it or add array values to an empty queue using enqueue.
 
 #### PriorityQueue
 ##### TS
