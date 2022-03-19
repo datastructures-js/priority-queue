@@ -206,192 +206,99 @@ const bids = [
 bids.forEach((bid) => bidsQueue.enqueue(bid));
 ```
 
-### front()
+### front
 returns the element with highest priority in the queue.
 
-#### PriorityQueue
-
 ```js
-console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
+console.log(carsQueue.front()); // 
+console.log(numbersQueue.front()); // 
+console.log(bidsQueue.front()); // 
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
-
-```js
-console.log(numbersQueue.front()); // { priority: -17, element: -17 }
-
-console.log(patientsQueue.front()); // { priority: 1, element: 'patient y' }
-
-console.log(biddersQueue.front()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
-```
-
-### .back()
+### back
 returns an element with a lowest priority in the queue.
 
-#### PriorityQueue
-
 ```js
-console.log(employeesQueue.back()); // { name: 'employee 2', salary: 1500, rank: 0 }
+console.log(carsQueue.front()); // 
+console.log(numbersQueue.front()); // 
+console.log(bidsQueue.front()); // 
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
-
-```js
-console.log(numbersQueue.back()); // { priority: 33, element: 33 }
-
-patientsQueue.enqueue('patient m', 4); // lowest priority
-patientsQueue.enqueue('patient c', 4); // lowest priority
-console.log(patientsQueue.back()); // { priority: 4, element: 'patient c' }
-
-biddersQueue.enqueue({ name: 'bidder m', value: 1000 }); // lowest priority
-biddersQueue.enqueue({ name: 'bidder c', value: 1000 }); // lowest priority
-console.log(biddersQueue.back()); // { priority: 1000, element: { name: 'bidder y', value: 1000 } }
-```
-
-### .dequeue()
+### dequeue
 removes and returns the element with highest priority in the queue.
 
-#### PriorityQueue
-
 ```js
-console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
-console.log(employeesQueue.dequeue()); // { name: 'employee 5', salary: 3000, rank: 3 }
-console.log(employeesQueue.dequeue()); // { name: 'employee 4', salary: 2000, rank: 2 }
-console.log(employeesQueue.dequeue()); // { name: 'employee 1', salary: 2000, rank: 1 }
-console.log(employeesQueue.dequeue()); // { name: 'employee 2', salary: 1500, rank: 0 }
+console.log(carsQueue.dequeue()); // 
+console.log(carsQueue.dequeue()); // 
+console.log(carsQueue.dequeue()); // 
+
+console.log(numbersQueue.dequeue()); // 
+console.log(numbersQueue.dequeue()); // 
+console.log(numbersQueue.dequeue()); // 
+
+console.log(bidsQueue.dequeue()); // 
+console.log(bidsQueue.dequeue()); // 
+console.log(bidsQueue.dequeue()); // 
 ```
 
-#### MinPriorityQueue/MaxPriorityQueue
-
-
-```js
-console.log(numbersQueue.dequeue()); // { priority: -17, element: -17 }
-console.log(numbersQueue.front()); // { priority: -7, element: -7 }
-
-console.log(patientsQueue.dequeue()); // { priority: 1, element: 'patient y' }
-console.log(patientsQueue.front()); // { priority: 2, element: 'patient x' }
-
-console.log(biddersQueue.dequeue()); // { priority: 3500, element: { name: 'bidder z', value: 3500 } }
-console.log(biddersQueue.front()); // { priority: 3000, element: { name: 'bidder x', value: 3000 } }
-```
-
-### .isEmpty()
+### isEmpty
 checks if the queue is empty.
 
 ```js
+console.log(carsQueue.isEmpty()); // false
 console.log(numbersQueue.isEmpty()); // false
-
-console.log(patientsQueue.isEmpty()); // false
-
-console.log(biddersQueue.isEmpty()); // false
+console.log(bidsQueue.isEmpty()); // false
 ```
 
-### .size()
+### size
 returns the number of elements in the queue.
 
 
 ```js
-console.log(numbersQueue.size()); // 5
-
-console.log(patientsQueue.size()); // 5
-
-console.log(biddersQueue.size()); // 5
+console.log(carsQueue.size()); //
+console.log(numbersQueue.size()); //
+console.log(bidsQueue.size()); //
 ```
 
 ### .toArray()
-returns a sorted array of elements by their priorities from highest to lowest.
+returns a sorted array of elements by their priorities from highest to lowest in O(n*log(n)) runtime.
 
-#### PriorityQueue
 
 ```js
-console.log(employeesQueue.toArray());
+console.log(carsQueue.toArray());
 /*
-[
-  { name: 'employee 3', salary: 4000, rank: 4 },
-  { name: 'employee 5', salary: 3000, rank: 3 },
-  { name: 'employee 4', salary: 2000, rank: 2 },
-  { name: 'employee 1', salary: 2000, rank: 1 },
-  { name: 'employee 2', salary: 1500, rank: 0 }
-]
+
 */
-```
 
-#### MinPriorityQueue/MaxPriorityQueue
-
-<table>
-  <tr>
-    <th align="center">return</th>
-    <th align="center">runtime</th>
-  </tr>
-  <tr>
-    <td align="center">PriorityQueueItem&lt;T&gt;[]</td>
-    <td align="center">O(n*log(n))</td>
-  </tr>
-</table>
-
-```js
 console.log(numbersQueue.toArray());
 /*
-[
-  { priority: -7, element: -7 },
-  { priority: -1, element: -1 },
-  { priority: 2, element: 2 },
-  { priority: 10, element: 10 },
-  { priority: 33, element: 33 }
-]
+
 */
 
-console.log(patientsQueue.toArray());
+console.log(bidsQueue.toArray());
 /*
-[
-  { priority: 2, element: 'patient x' },
-  { priority: 3, element: 'patient z' },
-  { priority: 4, element: 'patient c' },
-  { priority: 4, element: 'patient w' },
-  { priority: 4, element: 'patient m' }
-]
-*/
 
-console.log(biddersQueue.toArray());
-/*
-[
-  { priority: 3000, element: { name: 'bidder x', value: 3000 } },
-  { priority: 2500, element: { name: 'bidder w', value: 2500 } },
-  { priority: 1000, element: { name: 'bidder y', value: 1000 } },
-  { priority: 1000, element: { name: 'bidder m', value: 1000 } },
-  { priority: 1000, element: { name: 'bidder c', value: 1000 } }
-]
 */
 ```
 
 ### .clear()
 clears all elements in the queue.
 
-<table>
- <tr>
-  <th>runtime</th>
- </tr>
- <tr>
-  <td>O(1)</td>
- </tr>
-</table>
-
-
 ```js
+carsQueue.clear();
+console.log(carsQueue.size()); // 0
+console.log(carsQueue.front()); // null
+console.log(carsQueue.dequeue()); // null
+
 numbersQueue.clear();
 console.log(numbersQueue.size()); // 0
 console.log(numbersQueue.front()); // null
 console.log(numbersQueue.dequeue()); // null
 
-patientsQueue.clear();
-console.log(patientsQueue.size()); // 0
-console.log(patientsQueue.front()); // null
-console.log(patientsQueue.dequeue()); // null
-
-biddersQueue.clear();
-console.log(biddersQueue.size()); // 0
-console.log(biddersQueue.front()); // null
-console.log(biddersQueue.dequeue()); // null
+bidsQueue.clear();
+console.log(bidsQueue.size()); // 0
+console.log(bidsQueue.front()); // null
+console.log(bidsQueue.dequeue()); // null
 ```
 
 ## Build
