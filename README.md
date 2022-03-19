@@ -167,7 +167,7 @@ console.log(numbers); // [ 0, -1, -5, -2 ]
 ```ts
 const numbers = [3, -2, 5, 0, -1, -5, 4];
 
-const mpq = MaxPriorityQueue.fromArray<number>(numbers);
+const mpq = MaxPriorityQueue.fromArray(numbers);
 
 console.log(numbers); // [-5, -1, -2, 3, 0, 5, 4]
 mpq.dequeue(); // 5
