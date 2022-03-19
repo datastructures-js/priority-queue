@@ -210,35 +210,35 @@ bids.forEach((bid) => bidsQueue.enqueue(bid));
 peeks on the value with highest priority in the queue.
 
 ```js
-console.log(carsQueue.front()); // 
-console.log(numbersQueue.front()); // 
-console.log(bidsQueue.front()); // 
+console.log(carsQueue.front()); // { year: 2022, price: 70000 }
+console.log(numbersQueue.front()); // -5
+console.log(bidsQueue.front()); // { id: 2, value: 20000 }
 ```
 
 ### back
 peeks on the value with a lowest priority in the queue.
 
 ```js
-console.log(carsQueue.front()); // 
-console.log(numbersQueue.front()); // 
-console.log(bidsQueue.front()); // 
+console.log(carsQueue.back()); // { year: 2010, price: 2000 }
+console.log(numbersQueue.back()); // 5
+console.log(bidsQueue.back()); // { id: 1, value: 1000 }
 ```
 
 ### dequeue
 removes and returns the element with highest priority in the queue in O(log(n)) runtime.
 
 ```js
-console.log(carsQueue.dequeue()); // 
-console.log(carsQueue.dequeue()); // 
-console.log(carsQueue.dequeue()); // 
+console.log(carsQueue.dequeue()); // { year: 2022, price: 70000 }
+console.log(carsQueue.dequeue()); // { year: 2017, price: 50000 }
+console.log(carsQueue.dequeue()); // { year: 2015, price: 40000 }
 
-console.log(numbersQueue.dequeue()); // 
-console.log(numbersQueue.dequeue()); // 
-console.log(numbersQueue.dequeue()); // 
+console.log(numbersQueue.dequeue()); // -5
+console.log(numbersQueue.dequeue()); // -2
+console.log(numbersQueue.dequeue()); // -1
 
-console.log(bidsQueue.dequeue()); // 
-console.log(bidsQueue.dequeue()); // 
-console.log(bidsQueue.dequeue()); // 
+console.log(bidsQueue.dequeue()); // { id: 2, value: 20000 }
+console.log(bidsQueue.dequeue()); // { id: 5, value: 12000 }
+console.log(bidsQueue.dequeue()); // { id: 7, value: 8000 }
 ```
 
 ### isEmpty
@@ -255,9 +255,9 @@ returns the number of elements in the queue.
 
 
 ```js
-console.log(carsQueue.size()); //
-console.log(numbersQueue.size()); //
-console.log(bidsQueue.size()); //
+console.log(carsQueue.size()); // 4
+console.log(numbersQueue.size()); // 4
+console.log(bidsQueue.size()); // 4
 ```
 
 ### .toArray()
@@ -267,17 +267,24 @@ returns a sorted array of elements by their priorities from highest to lowest in
 ```js
 console.log(carsQueue.toArray());
 /*
-
+[
+  { year: 2013, price: 25000 },
+  { year: 2013, price: 30000 },
+  { year: 2013, price: 35000 },
+  { year: 2010, price: 2000 }
+]
 */
 
-console.log(numbersQueue.toArray());
-/*
-
-*/
+console.log(numbersQueue.toArray()); // [ 0, 3, 4, 5 ]
 
 console.log(bidsQueue.toArray());
 /*
-
+[
+  { id: 6, value: 4000 },
+  { id: 4, value: 1500 },
+  { id: 3, value: 1000 },
+  { id: 1, value: 1000 }
+]
 */
 ```
 
