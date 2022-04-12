@@ -58,7 +58,7 @@ import {
 
 ### constructor
 #### PriorityQueue
-constructor requires a compare function that works similar to javascript sort callback, returning a number bigger than 0, means swap elemens.
+constructor requires a compare function that works similar to javascript sort callback, returning a number bigger than 0, means swap elements.
 
 ##### TS
 ```ts
