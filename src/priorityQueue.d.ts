@@ -7,7 +7,9 @@ export class PriorityQueue<T> {
   front(): T;
   back(): T;
   enqueue(value: T): PriorityQueue<T>;
+  push(value: T): PriorityQueue<T>;
   dequeue(): T;
+  pop(): T;
   toArray(): T[];
   clear(): void;
   static fromArray<T>(values: T[], compare: ICompare<T>): PriorityQueue<T>;

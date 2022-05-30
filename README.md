@@ -14,10 +14,10 @@ A heap-based implementation of priority queue in javascript with typescript supp
 * [API](#api)
   * [constructor](#constructor)
   * [fromArray](#fromarray)
-  * [enqueue](#enqueue)
+  * [enqueue (push)](#enqueue-push)
   * [front](#front)
   * [back](#back)
-  * [dequeue](#dequeue)
+  * [dequeue (pop)](#dequeue-pop)
   * [isEmpty](#isEmpty)
   * [size](#size)
   * [toArray](#toarray)
@@ -176,7 +176,7 @@ mpq.dequeue(); // 3
 console.log(numbers); // [ 0, -1, -5, -2 ]
 ```
 
-### enqueue
+### enqueue (push)
 adds a value based on its comparison with other values in the queue in O(log(n)) runtime.
 
 ```js
@@ -192,7 +192,7 @@ const cars = [
 cars.forEach((car) => carsQueue.enqueue(car));
 
 const numbers = [3, -2, 5, 0, -1, -5, 4];
-numbers.forEach((num) => numbersQueue.enqueue(num));
+numbers.forEach((num) => numbersQueue.push(num));
 
 const bids = [
   { id: 1, value: 1000 },
@@ -224,7 +224,7 @@ console.log(numbersQueue.back()); // 5
 console.log(bidsQueue.back()); // { id: 1, value: 1000 }
 ```
 
-### dequeue
+### dequeue (pop)
 removes and returns the element with highest priority in the queue in O(log(n)) runtime.
 
 ```js
@@ -236,9 +236,9 @@ console.log(numbersQueue.dequeue()); // -5
 console.log(numbersQueue.dequeue()); // -2
 console.log(numbersQueue.dequeue()); // -1
 
-console.log(bidsQueue.dequeue()); // { id: 2, value: 20000 }
-console.log(bidsQueue.dequeue()); // { id: 5, value: 12000 }
-console.log(bidsQueue.dequeue()); // { id: 7, value: 8000 }
+console.log(bidsQueue.pop()); // { id: 2, value: 20000 }
+console.log(bidsQueue.pop()); // { id: 5, value: 12000 }
+console.log(bidsQueue.pop()); // { id: 7, value: 8000 }
 ```
 
 ### isEmpty

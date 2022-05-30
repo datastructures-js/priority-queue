@@ -52,12 +52,31 @@ class MaxPriorityQueue {
   }
 
   /**
+   * Adds a value to the queue
+   * @public
+   * @param {number|string|object} value
+   * @returns {MaxPriorityQueue}
+   */
+  push(value) {
+    return this.enqueue(value);
+  }
+
+  /**
    * Removes and returns an element with highest priority in the queue
    * @public
    * @returns {number|string|object}
    */
   dequeue() {
     return this._heap.extractRoot();
+  }
+
+  /**
+   * Removes and returns an element with highest priority in the queue
+   * @public
+   * @returns {number|string|object}
+   */
+  pop() {
+    return this.dequeue();
   }
 
   /**
