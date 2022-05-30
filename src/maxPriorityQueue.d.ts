@@ -7,7 +7,9 @@ export class MaxPriorityQueue<T> {
   front(): T;
   back(): T;
   enqueue(value: T): MaxPriorityQueue<T>;
+  push(value: T): PriorityQueue<T>;
   dequeue(): T;
+  pop(): T;
   toArray(): T[];
   clear(): void;
   static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MaxPriorityQueue<T>;
