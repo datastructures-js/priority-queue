@@ -7,7 +7,7 @@ export class MinPriorityQueue<T> {
   front(): T;
   back(): T;
   enqueue(value: T): MinPriorityQueue<T>;
-  push(value: T): PriorityQueue<T>;
+  push(value: T): MinPriorityQueue<T>;
   dequeue(): T;
   pop(): T;
   toArray(): T[];
