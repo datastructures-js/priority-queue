@@ -54,8 +54,8 @@ describe('MinPriorityQueue', () => {
     ];
     const minQ = new MinPriorityQueue((value) => value.id);
 
-    it('enqueue', () => {
-      values.forEach((value) => minQ.enqueue(value));
+    it('enqueue (push)', () => {
+      values.forEach((value) => minQ.push(value));
     });
 
     it('toArray', () => {
@@ -78,14 +78,14 @@ describe('MinPriorityQueue', () => {
       expect(minQ.isEmpty()).to.equal(false);
     });
 
-    it('dequeue', () => {
-      expect(minQ.dequeue()).to.deep.equal({ id: 20 });
-      expect(minQ.dequeue()).to.deep.equal({ id: 30 });
-      expect(minQ.dequeue()).to.deep.equal({ id: 40 });
-      expect(minQ.dequeue()).to.deep.equal({ id: 50 });
-      expect(minQ.dequeue()).to.deep.equal({ id: 60 });
-      expect(minQ.dequeue()).to.deep.equal({ id: 80 });
-      expect(minQ.dequeue()).to.deep.equal({ id: 90 });
+    it('dequeue (pop)', () => {
+      expect(minQ.pop()).to.deep.equal({ id: 20 });
+      expect(minQ.pop()).to.deep.equal({ id: 30 });
+      expect(minQ.pop()).to.deep.equal({ id: 40 });
+      expect(minQ.pop()).to.deep.equal({ id: 50 });
+      expect(minQ.pop()).to.deep.equal({ id: 60 });
+      expect(minQ.pop()).to.deep.equal({ id: 80 });
+      expect(minQ.pop()).to.deep.equal({ id: 90 });
       expect(minQ.isEmpty()).to.equal(true);
     });
   });

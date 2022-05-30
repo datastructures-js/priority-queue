@@ -56,8 +56,8 @@ describe('MaxPriorityQueue', () => {
     ];
     const maxQ = new MaxPriorityQueue((value) => value.id);
 
-    it('enqueue', () => {
-      values.forEach((value) => maxQ.enqueue(value));
+    it('enqueue (push)', () => {
+      values.forEach((value) => maxQ.push(value));
     });
 
     it('toArray', () => {
@@ -82,14 +82,14 @@ describe('MaxPriorityQueue', () => {
       expect(maxQ.isEmpty()).to.equal(false);
     });
 
-    it('dequeue', () => {
-      expect(maxQ.dequeue()).to.deep.equal({ id: 'z' });
-      expect(maxQ.dequeue()).to.deep.equal({ id: 'x' });
-      expect(maxQ.dequeue()).to.deep.equal({ id: 'm' });
-      expect(maxQ.dequeue()).to.deep.equal({ id: 'k' });
-      expect(maxQ.dequeue()).to.deep.equal({ id: 'f' });
-      expect(maxQ.dequeue()).to.deep.equal({ id: 'c' });
-      expect(maxQ.dequeue()).to.deep.equal({ id: 'b' });
+    it('dequeue (pop)', () => {
+      expect(maxQ.pop()).to.deep.equal({ id: 'z' });
+      expect(maxQ.pop()).to.deep.equal({ id: 'x' });
+      expect(maxQ.pop()).to.deep.equal({ id: 'm' });
+      expect(maxQ.pop()).to.deep.equal({ id: 'k' });
+      expect(maxQ.pop()).to.deep.equal({ id: 'f' });
+      expect(maxQ.pop()).to.deep.equal({ id: 'c' });
+      expect(maxQ.pop()).to.deep.equal({ id: 'b' });
       expect(maxQ.isEmpty()).to.equal(true);
     });
   });
