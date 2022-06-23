@@ -192,7 +192,7 @@ const cars = [
 cars.forEach((car) => carsQueue.enqueue(car));
 
 const numbers = [3, -2, 5, 0, -1, -5, 4];
-numbers.forEach((num) => numbersQueue.enqueue(num));
+numbers.forEach((num) => numbersQueue.push(num)); // push is an alias for enqueue
 
 const bids = [
   { id: 1, value: 1000 },
