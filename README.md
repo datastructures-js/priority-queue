@@ -72,7 +72,7 @@ const compareCars: ICompare<ICar> = (a: ICar, b: ICar) => {
     return -1;
   }
   if (a.year < b.year) {
-    // prioratize newest cars
+    // prioritize newest cars
     return 1;
   }
   // with least price
@@ -192,7 +192,7 @@ const cars = [
 cars.forEach((car) => carsQueue.enqueue(car));
 
 const numbers = [3, -2, 5, 0, -1, -5, 4];
-numbers.forEach((num) => numbersQueue.push(num));
+numbers.forEach((num) => numbersQueue.enqueue(num));
 
 const bids = [
   { id: 1, value: 1000 },
