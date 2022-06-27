@@ -75,7 +75,7 @@ const compareCars: ICompare<ICar> = (a: ICar, b: ICar) => {
     // prioritize newest cars
     return 1;
   }
-  // with least price
+  // with lowest price
   return a.price < b.price ? -1 : 1;
 };
 
@@ -92,7 +92,7 @@ const carsQueue = new PriorityQueue((a, b) => {
       // prioratize newest cars
       return 1;
     }
-    // with least price
+    // with lowest price
     return a.price < b.price ? -1 : 1;
   }
 });
