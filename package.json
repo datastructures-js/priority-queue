@@ -3,6 +3,7 @@
   "version": "6.1.1",
   "description": "A heap-based implementation of priority queue in javascript with typescript support.",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "grunt test"
   },
