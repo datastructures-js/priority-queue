@@ -95,7 +95,7 @@ const carsQueue = new PriorityQueue((a, b) => {
     // with lowest price
     return a.price < b.price ? -1 : 1;
   }
-});
+);
 ```
 
 #### MinPriorityQueue, MaxPriorityQueue
