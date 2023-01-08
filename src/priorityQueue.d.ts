@@ -2,6 +2,7 @@ import { ICompare } from '@datastructures-js/heap';
 
 export class PriorityQueue<T> {
   constructor(compare: ICompare<T>, values?: T[]);
+  [Symbol.iterator](): Iterator<T, any, undefined>;
   size(): number;
   isEmpty(): boolean;
   front(): T;

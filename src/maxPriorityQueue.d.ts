@@ -2,6 +2,7 @@ import { MaxHeap, IGetCompareValue } from '@datastructures-js/heap';
 
 export class MaxPriorityQueue<T> {
   constructor(getCompareValue?: IGetCompareValue<T>, heap?: MaxHeap<T>);
+  [Symbol.iterator](): Iterator<T, any, undefined>;
   size(): number;
   isEmpty(): boolean;
   front(): T;
