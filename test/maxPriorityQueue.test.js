@@ -92,5 +92,19 @@ describe('MaxPriorityQueue', () => {
       expect(maxQ.pop()).to.deep.equal({ id: 'b' });
       expect(maxQ.isEmpty()).to.equal(true);
     });
+
+    describe('iterator', () => {
+      it('allows iterating on heap elements', () => {
+        const testArr = [90, 80, 50, 40, 30, 20];
+        const qTest = MaxPriorityQueue.fromArray(testArr.slice());
+        expect([...qTest]).to.eql(testArr);
+        const qTest2 = MaxPriorityQueue.fromArray(testArr.slice());
+        const res = [];
+        for (const n of qTest2) {
+          res.push(n);
+        }
+        expect(res).to.eql(testArr);
+      });
+    });
   });
 });

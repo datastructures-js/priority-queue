@@ -108,6 +108,20 @@ describe('PriorityQueue', () => {
     });
   });
 
+  describe('iterator', () => {
+    it('allows iterating on heap elements', () => {
+      const testArr = [20, 30, 40, 50, 80, 90];
+      const qTest = PriorityQueue.fromArray(testArr.slice(), (a, b) => a - b);
+      expect([...qTest]).to.eql(testArr);
+      const qTest2 = PriorityQueue.fromArray(testArr.slice(), (a, b) => a - b);
+      const res = [];
+      for (const n of qTest2) {
+        res.push(n);
+      }
+      expect(res).to.eql(testArr);
+    });
+  });
+
   describe('fromArray', () => {
     it('min PriorityQueue from array', () => {
       const q = PriorityQueue.fromArray(numValues, numComparator);
