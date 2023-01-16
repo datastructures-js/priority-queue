@@ -109,7 +109,7 @@ describe('PriorityQueue', () => {
   });
 
   describe('iterator', () => {
-    it('allows iterating on heap elements', () => {
+    it('allows iterating on queue elements', () => {
       const testArr = [20, 30, 40, 50, 80, 90];
       const qTest = PriorityQueue.fromArray(testArr.slice(), (a, b) => a - b);
       expect([...qTest]).to.eql(testArr);

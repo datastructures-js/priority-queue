@@ -90,7 +90,7 @@ describe('MinPriorityQueue', () => {
     });
 
     describe('iterator', () => {
-      it('allows iterating on heap elements', () => {
+      it('allows iterating on queue elements', () => {
         const testArr = [20, 30, 40, 50, 80, 90];
         const qTest = MinPriorityQueue.fromArray(testArr.slice());
         expect([...qTest]).to.eql(testArr);

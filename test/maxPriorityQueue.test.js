@@ -94,7 +94,7 @@ describe('MaxPriorityQueue', () => {
     });
 
     describe('iterator', () => {
-      it('allows iterating on heap elements', () => {
+      it('allows iterating on queue elements', () => {
         const testArr = [90, 80, 50, 40, 30, 20];
         const qTest = MaxPriorityQueue.fromArray(testArr.slice());
         expect([...qTest]).to.eql(testArr);
