@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { MinPriorityQueue } = require('../src/MinPriorityQueue');
+const { MinPriorityQueue } = require('../src/minPriorityQueue');
 
 describe('MinPriorityQueue', () => {
   describe('primitive values', () => {

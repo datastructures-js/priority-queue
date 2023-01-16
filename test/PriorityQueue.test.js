@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { Heap } = require('../src/PriorityQueue');
+const { Heap } = require('../src/priorityQueue');
 const { PriorityQueue } = require('../src/priorityQueue');
 
 describe('PriorityQueue', () => {
