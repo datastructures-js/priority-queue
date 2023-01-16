@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { Heap } = require('../src/PriorityQueue');
+const { Heap } = require('../src/priorityQueue');
 const { PriorityQueue } = require('../src/priorityQueue');
 
 describe('PriorityQueue', () => {
@@ -105,6 +105,20 @@ describe('PriorityQueue', () => {
       expect(maxQ.pop()).to.deep.equal({ id: 'c' });
       expect(maxQ.pop()).to.deep.equal({ id: 'b' });
       expect(maxQ.isEmpty()).to.equal(true);
+    });
+  });
+
+  describe('iterator', () => {
+    it('allows iterating on queue elements', () => {
+      const testArr = [20, 30, 40, 50, 80, 90];
+      const qTest = PriorityQueue.fromArray(testArr.slice(), (a, b) => a - b);
+      expect([...qTest]).to.eql(testArr);
+      const qTest2 = PriorityQueue.fromArray(testArr.slice(), (a, b) => a - b);
+      const res = [];
+      for (const n of qTest2) {
+        res.push(n);
+      }
+      expect(res).to.eql(testArr);
     });
   });
 

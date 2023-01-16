@@ -114,6 +114,23 @@ class MinPriorityQueue {
   }
 
   /**
+   * Implements an iterable on the min priority queue
+   * @public
+   */
+  [Symbol.iterator]() {
+    let size = this.size();
+    return {
+      next: () => {
+        size -= 1;
+        return {
+          value: this.pop(),
+          done: size === -1
+        };
+      }
+    };
+  }
+
+  /**
    * Creates a priority queue from an existing array
    * @public
    * @static

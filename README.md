@@ -22,6 +22,7 @@ A heap-based implementation of priority queue in javascript with typescript supp
   * [size](#size)
   * [toArray](#toarray)
   * [clear](#clear)
+  * [Symbol.iterator](#symboliterator)
  * [Build](#build)
  * [License](#license)
 
@@ -253,7 +254,6 @@ console.log(bidsQueue.isEmpty()); // false
 ### size
 returns the number of elements in the queue.
 
-
 ```js
 console.log(carsQueue.size()); // 4
 console.log(numbersQueue.size()); // 4
@@ -262,7 +262,6 @@ console.log(bidsQueue.size()); // 4
 
 ### toArray
 returns a sorted array of elements by their priorities from highest to lowest in O(n*log(n)) runtime.
-
 
 ```js
 console.log(carsQueue.toArray());
@@ -286,6 +285,35 @@ console.log(bidsQueue.toArray());
   { id: 1, value: 1000 }
 ]
 */
+```
+
+### Symbol.iterator
+The queues implement a Symbol.iterator that makes them iterable on `pop`.
+```js
+console.log([...carsQueue]);
+/*
+[
+  { year: 2013, price: 25000 },
+  { year: 2013, price: 30000 },
+  { year: 2013, price: 35000 },
+  { year: 2010, price: 2000 }
+]
+*/
+console.log(carsQueue.size()); // 0
+
+console.log([...numbersQueue]); // [ 0, 3, 4, 5 ]
+console.log(numbersQueue.size()); // 0
+
+for (const bid of bidsQueue) {
+  console.log(bid);
+}
+/*
+{ id: 6, value: 4000 },
+{ id: 4, value: 1500 },
+{ id: 3, value: 1000 },
+{ id: 1, value: 1000 }
+*/
+console.log(bidsHeap.size()); // 0
 ```
 
 ### clear
