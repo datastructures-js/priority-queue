@@ -21,8 +21,8 @@ A heap-based implementation of priority queue in javascript with typescript supp
   * [isEmpty](#isEmpty)
   * [size](#size)
   * [toArray](#toarray)
-  * [clear](#clear)
   * [Symbol.iterator](#symboliterator)
+  * [clear](#clear)
  * [Build](#build)
  * [License](#license)
 
