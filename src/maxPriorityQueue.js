@@ -87,7 +87,7 @@ class MaxPriorityQueue {
    */
   remove(cb) {
     if (typeof cb !== 'function') {
-      throw new Error('MinPriorityQueue remove expects a callback');
+      throw new Error('MaxPriorityQueue remove expects a callback');
     }
 
     const removed = [];
