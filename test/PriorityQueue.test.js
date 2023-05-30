@@ -108,6 +108,18 @@ describe('PriorityQueue', () => {
     });
   });
 
+  describe('remove', () => {
+    it('remove elements that match a criteria', () => {
+      const testArr = [20, 30, 40, 50, 80, 90];
+      const qTest = PriorityQueue.fromArray(testArr.slice(), (a, b) => a - b);
+      const removed = qTest.remove((n) => [30, 50, 80].includes(n));
+      expect(removed.sort()).to.eql([30, 50, 80]);
+      expect(qTest.pop()).to.eql(20);
+      expect(qTest.pop()).to.eql(40);
+      expect(qTest.pop()).to.eql(90);
+    });
+  });
+
   describe('iterator', () => {
     it('allows iterating on queue elements', () => {
       const testArr = [20, 30, 40, 50, 80, 90];
