@@ -11,6 +11,7 @@ export class MaxPriorityQueue<T> {
   push(value: T): MaxPriorityQueue<T>;
   dequeue(): T;
   pop(): T;
+  remove(cb: (value: T) => boolean): T[];
   toArray(): T[];
   clear(): void;
   static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MaxPriorityQueue<T>;

@@ -18,6 +18,7 @@ A heap-based implementation of priority queue in javascript with typescript supp
   * [front](#front)
   * [back](#back)
   * [dequeue (pop)](#dequeue-pop)
+  * [remove](#remove)
   * [isEmpty](#isEmpty)
   * [size](#size)
   * [toArray](#toarray)
@@ -242,6 +243,17 @@ console.log(bidsQueue.pop()); // { id: 5, value: 12000 }
 console.log(bidsQueue.pop()); // { id: 7, value: 8000 }
 ```
 
+### remove
+removes all elements that meet a criteria in O(n*log(n)) runtime and return a list of the removed elements.
+
+```js
+carsQueue.remove((car) => car.price === 35000); // [{ year: 2013, price: 35000 }]
+
+numbersQueue.remove((n) => n === 4); // [4]
+
+bidsQueue.remove((bid) => bid.id === 3); // [{ id: 3, value: 1000 }]
+```
+
 ### isEmpty
 checks if the queue is empty.
 
@@ -255,9 +267,9 @@ console.log(bidsQueue.isEmpty()); // false
 returns the number of elements in the queue.
 
 ```js
-console.log(carsQueue.size()); // 4
-console.log(numbersQueue.size()); // 4
-console.log(bidsQueue.size()); // 4
+console.log(carsQueue.size()); // 3
+console.log(numbersQueue.size()); // 3
+console.log(bidsQueue.size()); // 3
 ```
 
 ### toArray
@@ -269,19 +281,17 @@ console.log(carsQueue.toArray());
 [
   { year: 2013, price: 25000 },
   { year: 2013, price: 30000 },
-  { year: 2013, price: 35000 },
   { year: 2010, price: 2000 }
 ]
 */
 
-console.log(numbersQueue.toArray()); // [ 0, 3, 4, 5 ]
+console.log(numbersQueue.toArray()); // [ 0, 3, 5 ]
 
 console.log(bidsQueue.toArray());
 /*
 [
   { id: 6, value: 4000 },
   { id: 4, value: 1500 },
-  { id: 3, value: 1000 },
   { id: 1, value: 1000 }
 ]
 */
@@ -295,13 +305,12 @@ console.log([...carsQueue]);
 [
   { year: 2013, price: 25000 },
   { year: 2013, price: 30000 },
-  { year: 2013, price: 35000 },
   { year: 2010, price: 2000 }
 ]
 */
 console.log(carsQueue.size()); // 0
 
-console.log([...numbersQueue]); // [ 0, 3, 4, 5 ]
+console.log([...numbersQueue]); // [ 0, 3, 5 ]
 console.log(numbersQueue.size()); // 0
 
 for (const bid of bidsQueue) {
@@ -310,7 +319,6 @@ for (const bid of bidsQueue) {
 /*
 { id: 6, value: 4000 },
 { id: 4, value: 1500 },
-{ id: 3, value: 1000 },
 { id: 1, value: 1000 }
 */
 console.log(bidsHeap.size()); // 0

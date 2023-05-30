@@ -80,6 +80,32 @@ class PriorityQueue {
   }
 
   /**
+   * Removes all elements that match a criteria in the callback
+   * @public
+   * @param {function} cb
+   * @returns {array}
+   */
+  remove(cb) {
+    if (typeof cb !== 'function') {
+      throw new Error('PriorityQueue remove expects a callback');
+    }
+
+    const removed = [];
+    const dequeued = [];
+    while (!this.isEmpty()) {
+      const popped = this.pop();
+      if (cb(popped)) {
+        removed.push(popped);
+      } else {
+        dequeued.push(popped);
+      }
+    }
+
+    dequeued.forEach((val) => this.push(val));
+    return removed;
+  }
+
+  /**
    * Returns the number of elements in the queue
    * @public
    * @returns {number}
