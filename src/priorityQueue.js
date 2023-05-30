@@ -80,7 +80,7 @@ class PriorityQueue {
   }
 
   /**
-   * Removes all elements that match the criteria in the callback
+   * Removes all elements that match a criteria in the callback
    * @public
    * @param {function} cb
    * @returns {array}
