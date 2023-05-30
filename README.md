@@ -18,6 +18,7 @@ A heap-based implementation of priority queue in javascript with typescript supp
   * [front](#front)
   * [back](#back)
   * [dequeue (pop)](#dequeue-pop)
+  * [remove](#remove)
   * [isEmpty](#isEmpty)
   * [size](#size)
   * [toArray](#toarray)
