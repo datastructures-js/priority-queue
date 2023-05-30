@@ -244,7 +244,7 @@ console.log(bidsQueue.pop()); // { id: 7, value: 8000 }
 ```
 
 ### remove
-removes all elements that meets a criteria in O(n*log(n)) runtime and return a list of the removed elements.
+removes all elements that meet a criteria in O(n*log(n)) runtime and return a list of the removed elements.
 
 ```js
 carsQueue.remove((car) => car.price === 35000); // [{ year: 2013, price: 35000 }]
