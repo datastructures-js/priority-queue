@@ -101,7 +101,7 @@ class MaxPriorityQueue {
       }
     }
 
-    dequeued.forEach((el) => this.push(el));
+    dequeued.forEach((val) => this.push(val));
     return removed;
   }
 
