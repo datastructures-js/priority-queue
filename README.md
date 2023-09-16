@@ -12,7 +12,7 @@ A heap-based implementation of priority queue in javascript with typescript supp
 - [v4](https://github.com/datastructures-js/priority-queue/tree/v4)
 - [v5](https://github.com/datastructures-js/priority-queue/tree/v5)
 
-# Contents (latest v6)
+# Contents (v6)
 * [Install](#install)
 * [require](#require)
 * [import](#import)
