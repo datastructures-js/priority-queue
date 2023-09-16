@@ -8,7 +8,7 @@ A heap-based implementation of priority queue in javascript with typescript supp
 <img src="https://user-images.githubusercontent.com/6517308/121813242-859a9700-cc6b-11eb-99c0-49e5bb63005b.jpg">
 
 
-#### NOTE: LeetCode is using previous versions of the lib. I have created two branch to maintain v4 & v5 for this purpose
+#### NOTE: LeetCode is using previous versions of the lib. I am maintaining v4 & v5 for this purpose
 - [v4](https://github.com/datastructures-js/priority-queue/tree/v4)
 - [v5](https://github.com/datastructures-js/priority-queue/tree/v5)
 
