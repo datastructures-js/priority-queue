@@ -269,5 +269,30 @@ describe('MaxPriorityQueue tests', () => {
         expect(employeesQueue.dequeue()).to.equal(null);
       });
     });
+
+    describe('MaxPriorityQueue.from(entries)', () => {
+      it('should create MaxPriorityQueue from [element, priority] pair array', () => {
+        const numValues = [
+          { id: 50 },
+          { id: 80 },
+          { id: 30 },
+          { id: 90 },
+          { id: 60 },
+          { id: 40 },
+          { id: 20 }
+        ];
+
+        const q = MaxPriorityQueue.from(numValues.map((element) => [element, element.id]));
+        expect(q.toArray()).to.deep.equal([
+          { priority: 90, element: { id: 90 } },
+          { priority: 80, element: { id: 80 } },
+          { priority: 60, element: { id: 60 } },
+          { priority: 50, element: { id: 50 } },
+          { priority: 40, element: { id: 40 } },
+          { priority: 30, element: { id: 30 } },
+          { priority: 20, element: { id: 20 } }
+        ]);
+      });
+    });
   });
 });
