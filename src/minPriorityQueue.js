@@ -16,6 +16,16 @@ class MinPriorityQueue extends PriorityQueue {
     super(options);
     this._heap = new MinHeap();
   }
+
+  static from(entries) {
+    const queue = new MinPriorityQueue();
+
+    entries.forEach(([element, priority]) => {
+      queue.enqueue(element, priority);
+    });
+
+    return queue;
+  }
 }
 
 module.exports = MinPriorityQueue;

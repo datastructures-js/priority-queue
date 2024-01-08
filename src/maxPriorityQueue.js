@@ -16,6 +16,16 @@ class MaxPriorityQueue extends PriorityQueue {
     super(options);
     this._heap = new MaxHeap();
   }
+
+  static from(entries) {
+    const queue = new MaxPriorityQueue();
+
+    entries.forEach(([element, priority]) => {
+      queue.enqueue(element, priority);
+    });
+
+    return queue;
+  }
 }
 
 module.exports = MaxPriorityQueue;

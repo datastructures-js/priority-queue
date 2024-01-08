@@ -12,6 +12,7 @@ A performant priority queue implementation using a Heap data structure.
   * [require](#require)
   * [import](#import)
   * [Construction](#construction)
+  * [.from](#fromentries)
   * [.enqueue(element[, priority])](#enqueueelement-priority)
   * [.front()](#front)
   * [.back()](#back)
@@ -90,6 +91,30 @@ biddersQueue.enqueue({ name: 'bidder y', value: 1000 }); // lowest priority
 biddersQueue.enqueue({ name: 'bidder w', value: 2500 });
 biddersQueue.enqueue({ name: 'bidder z', value: 3500 }); // highest priority
 biddersQueue.enqueue({ name: 'bidder x', value: 3000 });
+```
+
+### from(entries)
+
+Creates a priority queue from an array of element-priority pairs.
+
+```js
+MaxPriorityQueue.from([
+  ['Alice', 19],
+  ['Bob', 18],
+  ['Charles', 20]
+])
+// { priority: 20, element: 'Charles' }, 
+// { priority: 19, element: 'Alice' }, 
+// { priority: 18, element: 'Bob' }
+
+MinPriorityQueue.from([
+  ['Alice', 19],
+  ['Bob', 18],
+  ['Charles', 20]
+])
+// { priority: 18, element: 'Bob' },
+// { priority: 19, element: 'Alice' }, 
+// { priority: 20, element: 'Charles' },
 ```
 
 ### .front()
