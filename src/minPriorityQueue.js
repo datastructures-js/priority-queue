@@ -21,10 +21,10 @@ class MinPriorityQueue extends PriorityQueue {
   static from(entries) {
     const queue = new MinPriorityQueue();
 
-    for (const [element, priority] of entries) {
-      queue.enqueue(element, priority)
-    }
-    
+    entries.forEach(([element, priority]) => {
+      queue.enqueue(element, priority);
+    });
+
     return queue;
   }
 }
