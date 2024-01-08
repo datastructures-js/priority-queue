@@ -8,7 +8,7 @@ const { Heap, MinHeap } = require('@datastructures-js/heap');
 const getMinCompare = (getCompareValue) => (a, b) => {
   const aVal = typeof getCompareValue === 'function' ? getCompareValue(a) : a;
   const bVal = typeof getCompareValue === 'function' ? getCompareValue(b) : b;
-  return aVal < bVal ? -1 : 1;
+  return aVal <= bVal ? -1 : 1;
 };
 
 /**
