@@ -14,6 +14,7 @@ A performant priority queue implementation using a Heap data structure.
 * [import](#import)
 * [API](#api)
   * [constructor](#constructor)
+  * [.from](#fromentries)
   * [.enqueue](#enqueue)
   * [.front](#front)
   * [.back](#back)
@@ -127,6 +128,30 @@ interface Bid {
 const biddersQueue = new MaxPriorityQueue<Bid>({
   priority: (bid: Bid) => bid.value
 });
+```
+
+### from(entries)
+
+Creates a priority queue from an array of element-priority pairs.
+
+```js
+MaxPriorityQueue.from([
+  ['Alice', 19],
+  ['Bob', 18],
+  ['Charles', 20]
+])
+// { priority: 20, element: 'Charles' }, 
+// { priority: 19, element: 'Alice' }, 
+// { priority: 18, element: 'Bob' }
+
+MinPriorityQueue.from([
+  ['Alice', 19],
+  ['Bob', 18],
+  ['Charles', 20]
+])
+// { priority: 18, element: 'Bob' },
+// { priority: 19, element: 'Alice' }, 
+// { priority: 20, element: 'Charles' },
 ```
 
 ### .enqueue
