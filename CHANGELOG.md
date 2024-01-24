@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ## [6.3.1] - 2024-01-23
-### Added
+### Fixed
 - upgrade @datastructures-js/heap to latest
 
 ## [6.3.0] - 2023-05-30
