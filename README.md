@@ -250,7 +250,7 @@ console.log(bidsQueue.pop()); // { id: 7, value: 8000 }
 ```
 
 ### contains
-checks if the queue contains an element that meet a criteria in O(log(n)) runtime.
+checks if the queue contains an element that meet a criteria in O(n*log(n)) runtime.
 
 ```js
 carsQueue.contains((car) => car.price === 50000); // true
