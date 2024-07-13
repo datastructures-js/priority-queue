@@ -12,6 +12,7 @@ export class PriorityQueue<T> {
   dequeue(): T;
   pop(): T;
   remove(cb: (value: T) => boolean): T[];
+  contains(cb: (value: T) => boolean): boolean;
   toArray(): T[];
   clear(): void;
   static fromArray<T>(values: T[], compare: ICompare<T>): PriorityQueue<T>;

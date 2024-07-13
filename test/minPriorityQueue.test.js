@@ -103,6 +103,15 @@ describe('MinPriorityQueue', () => {
       });
     });
 
+    describe('contains', () => {
+      it('checks if the queue contains an element', () => {
+        const testArr = [90, 80, 50, 40, 30, 20];
+        const qTest = MinPriorityQueue.fromArray(testArr.slice());
+        expect(qTest.contains((n) => n === 50)).to.equal(true);
+        expect(qTest.contains((n) => n === 100)).to.equal(false);
+      });
+    });
+  
     describe('remove', () => {
       it('remove elements that match a criteria', () => {
         const testArr = [20, 30, 40, 50, 80, 90];
