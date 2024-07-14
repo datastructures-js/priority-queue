@@ -14,7 +14,8 @@ class MinPriorityQueue extends PriorityQueue {
   constructor(options) {
     super(options);
     if (!this._compare) {
-      this._heap = new MinHeap();
+      const from = options && options.from || [];
+      this._heap = new MinHeap(from);
     }
   }
 
