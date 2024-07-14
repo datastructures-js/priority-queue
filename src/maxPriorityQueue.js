@@ -106,6 +106,32 @@ class MaxPriorityQueue {
   }
 
   /**
+   * Checks if the queue contains an element that matches a criteria
+   * @public
+   * @param {function} cb
+   * @returns {boolean}
+   */
+  contains(cb) {
+    if (typeof cb !== 'function') {
+      throw new Error('MaxPriorityQueue contains expects a callback');
+    }
+
+    let found = false;
+    const dequeued = [];
+    while (!this.isEmpty()) {
+      const popped = this.pop();
+      dequeued.push(popped);
+      if (cb(popped)) {
+        found = true;
+        break;
+      }
+    }
+
+    dequeued.forEach((val) => this.push(val));
+    return found;
+  }
+
+  /**
    * Returns the number of elements in the queue
    * @public
    * @returns {number}

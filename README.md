@@ -23,6 +23,7 @@ A heap-based implementation of priority queue in javascript with typescript supp
   * [front](#front)
   * [back](#back)
   * [dequeue (pop)](#dequeue-pop)
+  * [contains](#contains)
   * [remove](#remove)
   * [isEmpty](#isEmpty)
   * [size](#size)
@@ -246,6 +247,16 @@ console.log(numbersQueue.dequeue()); // -1
 console.log(bidsQueue.pop()); // { id: 2, value: 20000 }
 console.log(bidsQueue.pop()); // { id: 5, value: 12000 }
 console.log(bidsQueue.pop()); // { id: 7, value: 8000 }
+```
+
+### contains
+checks if the queue contains an element that meet a criteria in O(n*log(n)) runtime.
+
+```js
+carsQueue.contains((car) => car.price === 50000); // true
+carsQueue.contains((car) => car.price === 200000); // false
+numbersQueue.contains((n) => n === 4); // true
+numbersQueue.contains((n) => n === 10); // false
 ```
 
 ### remove

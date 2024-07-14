@@ -108,6 +108,15 @@ describe('PriorityQueue', () => {
     });
   });
 
+  describe('contains', () => {
+    it('checks if the queue contains an element', () => {
+      const maxQ = new PriorityQueue(charComparator);
+      charValues.forEach((value) => maxQ.push(value));
+      expect(maxQ.contains((c) => c.id === 'z')).to.equal(true);
+      expect(maxQ.contains((c) => c.id === 'y')).to.equal(false);
+    });
+  });
+
   describe('remove', () => {
     it('remove elements that match a criteria', () => {
       const testArr = [20, 30, 40, 50, 80, 90];
