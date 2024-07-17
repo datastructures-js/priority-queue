@@ -8,7 +8,7 @@ A performant priority queue implementation using a Heap data structure.
 
 <img src="https://user-images.githubusercontent.com/6517308/121813242-859a9700-cc6b-11eb-99c0-49e5bb63005b.jpg">
 
-# Contents
+# Contents (v5)
 * [Install](#install)
 * [require](#require)
 * [import](#import)
@@ -63,7 +63,7 @@ import {
 
 ### constructor
 #### PriorityQueue
-The constructor requires a compare callback to compare between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap.
+The constructor requires a compare callback to compare between queue elements. compare works similar to javascript sort callback: returning a number less or equal 0, means do not swap. constructor also accepts a prop `from` as an initial array of elements that will be used without adding extra space, and heapified in case is not valid heap.
 
 ##### JS
 ```js
@@ -76,6 +76,11 @@ const employeesQueue = new PriorityQueue({
     // salaries are the same, compare rank
     return e1.rank < e2.rank ? 1 : -1;
   }
+});
+
+const queueFromExistingList = new PriorityQueue({
+  compare: (a, b) => a.id > b.id ? -1 : 1,
+  from: [{ id: 3 }, { id: 2 }, { id: 7 }, { id: 5 }],
 });
 ```
 
@@ -97,6 +102,11 @@ const employeesQueue = new PriorityQueue<Employee>({
     // salaries are the same, compare rank
     return e1.rank < e2.rank ? 1 : -1;
   }
+});
+
+const queueFromExistingList = new PriorityQueue<{ id: number }>({
+  compare: (a: { id: number; }, b: { id: number; }) => a.id > b.id ? -1 : 1,
+  from: [{ id: 3 }, { id: 2 }, { id: 7 }, { id: 5 }],
 });
 ```
 
