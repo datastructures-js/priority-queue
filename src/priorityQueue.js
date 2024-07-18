@@ -15,13 +15,16 @@ class PriorityQueue {
    * @params {object} [options]
    */
   constructor(options = {}) {
-    const { priority, compare } = options;
+    const { priority, compare, from } = options;
     if (compare) {
       if (typeof compare !== 'function') {
         throw new Error('.constructor expects a valid compare function');
       }
       this._compare = compare;
-      this._heap = new CustomHeap(this._compare);
+      this._heap = new CustomHeap(this._compare, from || []);
+      if (from && from.length > 0 && !this._heap.isValid()) {
+        this._heap.fix();
+      }
     } else {
       if (priority !== undefined && typeof priority !== 'function') {
         throw new Error('.constructor expects a valid priority function');
