@@ -242,7 +242,7 @@ returns the element with highest priority in the queue.
 </table>
 
 ```js
-console.log(employeesQueue.dequeue()); // { name: 'employee 3', salary: 4000, rank: 4 }
+console.log(employeesQueue.front()); // { name: 'employee 3', salary: 4000, rank: 4 }
 ```
 
 #### MinPriorityQueue/MaxPriorityQueue
