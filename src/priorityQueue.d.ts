@@ -8,14 +8,22 @@ export interface PriorityQueueItem<T> {
   element: T;
 }
 
-export abstract class PriorityQueue<T> {
-  constructor(options?: PriorityQueueOptions<T>);
+interface PriorityQueue<E, T = E> {
   size(): number;
   isEmpty(): boolean;
-  front(): PriorityQueueItem<T> | null;
-  back(): PriorityQueueItem<T> | null;
-  enqueue(element: T, priority?: number): PriorityQueue<T>;
-  dequeue(): PriorityQueueItem<T> | null;
-  toArray(): PriorityQueueItem<T>[];
+  front(): T | null;
+  back(): T | null;
+  enqueue(element: E, priority?: number): PriorityQueue<E, T>;
+  dequeue(): T | null;
+  toArray(): T[];
   clear(): void;
 }
+
+interface PriorityQueueConstructor {
+  new <T>(
+    options: PriorityQueueOptions<T> &
+      Required<Pick<PriorityQueueOptions<T>, "compare">>
+  ): PriorityQueue<T>;
+}
+
+declare var PriorityQueue: PriorityQueueConstructor;
