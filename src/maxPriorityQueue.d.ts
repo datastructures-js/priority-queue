@@ -1,7 +1,11 @@
 import { MaxHeap, IGetCompareValue } from '@datastructures-js/heap';
 
+interface LegacyOptions {
+  compare: (a: any, b: any) => number;
+}
+
 export class MaxPriorityQueue<T> implements Iterable<T> {
-  constructor(getCompareValue?: IGetCompareValue<T>, heap?: MaxHeap<T>);
+  constructor(options?: IGetCompareValue<T> | LegacyOptions, heap?: MaxHeap<T>);
   [Symbol.iterator](): Iterator<T, any, undefined>;
   size(): number;
   isEmpty(): boolean;
@@ -16,4 +20,5 @@ export class MaxPriorityQueue<T> implements Iterable<T> {
   toArray(): T[];
   clear(): void;
   static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MaxPriorityQueue<T>;
+  static from<T>(entries: [T, number][]): MaxPriorityQueue<T>;
 }

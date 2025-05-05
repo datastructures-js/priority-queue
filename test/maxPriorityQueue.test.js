@@ -96,9 +96,9 @@ describe('MaxPriorityQueue', () => {
     describe('iterator', () => {
       it('allows iterating on queue elements', () => {
         const testArr = [90, 80, 50, 40, 30, 20];
-        const qTest = MaxPriorityQueue.fromArray(testArr.slice());
+        const qTest = MaxPriorityQueue.from(testArr.slice());
         expect([...qTest]).to.eql(testArr);
-        const qTest2 = MaxPriorityQueue.fromArray(testArr.slice());
+        const qTest2 = MaxPriorityQueue.from(testArr.slice());
         const res = [];
         for (const n of qTest2) {
           res.push(n);
@@ -110,7 +110,7 @@ describe('MaxPriorityQueue', () => {
     describe('contains', () => {
       it('checks if the queue contains an element', () => {
         const testArr = [90, 80, 50, 40, 30, 20];
-        const qTest = MaxPriorityQueue.fromArray(testArr.slice());
+        const qTest = MaxPriorityQueue.from(testArr.slice());
         expect(qTest.contains((n) => n === 50)).to.equal(true);
         expect(qTest.contains((n) => n === 100)).to.equal(false);
       });
@@ -119,7 +119,7 @@ describe('MaxPriorityQueue', () => {
     describe('remove', () => {
       it('remove elements that match a criteria', () => {
         const testArr = [20, 30, 40, 50, 80, 90];
-        const qTest = MaxPriorityQueue.fromArray(testArr.slice());
+        const qTest = MaxPriorityQueue.from(testArr.slice());
         const removed = qTest.remove((n) => [30, 50, 80].includes(n));
         expect(removed.sort()).to.eql([30, 50, 80]);
         expect(qTest.pop()).to.eql(90);

@@ -1,7 +1,11 @@
 import { MinHeap, IGetCompareValue } from '@datastructures-js/heap';
 
+interface LegacyOptions {
+  compare: (a: any, b: any) => number;
+}
+
 export class MinPriorityQueue<T> implements Iterable<T> {
-  constructor(getCompareValue?: IGetCompareValue<T>, heap?: MinHeap<T>);
+  constructor(options?: IGetCompareValue<T> | LegacyOptions, heap?: MinHeap<T>);
   [Symbol.iterator](): Iterator<T, any, undefined>;
   size(): number;
   isEmpty(): boolean;
@@ -16,4 +20,5 @@ export class MinPriorityQueue<T> implements Iterable<T> {
   toArray(): T[];
   clear(): void;
   static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MinPriorityQueue<T>;
+  static from<T>(entries: [T, number][]): MinPriorityQueue<T>;
 }

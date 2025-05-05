@@ -5,21 +5,24 @@
 
 const { Heap, MinHeap } = require('@datastructures-js/heap');
 
-const getMinCompare = (getCompareValue) => (a, b) => {
-  const aVal = typeof getCompareValue === 'function' ? getCompareValue(a) : a;
-  const bVal = typeof getCompareValue === 'function' ? getCompareValue(b) : b;
-  return aVal <= bVal ? -1 : 1;
-};
-
 /**
  * @class MinPriorityQueue
  */
 class MinPriorityQueue {
-  constructor(getCompareValue, _heap) {
-    if (getCompareValue && typeof getCompareValue !== 'function') {
-      throw new Error('MinPriorityQueue constructor requires a callback for object values');
+  constructor(options, _heap) {
+    // Handle legacy options format ({ compare: fn })
+    if (options && typeof options === 'object' && typeof options.compare === 'function') {
+      this._getCompareValue = null;
+      const compareFunction = (a, b) => options.compare(a, b) <= 0 ? -1 : 1;
+      this._heap = _heap || new Heap(compareFunction);
+    } else {
+      // Current format (direct compare function)
+      const getCompareValue = options;
+      if (getCompareValue && typeof getCompareValue !== 'function') {
+        throw new Error('MinPriorityQueue constructor requires a callback for object values');
+      }
+      this._heap = _heap || new MinHeap(getCompareValue);
     }
-    this._heap = _heap || new MinHeap(getCompareValue);
   }
 
   /**
@@ -183,17 +186,28 @@ class MinPriorityQueue {
   }
 
   /**
-   * Creates a priority queue from an existing array
+   * Creates a priority queue from existing entries
    * @public
    * @static
    * @returns {MinPriorityQueue}
    */
-  static fromArray(values, getCompareValue) {
-    const heap = new Heap(getMinCompare(getCompareValue), values);
-    return new MinPriorityQueue(
-      getCompareValue,
-      new MinHeap(getCompareValue, heap).fix()
-    );
+  static from(entries) {
+    const queue = new MinPriorityQueue();
+
+    if (Array.isArray(entries)) {
+      entries.forEach((entry) => {
+        if (Array.isArray(entry) && entry.length === 2) {
+          // Legacy format: [[element, priority], ...]
+          const [element, priority] = entry;
+          queue.enqueue({ element, priority });
+        } else {
+          // New format: just add the value
+          queue.enqueue(entry);
+        }
+      });
+    }
+
+    return queue;
   }
 }
 
