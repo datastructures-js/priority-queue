@@ -1,6 +1,6 @@
 import { ICompare } from '@datastructures-js/heap';
 
-export class PriorityQueue<T> {
+export class PriorityQueue<T> implements Iterable<T> {
   constructor(compare: ICompare<T>, values?: T[]);
   [Symbol.iterator](): Iterator<T, any, undefined>;
   size(): number;
