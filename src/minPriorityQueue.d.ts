@@ -1,6 +1,6 @@
 import { MinHeap, IGetCompareValue } from '@datastructures-js/heap';
 
-export class MinPriorityQueue<T> {
+export class MinPriorityQueue<T> implements Iterable<T> {
   constructor(getCompareValue?: IGetCompareValue<T>, heap?: MinHeap<T>);
   [Symbol.iterator](): Iterator<T, any, undefined>;
   size(): number;
