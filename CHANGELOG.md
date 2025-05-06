@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Added backward compatibility with v5's compare function format for MinPriorityQueue and MaxPriorityQueue
+- Fixed iterator type.
 
 ## [6.3.1] - 2024-01-23
 ### Fixed
