@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [6.3.2] - 2024-01-05
+## [6.3.3] - 2025-05-01
 
 ### Fixed
 - Added backward compatibility with v5's compare function format for MinPriorityQueue and MaxPriorityQueue
