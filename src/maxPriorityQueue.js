@@ -5,6 +5,12 @@
 
 const { Heap, MaxHeap } = require('@datastructures-js/heap');
 
+const getMaxCompare = (getCompareValue) => (a, b) => {
+  const aVal = typeof getCompareValue === 'function' ? getCompareValue(a) : a;
+  const bVal = typeof getCompareValue === 'function' ? getCompareValue(b) : b;
+  return aVal < bVal ? 1 : -1;
+};
+
 /**
  * @class MaxPriorityQueue
  */
@@ -186,28 +192,17 @@ class MaxPriorityQueue {
   }
 
   /**
-   * Creates a priority queue from existing entries
+   * Creates a priority queue from an existing array
    * @public
    * @static
    * @returns {MaxPriorityQueue}
    */
-  static from(entries) {
-    const queue = new MaxPriorityQueue();
-
-    if (Array.isArray(entries)) {
-      entries.forEach((entry) => {
-        if (Array.isArray(entry) && entry.length === 2) {
-          // Legacy format: [[element, priority], ...]
-          const [element, priority] = entry;
-          queue.enqueue({ element, priority });
-        } else {
-          // New format: just add the value
-          queue.enqueue(entry);
-        }
-      });
-    }
-
-    return queue;
+  static fromArray(values, getCompareValue) {
+    const heap = new Heap(getMaxCompare(getCompareValue), values);
+    return new MaxPriorityQueue(
+      getCompareValue,
+      new MaxHeap(getCompareValue, heap).fix()
+    );
   }
 }
 

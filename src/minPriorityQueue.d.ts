@@ -20,5 +20,4 @@ export class MinPriorityQueue<T> implements Iterable<T> {
   toArray(): T[];
   clear(): void;
   static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MinPriorityQueue<T>;
-  static from<T>(entries: [T, number][]): MinPriorityQueue<T>;
 }

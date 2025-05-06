@@ -20,5 +20,4 @@ export class MaxPriorityQueue<T> implements Iterable<T> {
   toArray(): T[];
   clear(): void;
   static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MaxPriorityQueue<T>;
-  static from<T>(entries: [T, number][]): MaxPriorityQueue<T>;
 }
