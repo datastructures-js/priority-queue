@@ -1,6 +1,6 @@
 import { MinHeap, IGetCompareValue } from '@datastructures-js/heap';
 
-interface LegacyOptions {
+export interface LegacyOptions {
   compare: (a: any, b: any) => number;
 }
 
