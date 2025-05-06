@@ -128,4 +128,20 @@ describe('MaxPriorityQueue', () => {
       });
     });
   });
+
+  describe('legacy compare function', () => {
+    const values = [50, 80, 30, 90, 60, 40, 20];
+    const maxQ = new MaxPriorityQueue({ compare: (a, b) => a - b });
+
+    it('enqueue and dequeue with legacy compare', () => {
+      values.forEach((value) => maxQ.enqueue(value));
+      expect(maxQ.dequeue()).to.equal(90);
+      expect(maxQ.dequeue()).to.equal(80);
+      expect(maxQ.dequeue()).to.equal(60);
+      expect(maxQ.dequeue()).to.equal(50);
+      expect(maxQ.dequeue()).to.equal(40);
+      expect(maxQ.dequeue()).to.equal(30);
+      expect(maxQ.dequeue()).to.equal(20);
+    });
+  });
 });

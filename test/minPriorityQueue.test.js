@@ -125,4 +125,20 @@ describe('MinPriorityQueue', () => {
     });
 
   });
+
+  describe('legacy compare function', () => {
+    const values = [50, 80, 30, 90, 60, 40, 20];
+    const minQ = new MinPriorityQueue({ compare: (a, b) => a - b });
+
+    it('enqueue and dequeue with legacy compare', () => {
+      values.forEach((value) => minQ.enqueue(value));
+      expect(minQ.dequeue()).to.equal(20);
+      expect(minQ.dequeue()).to.equal(30);
+      expect(minQ.dequeue()).to.equal(40);
+      expect(minQ.dequeue()).to.equal(50);
+      expect(minQ.dequeue()).to.equal(60);
+      expect(minQ.dequeue()).to.equal(80);
+      expect(minQ.dequeue()).to.equal(90);
+    });
+  });
 });
