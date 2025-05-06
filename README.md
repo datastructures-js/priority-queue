@@ -8,7 +8,7 @@ A heap-based implementation of priority queue in javascript with typescript supp
 <img src="https://user-images.githubusercontent.com/6517308/121813242-859a9700-cc6b-11eb-99c0-49e5bb63005b.jpg">
 
 
-# Contents (v6)
+# Contents
 * [Install](#install)
 * [require](#require)
 * [import](#import)
