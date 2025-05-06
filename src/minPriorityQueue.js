@@ -15,11 +15,20 @@ const getMinCompare = (getCompareValue) => (a, b) => {
  * @class MinPriorityQueue
  */
 class MinPriorityQueue {
-  constructor(getCompareValue, _heap) {
-    if (getCompareValue && typeof getCompareValue !== 'function') {
-      throw new Error('MinPriorityQueue constructor requires a callback for object values');
+  constructor(options, _heap) {
+    // Handle legacy options format ({ compare: fn })
+    if (options && typeof options === 'object' && typeof options.compare === 'function') {
+      this._getCompareValue = null;
+      const compareFunction = (a, b) => options.compare(a, b) <= 0 ? -1 : 1;
+      this._heap = _heap || new Heap(compareFunction);
+    } else {
+      // Current format (direct compare function)
+      const getCompareValue = options;
+      if (getCompareValue && typeof getCompareValue !== 'function') {
+        throw new Error('MinPriorityQueue constructor requires a callback for object values');
+      }
+      this._heap = _heap || new MinHeap(getCompareValue);
     }
-    this._heap = _heap || new MinHeap(getCompareValue);
   }
 
   /**

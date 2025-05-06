@@ -4,6 +4,7 @@
     "comma-dangle": ["error", {
       "functions": "ignore"
     }],
+    "no-confusing-arrow": 0,
     "no-underscore-dangle": [
       "error",
       { "allowAfterThis": true }
