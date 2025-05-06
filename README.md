@@ -123,6 +123,19 @@ const numbersQueue = new MinPriorityQueue();
 const bidsQueue = new MaxPriorityQueue((bid) => bid.value);
 ```
 
+##### Legacy Compare Function (v5 compatibility)
+For backward compatibility with v5, you can also pass a compare function in an options object:
+
+```js
+// MinPriorityQueue with legacy compare
+const minQueue = new MinPriorityQueue({ compare: (a, b) => a - b });
+
+// MaxPriorityQueue with legacy compare
+const maxQueue = new MaxPriorityQueue({ compare: (a, b) => a - b });
+```
+
+This format is supported for backward compatibility with v5 of the library.
+
 ### fromArray
 If the queue is being created from an existing array, and there is no desire to use an extra O(n) space, this static function can turn an array into a priority queue in O(n) runtime.
 
