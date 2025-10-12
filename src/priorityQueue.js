@@ -12,15 +12,13 @@ class PriorityQueue {
   /**
    * Creates a priority queue
    * @params {function} compare
+   * @params {array} [values]
    */
-  constructor(compare, _values) {
+  constructor(compare, values) {
     if (typeof compare !== 'function') {
       throw new Error('PriorityQueue constructor expects a compare function');
     }
-    this._heap = new Heap(compare, _values);
-    if (_values) {
-      this._heap.fix();
-    }
+    this._heap = new Heap(compare, values);
   }
 
   /**
@@ -48,7 +46,8 @@ class PriorityQueue {
    * @returns {PriorityQueue}
    */
   enqueue(value) {
-    return this._heap.insert(value);
+    this._heap.insert(value);
+    return this;
   }
 
   /**
