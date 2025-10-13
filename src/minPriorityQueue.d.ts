@@ -12,5 +12,5 @@ export interface MinPriorityQueue<T> extends PriorityQueue<T> {
 
 export const MinPriorityQueue: {
   new <T>(options?: IGetCompareValue<T> | LegacyOptions<T> | null | undefined, values?: T[]): MinPriorityQueue<T>;
-  fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T> | null | undefined): MinPriorityQueue<T>;
+  fromArray<T>(values: T[], options?: IGetCompareValue<T> | LegacyOptions<T> | null | undefined): MinPriorityQueue<T>;
 };

@@ -9,5 +9,5 @@ export interface MaxPriorityQueue<T> extends PriorityQueue<T> {
 
 export const MaxPriorityQueue: {
   new <T>(options?: IGetCompareValue<T> | LegacyOptions<T> | null | undefined, values?: T[]): MaxPriorityQueue<T>;
-  fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T> | null | undefined): MaxPriorityQueue<T>;
+  fromArray<T>(values: T[], options?: IGetCompareValue<T> | LegacyOptions<T> | null | undefined): MaxPriorityQueue<T>;
 };

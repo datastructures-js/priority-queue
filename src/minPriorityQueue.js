@@ -59,8 +59,8 @@ class MinPriorityQueue extends PriorityQueue {
  * @static
  * @returns {MinPriorityQueue}
  */
-MinPriorityQueue.fromArray = function fromArray(values, getCompareValue) {
-  return new MinPriorityQueue(getCompareValue, values);
+MinPriorityQueue.fromArray = function fromArray(values, options) {
+  return new MinPriorityQueue(options, values);
 };
 
 exports.MinPriorityQueue = MinPriorityQueue;

@@ -59,8 +59,8 @@ class MaxPriorityQueue extends PriorityQueue {
  * @static
  * @returns {MaxPriorityQueue}
  */
-MaxPriorityQueue.fromArray = function fromArray(values, getCompareValue) {
-  return new MaxPriorityQueue(getCompareValue, values);
+MaxPriorityQueue.fromArray = function fromArray(values, options) {
+  return new MaxPriorityQueue(options, values);
 };
 
 exports.MaxPriorityQueue = MaxPriorityQueue;
