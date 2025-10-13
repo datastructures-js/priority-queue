@@ -51,7 +51,6 @@ class MaxPriorityQueue extends PriorityQueue {
   push(value) {
     return this.enqueue(value);
   }
-
 }
 
 /**
@@ -60,7 +59,7 @@ class MaxPriorityQueue extends PriorityQueue {
  * @static
  * @returns {MaxPriorityQueue}
  */
-MaxPriorityQueue.fromArray = function(values, getCompareValue) {
+MaxPriorityQueue.fromArray = function fromArray(values, getCompareValue) {
   return new MaxPriorityQueue(getCompareValue, values);
 };
 

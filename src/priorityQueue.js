@@ -181,7 +181,6 @@ class PriorityQueue {
       }
     };
   }
-
 }
 
 /**
@@ -190,7 +189,7 @@ class PriorityQueue {
  * @static
  * @returns {PriorityQueue}
  */
-PriorityQueue.fromArray = function(values, compare) {
+PriorityQueue.fromArray = function fromArray(values, compare) {
   return new PriorityQueue(compare, values);
 };
 

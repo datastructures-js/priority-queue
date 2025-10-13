@@ -51,7 +51,6 @@ class MinPriorityQueue extends PriorityQueue {
   push(value) {
     return this.enqueue(value);
   }
-
 }
 
 /**
@@ -60,7 +59,7 @@ class MinPriorityQueue extends PriorityQueue {
  * @static
  * @returns {MinPriorityQueue}
  */
-MinPriorityQueue.fromArray = function(values, getCompareValue) {
+MinPriorityQueue.fromArray = function fromArray(values, getCompareValue) {
   return new MinPriorityQueue(getCompareValue, values);
 };
 
