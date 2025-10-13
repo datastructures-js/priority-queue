@@ -143,6 +143,45 @@ describe('PriorityQueue', () => {
     });
   });
 
+  describe('constructor with initial values', () => {
+    it('should properly initialize with values (min priority)', () => {
+      const q = new PriorityQueue((a, b) => a - b, [3, 1, 4]);
+      expect(q.front()).to.equal(1);
+      expect(q.back()).to.equal(4);
+      expect(q.size()).to.equal(3);
+    });
+
+    it('should properly initialize with values (max priority)', () => {
+      const q = new PriorityQueue((a, b) => b - a, [3, 1, 4]);
+      expect(q.front()).to.equal(4);
+      expect(q.back()).to.equal(1);
+      expect(q.size()).to.equal(3);
+    });
+
+    it('should maintain priority ordering after enqueue', () => {
+      const q = new PriorityQueue((a, b) => a - b, [3, 1, 4]);
+      q.enqueue(2);
+      expect(q.toArray()).to.eql([1, 2, 3, 4]);
+      expect(q.front()).to.equal(1);
+    });
+
+    it('should handle enqueue of highest priority element correctly', () => {
+      const q = new PriorityQueue((a, b) => b - a, [3, 1, 4]);
+      q.enqueue(5);
+      expect(q.front()).to.equal(5);
+      expect(q.toArray()).to.eql([5, 4, 3, 1]);
+    });
+
+    it('should work with object values and initial array', () => {
+      const values = [{ id: 3 }, { id: 1 }, { id: 4 }];
+      const q = new PriorityQueue((a, b) => a.id - b.id, values);
+      expect(q.front()).to.eql({ id: 1 });
+      expect(q.back()).to.eql({ id: 4 });
+      q.enqueue({ id: 2 });
+      expect(q.toArray()).to.eql([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
+    });
+  });
+
   describe('fromArray', () => {
     it('min PriorityQueue from array', () => {
       const q = PriorityQueue.fromArray(numValues, numComparator);

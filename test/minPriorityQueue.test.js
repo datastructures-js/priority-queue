@@ -126,6 +126,38 @@ describe('MinPriorityQueue', () => {
 
   });
 
+  describe('constructor with initial values', () => {
+    it('should properly initialize with primitive values', () => {
+      const q = new MinPriorityQueue(null, [3, 1, 4]);
+      expect(q.front()).to.equal(1);
+      expect(q.back()).to.equal(4);
+      expect(q.size()).to.equal(3);
+    });
+
+    it('should maintain priority ordering after enqueue', () => {
+      const q = new MinPriorityQueue(null, [3, 1, 4]);
+      q.enqueue(2);
+      expect(q.toArray()).to.eql([1, 2, 3, 4]);
+      expect(q.front()).to.equal(1);
+    });
+
+    it('should handle enqueue of smallest element correctly', () => {
+      const q = new MinPriorityQueue(null, [3, 1, 4]);
+      q.enqueue(0);
+      expect(q.front()).to.equal(0);
+      expect(q.toArray()).to.eql([0, 1, 3, 4]);
+    });
+
+    it('should work with object values and compare function', () => {
+      const values = [{ id: 3 }, { id: 1 }, { id: 4 }];
+      const q = new MinPriorityQueue((obj) => obj.id, values);
+      expect(q.front()).to.eql({ id: 1 });
+      expect(q.back()).to.eql({ id: 4 });
+      q.enqueue({ id: 2 });
+      expect(q.toArray()).to.eql([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
+    });
+  });
+
   describe('legacy compare function', () => {
     const values = [50, 80, 30, 90, 60, 40, 20];
     const minQ = new MinPriorityQueue({ compare: (a, b) => a - b });

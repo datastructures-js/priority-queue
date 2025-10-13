@@ -129,9 +129,41 @@ describe('MaxPriorityQueue', () => {
     });
   });
 
+  describe('constructor with initial values', () => {
+    it('should properly initialize with primitive values', () => {
+      const q = new MaxPriorityQueue(null, [3, 1, 4]);
+      expect(q.front()).to.equal(4);
+      expect(q.back()).to.equal(1);
+      expect(q.size()).to.equal(3);
+    });
+
+    it('should maintain priority ordering after enqueue', () => {
+      const q = new MaxPriorityQueue(null, [3, 1, 4]);
+      q.enqueue(2);
+      expect(q.toArray()).to.eql([4, 3, 2, 1]);
+      expect(q.front()).to.equal(4);
+    });
+
+    it('should handle enqueue of largest element correctly', () => {
+      const q = new MaxPriorityQueue(null, [3, 1, 4]);
+      q.enqueue(5);
+      expect(q.front()).to.equal(5);
+      expect(q.toArray()).to.eql([5, 4, 3, 1]);
+    });
+
+    it('should work with object values and compare function', () => {
+      const values = [{ id: 3 }, { id: 1 }, { id: 4 }];
+      const q = new MaxPriorityQueue((obj) => obj.id, values);
+      expect(q.front()).to.eql({ id: 4 });
+      expect(q.back()).to.eql({ id: 1 });
+      q.enqueue({ id: 5 });
+      expect(q.toArray()).to.eql([{ id: 5 }, { id: 4 }, { id: 3 }, { id: 1 }]);
+    });
+  });
+
   describe('legacy compare function', () => {
     const values = [50, 80, 30, 90, 60, 40, 20];
-    const maxQ = new MaxPriorityQueue({ compare: (a, b) => a - b });
+    const maxQ = new MaxPriorityQueue({ compare: (a, b) => b - a });
 
     it('enqueue and dequeue with legacy compare', () => {
       values.forEach((value) => maxQ.enqueue(value));
