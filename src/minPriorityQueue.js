@@ -52,15 +52,16 @@ class MinPriorityQueue extends PriorityQueue {
     return this.enqueue(value);
   }
 
-  /**
-   * Creates a priority queue from an existing array
-   * @public
-   * @static
-   * @returns {MinPriorityQueue}
-   */
-  static fromArray(values, getCompareValue) {
-    return new MinPriorityQueue(getCompareValue, values);
-  }
 }
+
+/**
+ * Creates a priority queue from an existing array
+ * @public
+ * @static
+ * @returns {MinPriorityQueue}
+ */
+MinPriorityQueue.fromArray = function(values, getCompareValue) {
+  return new MinPriorityQueue(getCompareValue, values);
+};
 
 exports.MinPriorityQueue = MinPriorityQueue;

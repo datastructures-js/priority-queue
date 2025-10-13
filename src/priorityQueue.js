@@ -182,15 +182,16 @@ class PriorityQueue {
     };
   }
 
-  /**
-   * Creates a priority queue from an existing array
-   * @public
-   * @static
-   * @returns {PriorityQueue}
-   */
-  static fromArray(values, compare) {
-    return new PriorityQueue(compare, values);
-  }
 }
+
+/**
+ * Creates a priority queue from an existing array
+ * @public
+ * @static
+ * @returns {PriorityQueue}
+ */
+PriorityQueue.fromArray = function(values, compare) {
+  return new PriorityQueue(compare, values);
+};
 
 exports.PriorityQueue = PriorityQueue;

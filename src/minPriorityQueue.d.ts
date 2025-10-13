@@ -5,9 +5,12 @@ export interface LegacyOptions<T> {
   compare: (a: T, b: T) => number;
 }
 
-export class MinPriorityQueue<T> extends PriorityQueue<T> {
-  constructor(options?: IGetCompareValue<T> | LegacyOptions<T>, values?: T[]);
+export interface MinPriorityQueue<T> extends PriorityQueue<T> {
   enqueue(value: T): MinPriorityQueue<T>;
   push(value: T): MinPriorityQueue<T>;
-  static fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T>): MinPriorityQueue<T>;
 }
+
+export const MinPriorityQueue: {
+  new <T>(options?: IGetCompareValue<T> | LegacyOptions<T> | null | undefined, values?: T[]): MinPriorityQueue<T>;
+  fromArray<T>(values: T[], getCompareValue?: IGetCompareValue<T> | null | undefined): MinPriorityQueue<T>;
+};

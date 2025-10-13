@@ -163,7 +163,7 @@ describe('MaxPriorityQueue', () => {
 
   describe('legacy compare function', () => {
     const values = [50, 80, 30, 90, 60, 40, 20];
-    const maxQ = new MaxPriorityQueue({ compare: (a, b) => a - b });
+    const maxQ = new MaxPriorityQueue({ compare: (a, b) => b - a });
 
     it('enqueue and dequeue with legacy compare', () => {
       values.forEach((value) => maxQ.enqueue(value));

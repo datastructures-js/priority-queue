@@ -13,7 +13,7 @@ class MaxPriorityQueue extends PriorityQueue {
   constructor(options, values) {
     // Handle legacy options format ({ compare: fn })
     if (options && typeof options === 'object' && typeof options.compare === 'function') {
-      const compareFunction = (a, b) => options.compare(a, b) >= 0 ? -1 : 1;
+      const compareFunction = (a, b) => options.compare(a, b) <= 0 ? -1 : 1;
       super(compareFunction, values);
     } else {
       // Current format (direct compare function)
@@ -52,15 +52,16 @@ class MaxPriorityQueue extends PriorityQueue {
     return this.enqueue(value);
   }
 
-  /**
-   * Creates a priority queue from an existing array
-   * @public
-   * @static
-   * @returns {MaxPriorityQueue}
-   */
-  static fromArray(values, getCompareValue) {
-    return new MaxPriorityQueue(getCompareValue, values);
-  }
 }
+
+/**
+ * Creates a priority queue from an existing array
+ * @public
+ * @static
+ * @returns {MaxPriorityQueue}
+ */
+MaxPriorityQueue.fromArray = function(values, getCompareValue) {
+  return new MaxPriorityQueue(getCompareValue, values);
+};
 
 exports.MaxPriorityQueue = MaxPriorityQueue;

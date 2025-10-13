@@ -1,7 +1,6 @@
 import { ICompare } from '@datastructures-js/heap';
 
-export class PriorityQueue<T> implements Iterable<T> {
-  constructor(compare: ICompare<T>, values?: T[]);
+export interface PriorityQueue<T> extends Iterable<T> {
   [Symbol.iterator](): Iterator<T, any, undefined>;
   size(): number;
   isEmpty(): boolean;
@@ -15,5 +14,9 @@ export class PriorityQueue<T> implements Iterable<T> {
   contains(cb: (value: T) => boolean): boolean;
   toArray(): T[];
   clear(): void;
-  static fromArray<T>(values: T[], compare: ICompare<T>): PriorityQueue<T>;
 }
+
+export const PriorityQueue: {
+  new <T>(compare: ICompare<T>, values?: T[]): PriorityQueue<T>;
+  fromArray<T>(values: T[], compare: ICompare<T>): PriorityQueue<T>;
+};
