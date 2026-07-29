@@ -8,6 +8,7 @@ export interface LegacyOptions<T> {
 export interface MinPriorityQueue<T> extends PriorityQueue<T> {
   enqueue(value: T): MinPriorityQueue<T>;
   push(value: T): MinPriorityQueue<T>;
+  fix(): MinPriorityQueue<T>;
 }
 
 export const MinPriorityQueue: {

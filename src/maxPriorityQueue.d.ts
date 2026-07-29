@@ -5,6 +5,7 @@ import { LegacyOptions } from './minPriorityQueue';
 export interface MaxPriorityQueue<T> extends PriorityQueue<T> {
   enqueue(value: T): MaxPriorityQueue<T>;
   push(value: T): MaxPriorityQueue<T>;
+  fix(): MaxPriorityQueue<T>;
 }
 
 export const MaxPriorityQueue: {
