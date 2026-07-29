@@ -127,6 +127,40 @@ describe('MaxPriorityQueue', () => {
         expect(qTest.pop()).to.eql(20);
       });
     });
+
+    describe('fix', () => {
+      it('fixes element positions when multiple priorities change', () => {
+        const one = { id: 'one', priority: 1 };
+        const two = { id: 'two', priority: 2 };
+        const three = { id: 'three', priority: 3 };
+        const four = { id: 'four', priority: 4 };
+        const five = { id: 'five', priority: 5 };
+        const six = { id: 'six', priority: 6 };
+        const seven = { id: 'seven', priority: 7 };
+        const qTest = MaxPriorityQueue.fromArray(
+          [one, two, three, four, five, six, seven],
+          (value) => value.priority
+        );
+
+        one.priority = 8;
+        four.priority = 0;
+        seven.priority = 3.5;
+
+        expect(qTest.fix()).to.equal(qTest);
+        expect(qTest.size()).to.equal(7);
+        expect(qTest.toArray()).to.eql([
+          one,
+          six,
+          five,
+          seven,
+          three,
+          two,
+          four
+        ]);
+        expect(qTest.front()).to.equal(one);
+        expect(qTest.back()).to.equal(four);
+      });
+    });
   });
 
   describe('constructor with initial values', () => {

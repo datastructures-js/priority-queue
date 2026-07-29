@@ -111,7 +111,7 @@ describe('MinPriorityQueue', () => {
         expect(qTest.contains((n) => n === 100)).to.equal(false);
       });
     });
-  
+
     describe('remove', () => {
       it('remove elements that match a criteria', () => {
         const testArr = [20, 30, 40, 50, 80, 90];
@@ -124,6 +124,39 @@ describe('MinPriorityQueue', () => {
       });
     });
 
+    describe('fix', () => {
+      it('fixes element positions when multiple priorities change', () => {
+        const one = { id: 'one', priority: 1 };
+        const two = { id: 'two', priority: 2 };
+        const three = { id: 'three', priority: 3 };
+        const four = { id: 'four', priority: 4 };
+        const five = { id: 'five', priority: 5 };
+        const six = { id: 'six', priority: 6 };
+        const seven = { id: 'seven', priority: 7 };
+        const qTest = MinPriorityQueue.fromArray(
+          [one, two, three, four, five, six, seven],
+          (value) => value.priority
+        );
+
+        one.priority = 8;
+        four.priority = 0;
+        seven.priority = 3.5;
+
+        expect(qTest.fix()).to.equal(qTest);
+        expect(qTest.size()).to.equal(7);
+        expect(qTest.toArray()).to.eql([
+          four,
+          two,
+          three,
+          seven,
+          five,
+          six,
+          one
+        ]);
+        expect(qTest.front()).to.equal(four);
+        expect(qTest.back()).to.equal(one);
+      });
+    });
   });
 
   describe('constructor with initial values', () => {

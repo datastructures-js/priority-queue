@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `.fix()` to repair queue positions after mutable priorities change.
+
 ## [6.3.5] - 2025-10-12
 ### Fixed
 - Allows creating queues from list of values in O(n) runtime via constructor & fromArray

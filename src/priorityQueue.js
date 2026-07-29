@@ -149,6 +149,16 @@ class PriorityQueue {
   }
 
   /**
+   * Fixes element positions in the queue
+   * @public
+   * @returns {PriorityQueue}
+   */
+  fix() {
+    this._heap.fix();
+    return this;
+  }
+
+  /**
    * Clears the queue
    * @public
    */

@@ -12,6 +12,7 @@ export interface PriorityQueue<T> extends Iterable<T> {
   pop(): T | null;
   remove(cb: (value: T) => boolean): T[];
   contains(cb: (value: T) => boolean): boolean;
+  fix(): PriorityQueue<T>;
   toArray(): T[];
   clear(): void;
 }
